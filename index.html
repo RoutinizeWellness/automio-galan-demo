@@ -51,6 +51,19 @@ main{min-width:0;display:flex;flex-direction:column}
 .bell svg{width:16px;height:16px;stroke:#475467}
 .bell .bd{position:absolute;top:-4px;right:-4px;background:var(--acc);color:#fff;border-radius:99px;font-size:9.5px;font-weight:700;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .avatar{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.rolepick{display:flex;align-items:center;gap:8px;cursor:pointer;padding:4px 7px;border-radius:9px;border:1px solid transparent}
+.rolepick:hover{background:#f6f7f9;border-color:var(--line)}
+.roleinfo{line-height:1.15;text-align:left}
+.roleinfo b{font-size:12px;color:var(--navy);display:block;font-weight:650}
+.roleinfo span{font-size:10.5px;color:var(--mute)}
+.rolemenu{position:absolute;top:54px;right:16px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(16,24,40,.16);width:296px;padding:6px;display:none;z-index:60}
+.rolemenu.on{display:block}
+.rolemenu .rm-t{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mute);padding:7px 9px 3px}
+.rolemenu .ri{display:flex;gap:10px;align-items:center;padding:8px 9px;border-radius:8px;cursor:pointer}
+.rolemenu .ri:hover{background:#f6f7f9}
+.rolemenu .ri.on{background:#fdf0f1}
+.rolemenu .rm-f{font-size:10.5px;color:var(--mute);padding:7px 9px 5px;border-top:1px solid var(--line);margin-top:4px}
+@media(max-width:980px){.roleinfo{display:none}.rolemenu{right:8px}}
 .content{padding:20px 22px 70px}
 h1{font-size:19px;margin:0;color:var(--navy);letter-spacing:-.01em}
 .sub{color:var(--mute);margin:3px 0 16px;font-size:12.5px}
@@ -213,8 +226,9 @@ aside{display:none}
 <div class="gsearch"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gs" type="search" placeholder="Cerca OF, comanda, article, proveïdor…" autocomplete="off"><div class="sr" id="gsr"></div></div>
 <div class="sp"></div>
 <span class="pill">DADES D'EXEMPLE</span>
-<div class="bell" id="bell" onclick="go('aprovacions')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bd" id="bell-n">9</span></div>
-<div class="avatar">GS</div>
+<div class="bell" id="bell" onclick="go('aprovacions')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bd" id="bell-n">10</span></div>
+<div class="rolepick" id="rolepick" onclick="event.stopPropagation();document.getElementById('rolemenu').classList.toggle('on')"><div class="avatar" id="role-av">GS</div><div class="roleinfo" id="role-info"><b>Glòria Sánchez</b><span>Compres</span></div><svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:12px;height:12px;stroke:#98a2b3"><path d="m6 9 6 6 6-6"/></svg></div>
+<div class="rolemenu" id="rolemenu"></div>
 </div>
 <div class="content" id="view"></div>
 </main>
@@ -232,7 +246,7 @@ const D = {
 nav:[
  {sec:"GENERAL"},
  {id:"tauler",t:"Tauler",i:"dash"},
- {id:"aprovacions",t:"Aprovacions",i:"check",n:9},
+ {id:"aprovacions",t:"Aprovacions",i:"check",n:10},
  {sec:"PRODUCCIÓ"},
  {id:"produccio",t:"Ordres de fabricació",i:"factory"},
  {id:"capacitat",t:"Capacitat i centres",i:"gauge"},
@@ -248,6 +262,14 @@ nav:[
  {id:"activitat",t:"Activitat",i:"clock"}
 ],
 
+roles:[
+ {id:"gloria",nom:"Glòria Sánchez",carrec:"Compres",ini:"GS",qui:"proveïdors i comandes"},
+ {id:"marti",nom:"Martí Camps",carrec:"Gerència",ini:"MC",qui:"marges i acords marc"},
+ {id:"ramon",nom:"Ramon Masip",carrec:"Producció",ini:"RM",qui:"OF, rutes i capacitat"},
+ {id:"silvia",nom:"Sílvia Vidal",carrec:"Magatzem",ini:"SV",qui:"recepcions, estoc i expedicions"},
+ {id:"nuria",nom:"Núria Font",carrec:"Qualitat",ini:"NF",qui:"inspeccions, NC i proves"}
+],
+
 kpis:[
  {v:"9",l:"OF actives",d:"3 amb risc de retard",cls:""},
  {v:"3",l:"OF amb risc",d:"OF-2641 · OF-2644 · OF-2645",cls:"bad"},
@@ -257,7 +279,7 @@ kpis:[
 ],
 
 ofs:[
- {id:"OF-2641",maq:"PRX375/4",desc:"Reunidora-retorcedora d'aro · 112 husos",cli:"Cordeles Tècniques València S.A.",aplic:"Cordatge tècnic PA 6.6 · 9.400 dtex",fase:6,fases:10,lliur:"12/12/2026",risc:"alt",riscTxt:"PLC S7-1200 retardat +6 d (PC-2315)",prog:58,horesP:412,horesR:398,resp:"M. Camps",
+ {id:"OF-2641",maq:"PRX375/4",desc:"Reunidora-retorcedora d'aro · 112 husos",cli:"Cordeles Tècniques València S.A.",aplic:"Cordatge tècnic PA 6.6 · 9.400 dtex",fase:6,fases:10,lliur:"12/12/2026",risc:"alt",riscTxt:"PLC S7-1200 retardat +6 d (PC-2315)",prog:58,horesP:412,horesR:398,resp:"R. Masip",
   bom:[
    {art:"Bancada mecanitzada PRX375 (S355JR)",tip:"Mecanitzat propi + acer",req:1,stock:1,comprat:0,rebut:1,lot:"Colada AC-2619 · Cert. 3.1",pc:"—",eta:"—",est:"ok"},
    {art:"Husos Galan Ø45 (joc de 112)",tip:"Fabricació pròpia",req:112,stock:64,comprat:0,rebut:64,lot:"Sèrie HU-2511",pc:"—",eta:"—",est:"ok"},
@@ -341,7 +363,7 @@ ofs:[
    {n:"10 · Enginyeria i disseny",c:"ENG",hp:96,hr:28,op:"A. Ferrer",st:"cur",nota:"Reunió variant cursada: 25/11"},
    {n:"20–100 · Resta de fases",c:"—",hp:244,hr:0,op:"—",st:"wait",nota:""}
   ]},
- {id:"OF-2638",maq:"PRX250/12",desc:"Reunidora-retorcedora d'aro · 132 husos",cli:"Hidràulica Levante S.L.",aplic:"Fil manguera automoció PET 4.700 dtex",fase:9,fases:10,lliur:"21/11/2026",risc:"baix",riscTxt:"Embalatge i reserva marítima en curs",prog:94,horesP:352,horesR:344,resp:"M. Camps",
+ {id:"OF-2638",maq:"PRX250/12",desc:"Reunidora-retorcedora d'aro · 132 husos",cli:"Hidràulica Levante S.L.",aplic:"Fil manguera automoció PET 4.700 dtex",fase:9,fases:10,lliur:"21/11/2026",risc:"baix",riscTxt:"Embalatge i reserva marítima en curs",prog:94,horesP:352,horesR:344,resp:"R. Masip",
   bom:[{art:"Conjunt complet traçat",tip:"Propi",req:1,stock:1,comprat:0,rebut:1,lot:"Dossier de qualitat en curs",pc:"—",eta:"—",est:"ok"}],
   ruta:[
    {n:"10–90 · Enginyeria a proves",c:"—",hp:328,hr:332,op:"Equip complet",st:"done",nota:"Proves superades 14/11 · informe qualitat OK"},
@@ -360,7 +382,7 @@ ofs:[
  {id:"OF-2646",maq:"BBJAP",desc:"Bobinadora automàtica bobines petites",cli:"Tèxtils Osona S.L.",aplic:"Bobines poques metres · mostraris",fase:1,fases:10,lliur:"30/03/2027",risc:"baix",riscTxt:"Enginyeria inicial",prog:4,horesP:210,horesR:8,resp:"A. Ferrer",
   bom:[{art:"Conjunt BBJ + curs de precisió",tip:"Propi",req:1,stock:0,comprat:0,rebut:0,lot:"—",pc:"—",eta:"—",est:"warn"}],
   ruta:[{n:"10 · Enginyeria",c:"ENG",hp:64,hr:8,op:"A. Ferrer",st:"cur",nota:""},{n:"20–100 · Resta",c:"—",hp:146,hr:0,op:"—",st:"wait",nota:""}]},
- {id:"OF-2640",maq:"CRB225",desc:"Reunidora-retorcedora · 2 cares col·lectives",cli:"Nets & Ropes Maroc SARL",aplic:"Xarxes PE 26.600 dtex",fase:10,fases:10,lliur:"07/11/2026",risc:"ok",riscTxt:"Entregada · instal·lació a destí setmana 47",prog:100,horesP:305,horesR:312,resp:"M. Camps",
+ {id:"OF-2640",maq:"CRB225",desc:"Reunidora-retorcedora · 2 cares col·lectives",cli:"Nets & Ropes Maroc SARL",aplic:"Xarxes PE 26.600 dtex",fase:10,fases:10,lliur:"07/11/2026",risc:"ok",riscTxt:"Entregada · instal·lació a destí setmana 47",prog:100,horesP:305,horesR:312,resp:"R. Masip",
   bom:[{art:"Conjunt complet",tip:"Propi",req:1,stock:1,comprat:0,rebut:1,lot:"Dossier tancat",pc:"—",eta:"—",est:"ok"}],
   ruta:[{n:"10–100 · Cicle complet",c:"—",hp:305,hr:312,op:"—",st:"done",nota:"Marxa en buit 8 h OK · torsió S/Z OK"}]},
  {id:"OF-2647",maq:"EPCA",desc:"Bobinadora de precisió (estoc)",cli:"Per a estoc",aplic:"Reposició catàleg EN STOCK",fase:3,fases:10,lliur:"15/01/2027",risc:"baix",riscTxt:"Dins de pla",prog:26,horesP:190,horesR:44,resp:"S. Vidal",
@@ -453,23 +475,25 @@ suppliers:[
 
 approvals:[
  {id:"AP-87",tip:"compres",sev:"red",t:"Enviar seguiment a Vallès pel PLC retardat",ctx:"PC-2315 · PLC S7-1200 · confirmat 15/11 → mogut a 21/11 sense avisar",impact:"OF-2641: quadre elèctric i proves es mouen +6 d si no s'accelera. OF-2642 també depèn d'aquesta comanda.",
-  who:"Glòria (compres)",mail:{to:"comercial@devalles.example",sub:"PC-2315 · PLC S7-1200 — necessitem acció per al 15/11",body:"Bon dia,\n\nLa comanda PC-2315 (4 × CPU 1215C + I/O) estava confirmada per al 15/11 i ens l'heu moguda al 21/11 sense avisar. Aquest PLC alimenta dues màquines en curs (PRX375/4 i CRG300) i el retard mou proves i lliurament.\n\nUs demanem:\n1. Enviament parcial de 2 CPU aquesta setmana, o\n2. Alternativa en estoc equivalent (S7-1200 F o CPU 1214C) que puguem validar.\n\nNecessitem resposta avui abans de les 17:00 per replanificar producció.\n\nGràcies,\nGlòria Sánchez · Compres · Galan"}},
+  roles:["gloria"],who:"Glòria Sánchez (compres)",mail:{to:"comercial@devalles.example",sub:"PC-2315 · PLC S7-1200 — necessitem acció per al 15/11",body:"Bon dia,\n\nLa comanda PC-2315 (4 × CPU 1215C + I/O) estava confirmada per al 15/11 i ens l'heu moguda al 21/11 sense avisar. Aquest PLC alimenta dues màquines en curs (PRX375/4 i CRG300) i el retard mou proves i lliurament.\n\nUs demanem:\n1. Enviament parcial de 2 CPU aquesta setmana, o\n2. Alternativa en estoc equivalent (S7-1200 F o CPU 1214C) que puguem validar.\n\nNecessitem resposta avui abans de les 17:00 per replanificar producció.\n\nGràcies,\nGlòria Sánchez · Compres · Galan"}},
  {id:"AP-88",tip:"produccio",sev:"red",t:"Replanificar OF-2641: proves +6 dies i avisar client",ctx:"Si el PLC no arriba abans del 15/11, la fase 70 (quadre) no pot arrencar i les proves del 05/12 es mouen al 11/12.",impact:"Lliurament OF-2641 passa de 12/12 a 18/12. Client: Cordeles Tècniques València. Alternativa: muntar quadre amb PLC de reserva (redueix a +2 d).",
-  who:"Responsable de producció",mail:null},
+  roles:["ramon"],who:"Ramon Masip (producció)",mail:null},
  {id:"AP-89",tip:"mixta",sev:"amb",t:"Validar substitució: SKF 6214-2RS esgotat → equivalent FAG",ctx:"L'equivalent FAG 6214-2RSR compleix mateixes dimensions i càrrega. Estoc immediat a Rodaments i Transmissions BCN.",impact:"Evita aturar premuntatge OF-2639 4 dies. Diferència de preu: +0,80 €/ud (24 ud). Qualitat ja ho ha revisat: equivalència dimensional OK.",
-  who:"Glòria + producció",mail:null},
+  roles:["gloria","ramon"],who:"Glòria S. + Ramon M.",mail:null},
  {id:"AP-90",tip:"compres",sev:"amb",t:"Aprovar comanda PC-2331 (Festo, 4.820 €)",ctx:"Cilindres i vàlvules per al CRG300 (OF-2642). Pressupost rebut 14/11, dins de preu habitual.",impact:"Si s'aprova aquesta setmana: recepció setmana 50, a temps per muntatge. Si s'endarrereix una setmana, el muntatge ja queda just.",
-  who:"Glòria (compres)",mail:null},
+  roles:["gloria"],who:"Glòria Sánchez (compres)",mail:null},
  {id:"AP-91",tip:"mixta",sev:"amb",t:"Acceptar recepció parcial PC-2318 i alliberar 60% dels husos d'OF-2639",ctx:"36/72 rodaments rebuts i inspeccionats OK. Amb 36 es poden alliberar 9 dels 12 mòduls UNI 1X1.",impact:"El premuntatge avança 1 setmana malgrat la recepció parcial. Resta arriba 26/11.",
-  who:"Glòria + producció",mail:null},
+  roles:["gloria","ramon"],who:"Glòria S. + Ramon M.",mail:null},
  {id:"AP-92",tip:"qualitat",sev:"amb",t:"Tancar NC-41 (pintura bancada PRX375) amb retraball intern de 12 h",ctx:"Defecte d'adherència en 2 zones de la bancada d'OF-2641. Pintures Rubí assumeix el retraball; cal decidir si es fa internament per no moure la fase.",impact:"Retraball intern: +12 h PIN, zero retard net (hi ha marge setmana 47). Si ho fa el proveïdor: +4 dies.",
-  who:"Qualitat + producció",mail:null},
+  roles:["nuria","ramon"],who:"Núria F. + Ramon M.",mail:null},
  {id:"AP-93",tip:"compres",sev:"gry",t:"Comanda urgent de detectors de fil (sobreestoc controlat)",ctx:"El lote DF-3308 cobreix 72 dies, però els dos projectes grans del T1 en consumiran el doble del previst.",impact:"Comanda de 96 ud (2.112 €) manté cobertura fins a maig sense risc de ruptura.",
-  who:"Glòria (compres)",mail:null},
+  roles:["gloria"],who:"Glòria Sánchez (compres)",mail:null},
  {id:"AP-94",tip:"logistica",sev:"amb",t:"Confirmar reserva marítima OF-2638 (sortida setmana 48)",ctx:"Contenidor 40' OT BCN → Casablanca per al PRX250/12. Cotització Logística Tarraco: 3.400 € amb assegurança.",impact:"Si es confirma avui, l'embalatge de setmana 47 enllaça amb la sortida. Sense reserva, el lliurament 21/11 queda en risc.",
-  who:"Glòria + logística",mail:{to:"operacions@logtarraco.example",sub:"Reserva 40' OT BCN–Casablanca · setmana 48",body:"Bon dia,\n\nConfirmem la reserva del contenidor 40' Open Top per a la setmana 48 segons la vostra cotització (3.400 € amb assegurança).\n\nCàrrega: maquinària embalada en 2 caixes de fusta (12,2 m total). Disponible a molls a partir de dimecres.\n\nConfirmeu-nos data de tall de documentació i instruccions d'etiquetat.\n\nGràcies,\nGalan · Logística"}},
+  roles:["gloria","silvia"],who:"Glòria S. + Sílvia V.",mail:{to:"operacions@logtarraco.example",sub:"Reserva 40' OT BCN–Casablanca · setmana 48",body:"Bon dia,\n\nConfirmem la reserva del contenidor 40' Open Top per a la setmana 48 segons la vostra cotització (3.400 € amb assegurança).\n\nCàrrega: maquinària embalada en 2 caixes de fusta (12,2 m total). Disponible a molls a partir de dimecres.\n\nConfirmeu-nos data de tall de documentació i instruccions d'etiquetat.\n\nGràcies,\nGalan · Logística"}},
  {id:"AP-95",tip:"produccio",sev:"gry",t:"Registrar desviació +18 h mecanitzat OF-2644 i recalcular data",ctx:"Aletes Ø180 (HMPE 60.000 dtex) han resultat més exigents del previst al CNC2.",impact:"Amb la desviació registrada, el lliurament passa de 15/02 a 22/02. Client encara no cal avisar-lo (marge contractual de 2 setmanes).",
-  who:"Responsable de producció",mail:null}
+  roles:["ramon"],who:"Ramon Masip (producció)",mail:null},
+ {id:"AP-96",tip:"compres",sev:"gry",t:"Signar acord marc amb Electrònica Martorell (components elèctrics)",ctx:"El 63% del gast es concentra en 3 proveïdors. Martorell és el més puntual (97% OTIF): acord marc de 12 mesos amb preu tancat en PLC, inversors i detectors.",impact:"Estalvi estimat del 4-6% en components elèctrics i menys comandes puntuals. Compres ho ha negociat; la signatura és de gerència.",
+  roles:["marti"],who:"Martí Camps (gerència)",mail:null}
 ],
 
 capacity:[
@@ -572,54 +596,72 @@ function go(v){location.hash='#/'+v}
 function currentView(){return (location.hash.replace('#/','')||'tauler').split('/')[0]}
 
 /* ---------- VIEWS ---------- */
+/* ---------- ROL ACTIU ---------- */
+let ROLE=localStorage.getItem('galan-role')||'gloria';
+const R=()=>D.roles.find(r=>r.id===ROLE)||D.roles[0];
+const mine=a=>(a.roles||[]).includes(ROLE);
+function setRole(id){ROLE=id;localStorage.setItem('galan-role',id);renderRoleUI();$('#rolemenu').classList.remove('on');render();toast(`Vista de ${R().carrec} · ${R().nom}`)}
+function renderRoleUI(){const r=R();$('#role-av').textContent=r.ini;$('#role-info').innerHTML=`<b>${r.nom}</b><span>${r.carrec}</span>`;
+ $('#rolemenu').innerHTML=`<div class="rm-t">Veure la demo com a…</div>`+D.roles.map(x=>`<div class="ri ${x.id===ROLE?'on':''}" onclick="setRole('${x.id}')"><div class="avatar" style="width:28px;height:28px;font-size:10px;flex:none">${x.ini}</div><div style="flex:1;min-width:0"><b style="font-size:12.5px">${x.nom}</b><div class="small mut">${x.carrec} · ${x.qui}</div></div>${x.id===ROLE?'<span class="tag t-red">Actiu</span>':''}</div>`).join('')+`<div class="rm-f">Cada rol veu el seu tauler i les seves decisions destacades. Totes les pantallas resten accessibles.</div>`}
+
+/* ---------- TAULER (per rol) ---------- */
+const TCFG={
+ gloria:{sal:'Bon dia, Glòria',kpis:[{v:'4',l:'Comandes amb incidència',d:'1 retard crític (PLC)',cls:'warn'},{v:'2',l:'Recepcions pendents',d:'avui i demà',cls:''},{v:'87%',l:'OTIF proveïdors 12 m',d:'objectiu 92%',cls:'warn'},{v:'4',l:'Sol·licituds noves',d:'2 amb pressupost rebut',cls:''}]},
+ marti:{sal:'Bon dia, Martí',kpis:[{v:'10',l:'OF al llibre',d:'9 actives · 1 lliurada al novembre',cls:''},{v:'3',l:'OF amb risc',d:'OF-2641 · OF-2644 · OF-2645',cls:'bad'},{v:'87%',l:'OTIF proveïdors 12 m',d:'objectiu 92%',cls:'warn'},{v:'1',l:'Decisió de gerència',d:'acord marc Martorell (AP-96)',cls:''}]},
+ ramon:{sal:'Bon dia, Ramon',kpis:[{v:'9',l:'OF actives',d:'3 amb risc de retard',cls:''},{v:'118%',l:'CNC1 · setmana 48',d:'proposta de reequilibri (AP-95)',cls:'bad'},{v:'+18 h',l:'Desviació OF-2644',d:'CNC2 · aletes Ø180',cls:'warn'},{v:'2',l:'Màquines en proves',d:'OF-2643 · OF-2638',cls:''}]},
+ silvia:{sal:'Bon dia, Sílvia',kpis:[{v:'2',l:'Recepcions pendents',d:'avui i demà',cls:''},{v:'5',l:'Articles sota mínim/baixos',d:'PLC · motor 22 kW · guiat ceràmic',cls:'warn'},{v:'1',l:'Expedició setmana 48',d:'PRX250/12 → Casablanca',cls:''},{v:'1',l:'Reserva per confirmar',d:'AP-94 · 3.400 €',cls:'warn'}]},
+ nuria:{sal:'Bon dia, Núria',kpis:[{v:'2',l:'Inspeccions de recepció',d:'rodaments i peça fosa OK',cls:''},{v:'1',l:'NC oberta',d:'NC-41 · pintura bancada',cls:'warn'},{v:'1',l:'Prova final en curs',d:'OF-2643 · marxa en buit 6/8 h',cls:''},{v:'1',l:'Decisió de qualitat',d:'AP-92 · retraball 12 h',cls:''}]}
+};
+function decisionsCard(){
+ const list=[...D.approvals].sort((x,y)=>(mine(y)?1:0)-(mine(x)?1:0)).slice(0,3);
+ return `<div class="card"><h3>Què demana la teva decisió</h3>
+  ${list.map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':a.sev==='amb'?'amb':'gry'}"></div><div class="b"><div class="b" style="font-size:12.5px">${a.t}</div><div class="small mut">${a.who} · ${a.id}</div></div>${mine(a)?'<span class="tag t-red">Per a tu</span>':''}</div>`).join('')}
+  <button class="btn soft" style="width:100%;justify-content:center" onclick="go('aprovacions')">Veure la cua completa (${D.approvals.length})</button></div>`;
+}
+const HERO={
+ gloria:()=>{const nextRec=D.pcs.filter(p=>['en-curs','pendent-conf','parcial','retard'].includes(p.est)).slice(0,5);
+  return `<div class="card"><h3>Comandes a seguir aquesta setmana</h3><div class="tw" style="border:0"><table><tr><th>Comanda</th><th>Proveïdor</th><th>Previst</th><th>Estat</th></tr>
+  ${nextRec.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="small">${p.rev}</td><td>${pcTag(p.est)}</td></tr>`).join('')}</table></div>
+  <div class="act" style="margin-top:10px"><button class="btn soft" onclick="go('compres')">Totes les comandes</button><button class="btn soft" onclick="go('solicituds')">Sol·licituds (4)</button></div></div>`},
+ marti:()=>`<div class="card"><h3>Les 10 OF del llibre, per estat</h3><div class="donut-wrap">${donutSVG([{v:5,c:'#16233f'},{v:2,c:'#175cd3'},{v:2,c:'#e8890c'},{v:1,c:'#3aa76d'}])}<div class="donut-legend">${[['#16233f','En taller',5],['#175cd3','Proves / embalatge',2],['#e8890c','Enginyeria',2],['#3aa76d','Entregada (novembre)',1]].map(d=>`<div class="dl"><span class="sw" style="background:${d[0]}"></span>${d[1]}<span class="dlb">${d[2]}</span></div>`).join('')}</div></div>
+  <div class="note" style="margin-top:10px">Marge i hores per fase, a <a style="color:var(--blu);cursor:pointer" onclick="go('informes')">Informes</a>. L'acord marc amb Electrònica Martorell espera la teva signatura (AP-96).</div></div>`,
+ ramon:()=>`<div class="card"><h3>OF en curs · cicle i risc</h3><div class="gantt">
+  ${D.ofs.filter(o=>o.risc!=='ok').slice(0,6).map(o=>`<div class="grow" style="cursor:pointer" onclick="openOF('${o.id}')"><div class="b">${o.id} <span class="mut">· ${o.maq}</span></div><div class="gtrack"><div class="gfill ${o.risc==='alt'?'risk':o.risc==='mitja'?'warn':'ok'}" style="left:0;width:${o.prog}%"></div></div><div class="small mut">${o.lliur}</div></div>`).join('')}</div>
+  <div class="act" style="margin-top:10px"><button class="btn soft" onclick="go('capacitat')">Capacitat (CNC1 al 118%)</button><button class="btn soft" onclick="go('taller')">Seguiment de taller</button></div></div>`,
+ silvia:()=>{const lows=D.stock.filter(s=>s.est!=='ok').slice(0,5);
+  return `<div class="card"><h3>Articles sota mínim o al límit</h3><div class="tw" style="border:0"><table><tr><th>Referència</th><th>Article</th><th>Estoc</th><th>Estat</th></tr>
+  ${lows.map(s=>`<tr class="row" onclick="go('estoc')"><td class="b">${s.ref}</td><td class="wrap">${s.nom}</td><td class="b">${s.st}</td><td>${estTag(s.est)}</td></tr>`).join('')}</table></div>
+  <div class="note" style="margin-top:10px">Recepcions pendents: PC-2333 (caixa marítima) i PC-2318 (resta de rodaments). La reserva marítima d'OF-2638 t'espera a la cua (AP-94).</div></div>`},
+ nuria:()=>{const p=D.quality.proves[0];
+  return `<div class="card"><h3>Prova final en curs · ${p.of} (${p.maq})</h3>
+  ${p.items.slice(0,5).map(i=>`<div class="chk ${i.done?'done':''}"><div class="cbx">${i.done?'✓':''}</div><div class="ct">${i.t}</div></div>`).join('')}
+  <div class="note" style="margin-top:10px">NC-41 (pintura bancada PRX375) espera decisió conjunta amb producció (AP-92). Inspeccions i dossier, a <a style="color:var(--blu);cursor:pointer" onclick="go('qualitat')">Qualitat i proves</a>.</div></div>`}
+};
 function vTauler(){
- const risks=D.ofs.filter(o=>o.risc==='alt'||o.risc==='mitja');
- const nextRec=D.pcs.filter(p=>['en-curs','pendent-conf','parcial','retard'].includes(p.est));
- return `<div class="row-head"><h1>Tauler</h1><span class="sub">Dimecres 18 de novembre de 2026 · vista compres ↔ producció</span><div class="sp"></div></div>
- <div class="banner"><b style="font-size:15px">ⓘ</b><div>Demo funcional amb <b>dades d'exemple</b> (clients, comandes i preus ficticis). Cap acció no s'envia ni s'aplica sola: cada proposta passa per la cua d'aprovacions. Models de màquina, Display CTB i arquitectura PLC→ERP són els reals de galan.es.</div></div>
- <div class="grid k5">${D.kpis.map(k=>`<div class="card kpi ${k.cls}"><b>${k.v}</b><span>${k.l}</span><div class="d mut">${k.d}</div></div>`).join('')}</div>
+ const r=R(),cfg=TCFG[ROLE]||TCFG.gloria;
+ return `<div class="row-head"><h1>${cfg.sal}</h1><span class="sub">${r.carrec} · Dimecres 18 de novembre de 2026</span><div class="sp"></div></div>
+ <div class="banner"><b style="font-size:15px">ⓘ</b><div>Demo funcional amb <b>dades d'exemple</b>: res no s'envia ni s'aplica sol, tot passa per aprovacions. Aquesta és la vista de <b>${r.carrec}</b> — canvia de rol a la part superior dreta.</div></div>
+ <div class="grid k4">${cfg.kpis.map(k=>`<div class="card kpi ${k.cls}"><b>${k.v}</b><span>${k.l}</span><div class="d mut">${k.d}</div></div>`).join('')}</div>
  <div class="grid two">
-  <div class="card"><h3>Ordres de fabricació · cicle i risc</h3><div class="gantt">
-   ${D.ofs.filter(o=>o.risc!=='ok').map(o=>`<div class="grow" style="cursor:pointer" onclick="openOF('${o.id}')"><div class="b">${o.id} <span class="mut">· ${o.maq}</span></div><div class="gtrack"><div class="gfill ${o.risc==='alt'?'risk':o.risc==='mitja'?'warn':'ok'}" style="left:0;width:${o.prog}%"></div></div><div class="small mut">${o.lliur}</div></div>`).join('')}
-  </div><div class="small mut" style="margin-top:10px">Barra = % del cicle completat (enginyeria → proves → embalatge). Vermell = material o hores en risc.</div></div>
-  <div class="card"><h3>Què demana decisió avui</h3>
-   ${D.approvals.filter(a=>a.sev!=='gry').slice(0,5).map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':'amb'}"></div><div class="b"><div class="b" style="font-size:12.5px">${a.t}</div><div class="small mut">${a.who} · ${a.id}</div></div><span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':'t-pur'}">${a.tip==='compres'?'Compres':a.tip==='produccio'?'Producció':a.tip==='mixta'?'Mixta':a.tip==='qualitat'?'Qualitat':'Logística'}</span></div>`).join('')}
-   <button class="btn soft" style="width:100%;justify-content:center" onclick="go('aprovacions')">Veure la cua completa (9)</button>
-  </div>
- </div>
- <div class="grid two">
-  <div class="card"><h3>Ordres de fabricació per estat</h3><div class="donut-wrap">${donutSVG([{v:5,c:'#16233f'},{v:2,c:'#175cd3'},{v:2,c:'#e8890c'},{v:1,c:'#3aa76d'}])}<div class="donut-legend">${[['#16233f','En taller',5],['#175cd3','Proves / embalatge',2],['#e8890c','Enginyeria',2],['#3aa76d','Entregada (novembre)',1]].map(d=>`<div class="dl"><span class="sw" style="background:${d[0]}"></span>${d[1]}<span class="dlb">${d[2]}</span></div>`).join('')}</div></div></div>
-  <div class="card"><h3>Puntualitat de proveïdors (OTIF) · 12 mesos</h3>${areaSVG([88,90,86,91,89,92,90,87,88,85,84,87],560,110)}
-  <div class="small mut" style="margin-top:6px">Baixada de la tardor: el PLC de Vallès i una bancada externa. Objectiu 92% — el seguiment AP-87 n'és la primera acció.</div></div>
- </div>
- <div class="grid two-r">
-  <div class="card"><h3>Capacitat per centre · properes 6 setmanes (% càrrega)</h3><div class="cap">
-   <div class="caprow small mut"><div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);text-align:center">${D.weeks.map(w=>`<span>${w}</span>`).join('')}</div><div></div></div>
-   ${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}</div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px">${c.w.map(v=>`<div class="bar ${v>100?'risk':v>85?'warn':'ok'}" style="height:12px"><i style="width:${Math.min(100,v)}%"></i></div>`).join('')}</div><div class="small mut">${Math.round(c.w.reduce((a,b)=>a+b)/6)}%</div></div>`).join('')}
-  </div><div class="small mut" style="margin-top:10px">CNC1 supera el 100% la setmana 48: l'aprovació AP-95 recalcula dates abans que es noti al taller.</div></div>
-  <div class="card"><h3>Recepcions i comandes a seguir</h3><div class="tw" style="border:0">
-   <table><tr><th>Comanda</th><th>Proveïdor</th><th>Previst</th><th>Estat</th></tr>
-   ${nextRec.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="small">${p.rev}</td><td>${pcTag(p.est)}</td></tr>`).join('')}
-  </table></div>
-  <h3 style="margin-top:16px">Activitat recent</h3>
-  <ul class="tl">${D.activity.slice(0,4).map(a=>`<li><b>${a.t}</b><span class="w">${a.d} · ${a.by}</span></li>`).join('')}</ul>
-  </div>
+  ${HERO[ROLE]()}
+  ${decisionsCard()}
  </div>`;
 }
 
 function vAprovacions(){
  const tipName={compres:'Compres',produccio:'Producció',mixta:'Mixta',qualitat:'Qualitat',logistica:'Logística'};
+ const list=[...D.approvals].sort((x,y)=>(mine(y)?1:0)-(mine(x)?1:0));
  return `<div class="row-head"><h1>Aprovacions</h1><span class="sub">La cua de decisions: Automio detecta i prepara, vosaltres aproveu. Res no s'envia ni s'aplica sol.</span></div>
  <div class="grid k3">
   <div class="card kpi bad"><b>${D.approvals.filter(a=>a.sev==='red').length}</b><span>Crítiques avui</span><div class="d mut">PLC retardat + replanificació OF-2641</div></div>
-  <div class="card kpi warn"><b>${D.approvals.filter(a=>a.sev==='amb').length}</b><span>Amb impacte de setmana</span><div class="d mut">si queden per sobre de divendres, mouen muntatges</div></div>
-  <div class="card kpi"><b>${D.approvals.length}</b><span>Total a la cua</span><div class="d mut">repartides entre compres, producció i qualitat</div></div>
+  <div class="card kpi warn"><b>${D.approvals.filter(mine).length}</b><span>Per a ${R().nom.split(' ')[0]} · ${R().carrec.toLowerCase()}</span><div class="d mut">marcades 'Per a tu' a la llista</div></div>
+  <div class="card kpi"><b>${D.approvals.length}</b><span>Total a la cua</span><div class="d mut">compres, producció, qualitat, magatzem i gerència</div></div>
  </div>
- ${D.approvals.map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':a.sev==='amb'?'amb':'gry'}"></div><div class="b">
+ ${list.map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':a.sev==='amb'?'amb':'gry'}"></div><div class="b">
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="b">${a.t}</span></div>
   <div class="small mut" style="margin-top:2px">${a.ctx}</div>
   <div class="small" style="margin-top:4px"><span class="mut">Decideix:</span> <b>${a.who}</b> · <span class="mut">${a.id}</span></div>
- </div><span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':a.tip==='mixta'?'t-pur':a.tip==='qualitat'?'t-grn':'t-gry'}">${tipName[a.tip]}</span></div>`).join('')}`;
+ </div><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end;flex:none">${mine(a)?'<span class="tag t-red">Per a tu</span>':''}<span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':a.tip==='mixta'?'t-pur':a.tip==='qualitat'?'t-grn':'t-gry'}">${tipName[a.tip]}</span></div></div>`).join('')}`;
 }
 
 function vProduccio(){
@@ -645,12 +687,12 @@ function vCapacitat(){
   <div class="caprow small mut"><div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);text-align:center">${D.weeks.map(w=>`<span>${w}</span>`).join('')}</div><div></div></div>
   ${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}<div class="mut" style="font-weight:400">${c.op}</div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px">${c.w.map(v=>`<div class="bar ${v>100?'risk':v>85?'warn':'ok'}" style="height:14px" title="${v}%"><i style="width:${Math.min(100,v)}%"></i></div>`).join('')}</div><div class="small mut">${Math.round(c.w.reduce((a,b)=>a+b)/6)}%</div></div>`).join('')}
  </div></div>
- <div class="grid k2" style="margin-top:14px">
-  <div class="card"><h3>On es concentra la càrrega (hores per fase, any en curs)</h3>${D.informes.horesFase.map(h=>`<div class="hbar"><span class="lb">${h[0]}</span><span class="tr"><span class="fl" style="width:${Math.round(h[1]/918*100)}%"></span></span><span class="vl">${h[1]} h</span></div>`).join('')}</div>
+ <div style="margin-top:14px">
   <div class="card"><h3>Lectura ràpida</h3><ul class="tl">
    <li><b>Muntatge i mecanitzat acumulen el 58% de les hores</b><span class="w">són els centres que marquen el lliurament de les 9 OF actives</span></li>
    <li><b>Proves: pista ocupada 6 setmanes seguides</b><span class="w">OF-2643 acaba aquesta setmana; OF-2641 entra al desembre</span></li>
    <li><b>Enginyeria baixa del 70% al febrer</b><span class="w">finestra per avançar la variant de la BBCA500D (OF-2645)</span></li>
+   <li><b>Hores per fase i marge, a Informes</b><span class="w">tot el detall analític queda al mòdul d'informes</span></li>
   </ul></div>
  </div>`;
 }
@@ -661,8 +703,7 @@ function vTaller(){
  <div class="tw"><table><tr><th>OF · màquina</th><th>Fase en curs</th><th>Centre</th><th>Operari</th><th>Hores p/r</th><th>Desviació</th><th>Nota de taller</th></tr>
  ${enCurs.map(o=>{const f=o.ruta.find(r=>r.st==='cur')||o.ruta[o.ruta.length-1];const dv=o.horesR-o.horesP;return `<tr class="row" onclick="openOF('${o.id}')"><td class="b">${o.id} · ${o.maq}</td><td class="wrap">${f.n}</td><td>${f.c}</td><td class="small">${f.op}</td><td class="small">${o.horesR}/${o.horesP} h</td><td>${dv>0?`<span class="tag t-red">+${dv} h</span>`:'<span class="tag t-grn">dins pla</span>'}</td><td class="wrap small mut">${f.nota||'—'}</td></tr>`}).join('')}
  </table><div class="tfoot">Les desviacions superiors a 8 h generen proposta de replanificació a la cua d'aprovacions</div></div>
- <div class="grid k2" style="margin-top:14px">
-  <div class="card"><h3>Imputació d'avui per centre</h3><div class="cap">${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}</div><div class="bar ${c.w[0]>100?'risk':c.w[0]>85?'warn':'ok'}"><i style="width:${Math.min(100,c.w[0])}%"></i></div><div class="small mut">${c.w[0]}%</div></div>`).join('')}</div></div>
+ <div style="margin-top:14px">
   <div class="card"><h3>Últims moviments de taller</h3><ul class="tl">${D.activity.filter(a=>/OF-|husos|muntatge|CNC|marxa/.test(a.t)).slice(0,5).map(a=>`<li><b>${a.t}</b><span class="w">${a.d} · ${a.by}</span></li>`).join('')}</ul></div>
  </div>`;
 }
@@ -725,7 +766,6 @@ function vProveidors(){
  <div class="grid k2">
  ${D.suppliers.map(s=>`<div class="card" style="cursor:pointer" onclick="openSUP('${s.id}')"><div class="sup-h"><div class="sup-av">${s.nom.split(' ')[0].slice(0,2).toUpperCase()}</div><div style="flex:1;min-width:0"><div class="b">${s.nom}</div><div class="small mut">${s.cat}</div></div><div style="text-align:right"><div class="b" style="font-size:18px;color:${s.otif>=92?'var(--grn)':s.otif>=85?'var(--amb)':'var(--red)'}">${s.otif}%</div><div class="small mut">OTIF</div></div></div>
  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:12px"><div><span class="mut">Termini mitjà</span><div class="b">${s.lead}</div></div><div><span class="mut">Incidències 12 m</span><div class="b">${s.inc}</div></div><div><span class="mut">Compres 12 m</span><div class="b">${s.compres}</div></div></div>
- <div style="margin-top:10px">${spark(s.trend)}<div class="small mut" style="margin-top:4px">Puntualitat per mes (10 = impecable)</div></div>
  ${s.note?`<div class="note" style="margin-top:10px">${s.note}</div>`:''}
  </div>`).join('')}
  </div>`;
@@ -736,7 +776,7 @@ function vInformes(){
  return `<div class="row-head"><h1>Informes</h1><span class="sub">Per a la revisió mensual de compres i producció</span></div>
  <div class="grid two">
   <div class="card"><h3>Gast per proveïdor · 12 mesos</h3>${g.map(x=>`<div class="hbar"><span class="lb">${x[0]}</span><span class="tr"><span class="fl" style="width:${Math.round(x[1]/mx*100)}%"></span></span><span class="vl">${x[1].toLocaleString('ca-ES')} €</span></div>`).join('')}
-   <div class="note" style="margin-top:10px">El 63% del gast es concentra en 3 proveïdors. Automio proposa acord marc amb el més puntual (Martorell, 97% OTIF) abans d'obrir segona font.</div></div>
+   <div class="note" style="margin-top:10px">El 63% del gast es concentra en 3 proveïdors. Automio proposa acord marc amb el més puntual (Martorell, 97% OTIF) abans d'obrir segona font — decisió AP-96, a gerència.</div></div>
   <div class="card"><h3>Puntualitat per proveïdor (OTIF)</h3>${D.suppliers.map(s=>`<div class="hbar"><span class="lb">${s.nom.split(' ')[0]} ${s.nom.split(' ')[1]||''}</span><span class="tr"><span class="fl" style="width:${s.otif}%;background:${s.otif>=92?'var(--grn)':s.otif>=85?'#e8890c':'var(--red)'}"></span></span><span class="vl">${s.otif}%</span></div>`).join('')}
    <div class="note" style="margin-top:10px">Objectiu 92%. Vallès (Siemens) ha caigut al 82% pel PLC: el seguiment AP-87 demana acció aquesta setmana.</div></div>
  </div>
@@ -835,7 +875,7 @@ gs.addEventListener('input',()=>{const q=gs.value.toLowerCase().trim();if(q.leng
  D.stock.forEach(s=>{if((s.ref+s.nom).toLowerCase().includes(q))res.push({t:`${s.ref} · ${s.nom}`,s:`Estoc ${s.st} · ${s.ub}`,fn:`go('estoc')`})});
  gsr.innerHTML=res.slice(0,8).map(r=>`<div onclick="${r.fn};gsr.classList.remove('on');gs.value=''"><span class="b">${r.t}</span><span class="mut small">${r.s}</span></div>`).join('')||'<div class="mut">Sense resultats</div>';
  gsr.classList.add('on')});
-document.addEventListener('click',e=>{if(!e.target.closest('.gsearch'))gsr.classList.remove('on')});
+document.addEventListener('click',e=>{if(!e.target.closest('.gsearch'))gsr.classList.remove('on');if(!e.target.closest('.rolepick')&&!e.target.closest('.rolemenu'))$('#rolemenu').classList.remove('on')});
 
 /* ---------- ROUTER ---------- */
 const VIEWS={tauler:vTauler,aprovacions:vAprovacions,produccio:vProduccio,capacitat:vCapacitat,taller:vTaller,qualitat:vQualitat,compres:vCompres,solicituds:vSolicituds,estoc:vEstoc,proveidors:vProveidors,informes:vInformes,activitat:vActivitat};
@@ -847,6 +887,6 @@ function render(){const v=currentView();$('#crumb').textContent=TITLES[v]||'Taul
  if(p[1]==='ap'&&AP(p[2]))openAP(p[2]);
  if(p[1]==='sup'&&SUP(p[2]))openSUP(p[2]);}
 window.addEventListener('hashchange',()=>{closeDrawer();render()});
-renderNav();render();
+renderRoleUI();renderNav();render();
 </script>
 </body></html>
