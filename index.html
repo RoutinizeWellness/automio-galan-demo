@@ -1,288 +1,526 @@
 <!doctype html>
 <html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
-<title>Compres i producció sincronitzats · Demo Galán v4</title>
-<style>
-:root{
---bg:#f4f6f9;--card:#fff;--ink:#101828;--ink2:#344054;--mute:#667085;--mute2:#98a2b3;--line:#e7eaf0;--line2:#eef1f5;
---navy:#1b2a4a;--navybg:#eef2f9;--acc:#c8272e;--accbg:#fdeeee;--amb:#b54708;--ambbg:#fef4e5;--grn:#067647;--grnbg:#e7f4ec;--blu:#175cd3;--blubg:#eaf1fd;--grybg:#f2f4f7;
---r:12px;--sh:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.04);--sh2:0 8px 24px rgba(16,24,40,.12)}
-*{box-sizing:border-box}html,body{margin:0}
-body{font:13.5px/1.55 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;letter-spacing:-.003em}
-.app{display:grid;grid-template-columns:236px minmax(0,1fr);min-height:100vh}
-aside{background:var(--card);border-right:1px solid var(--line);padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:2px}
-.brand{padding:2px 10px 18px;border-bottom:1px solid var(--line2);margin-bottom:14px}.brand img{max-height:30px;max-width:160px;display:block}.brand small{display:block;margin-top:12px;font-size:9.5px;letter-spacing:.14em;color:var(--mute2);font-weight:650}
-.nav-section{padding:0 12px 8px;font-size:9.5px;color:var(--mute2);letter-spacing:.14em;font-weight:650}
-aside a{display:flex;align-items:center;gap:10px;color:var(--ink2);text-decoration:none;padding:9px 12px;border-radius:9px;cursor:pointer;font-weight:550;font-size:13px;transition:background .12s}
-aside a:hover{background:var(--grybg)}aside a.on{background:var(--navybg);color:var(--navy);font-weight:650}
-.navicon{display:flex;color:var(--mute)}.on .navicon{color:var(--navy)}
-.n{margin-left:auto;background:var(--acc);color:#fff;border-radius:99px;font-size:10.5px;padding:0 7px;line-height:18px;font-weight:650}
-.side-foot{margin-top:auto;font-size:11px;color:var(--mute);border-top:1px solid var(--line2);padding:14px 8px 2px;line-height:1.6}
-.identity{display:flex;gap:9px;align-items:center;font-size:12px;color:var(--ink);font-weight:600}
-.identity .mut{font-weight:400;font-size:11px}
-.avatar{height:30px;width:30px;background:var(--navybg);color:var(--navy);border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px}
-.independent{margin-top:12px;font-size:10px;color:var(--mute2);line-height:1.55}
-main{padding:0 30px 48px;min-width:0}
-.topbar{height:58px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -30px 22px;padding:0 30px;position:sticky;top:0;z-index:5}
-.topbar img{max-height:24px;max-width:140px}.topbar .sp{flex:1}
-.pill{font-size:10px;font-weight:700;letter-spacing:.07em;background:var(--ambbg);color:var(--amb);border:1px solid #f5ddba;border-radius:99px;padding:4px 11px;white-space:nowrap}
-.version{font-size:11px;color:var(--mute);letter-spacing:.05em;font-weight:600}
-.heading{margin-bottom:22px}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--mute2);margin-bottom:7px}
-h1{font-size:23px;line-height:1.25;font-weight:700;letter-spacing:-.02em;margin:0;color:var(--ink)}
-h2{font-size:16px;font-weight:650;letter-spacing:-.01em;margin:0 0 10px;color:var(--ink)}
-h3{font-size:13px;color:var(--ink);font-weight:650}
-.sub{color:var(--mute);font-size:13px;margin:6px 0 0;max-width:70ch}
-.headrow{display:flex;justify-content:space-between;align-items:center;gap:15px}
-.snapshot{font-size:11px;color:var(--mute);border:1px solid var(--line);border-radius:8px;padding:5px 9px;background:#fff;white-space:nowrap}
-.grid{display:grid;gap:14px}.k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}.two{grid-template-columns:1.5fr 1fr}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0;box-shadow:var(--sh)}
-.kpi b{font-size:28px;display:block;line-height:1.1;color:var(--ink);font-weight:700;letter-spacing:-.02em}.kpi span{color:var(--mute);font-size:12.5px}
-.kpi.bad b{color:var(--acc)}.kpi.warn b{color:var(--amb)}
-.tag{display:inline-flex;align-items:center;gap:5px;border-radius:99px;padding:2px 10px;font-size:11.5px;font-weight:600;white-space:nowrap;line-height:1.6}
-.t-red{background:var(--accbg);color:#b42318}.t-amb{background:var(--ambbg);color:var(--amb)}.t-grn{background:var(--grnbg);color:var(--grn)}.t-blu{background:var(--blubg);color:var(--blu)}.t-gry{background:var(--grybg);color:#475467}
-.mut{color:var(--mute)}.small{font-size:12.5px}
-.item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--line2);align-items:flex-start}.item:last-child{border:0}
-.dot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex:none}.d-red{background:var(--acc)}.d-amb{background:#f79009}.d-blu{background:var(--blu)}.d-gry{background:#a7b0bf}.d-grn{background:#12b76a}
-.item .b{flex:1;min-width:0}
-button.btn{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:9px;padding:8px 15px;cursor:pointer;transition:filter .12s,background .12s}
-button.btn:hover{filter:brightness(1.12)}
-button.btn.ghost{background:#fff;color:var(--ink2);border-color:#d0d5dd}button.btn.ghost:hover{background:var(--grybg);filter:none}
-button.btn.soft{background:var(--navybg);color:var(--navy);border-color:transparent}
+<title>Automio OS · Galan — Compres i producció (demo)</title>
+<style>:root{--bg:#eef0f4;--card:#fff;--ink:#1c2b43;--mute:#667085;--line:#e3e7ee;--side:#fff;--red:#d92d20;--redbg:#fee4e2;--amb:#b54708;--ambbg:#fff3df;--grn:#067647;--grnbg:#dcfae6;--acc:#0f7a3d;--accbg:#e6f4ea;--accink:#0b5f2f;--navy:#17335e}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font:13px/1.45 "Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
+aside{background:var(--side);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto}
+.brand{padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+.brand .logo{display:flex;align-items:center;gap:9px}
+.brand .mark{width:30px;height:30px;border-radius:7px;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;letter-spacing:.02em}
+.brand .bn{font-weight:700;font-size:13.5px;color:var(--navy)}
+.brand .bs{font-size:10px;letter-spacing:.14em;color:#8a94a6;font-weight:600;margin-top:2px}
+nav{padding:10px 8px;flex:1}
+nav .sec{font-size:10px;letter-spacing:.12em;color:#98a2b3;font-weight:700;padding:12px 10px 5px;text-transform:uppercase}
+nav a{display:flex;align-items:center;gap:9px;color:#34405a;text-decoration:none;padding:7px 10px;border-radius:7px;cursor:pointer;font-weight:500;font-size:13px;margin-bottom:1px}
+nav a svg{width:16px;height:16px;stroke:#667085;flex:none}
+nav a:hover{background:#f2f4f8}
+nav a.on{background:var(--accbg);color:var(--accink);font-weight:600}
+nav a.on svg{stroke:var(--acc)}
+nav a .n{margin-left:auto;background:var(--acc);color:#fff;border-radius:99px;font-size:10.5px;padding:0 6px;line-height:16px;font-weight:700}
+.side-foot{font-size:11px;color:var(--mute);border-top:1px solid var(--line);padding:10px 14px;line-height:1.55}
+main{min-width:0;display:flex;flex-direction:column}
+.topbar{height:52px;display:flex;align-items:center;gap:12px;background:#fff;border-bottom:1px solid var(--line);padding:0 22px;position:sticky;top:0;z-index:15}
+.topbar .crumb{font-weight:600;color:var(--navy);font-size:13.5px}
+.topbar .gsearch{flex:1;max-width:420px;position:relative}
+.topbar .gsearch input{width:100%;border:1px solid var(--line);background:#f6f7f9;border-radius:8px;padding:7px 12px 7px 32px;font-size:12.5px}
+.topbar .gsearch svg{position:absolute;left:10px;top:8px;width:15px;height:15px;stroke:#98a2b3}
+.topbar .sp{flex:1}
+.pill{font-size:10.5px;font-weight:700;letter-spacing:.05em;background:var(--ambbg);color:var(--amb);border:1px solid #f1d19a;border-radius:99px;padding:4px 11px;white-space:nowrap}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.content{padding:20px 22px 60px}
+h1{font-size:19px;margin:0;color:var(--navy);letter-spacing:-.01em}
+.sub{color:var(--mute);margin:3px 0 16px;font-size:12.5px}
+.row-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+.row-head .sp{flex:1}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.card h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 12px}
+.grid{display:grid;gap:14px;margin-bottom:14px}
+.k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}.k2{grid-template-columns:1fr 1fr}.two{grid-template-columns:1.6fr 1fr}
+.kpi b{font-size:24px;display:block;line-height:1.1;color:var(--navy);font-weight:750}
+.kpi span{color:var(--mute);font-size:12px}
+.kpi .d{font-size:11px;margin-top:4px}
+.kpi.bad b{color:var(--red)}.kpi.warn b{color:var(--amb)}.kpi.ok b{color:var(--grn)}
+.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap}
+.t-red{background:var(--redbg);color:#b42318}.t-amb{background:var(--ambbg);color:var(--amb)}.t-grn{background:var(--grnbg);color:var(--grn)}.t-blu{background:var(--accbg);color:var(--accink)}.t-gry{background:#eef0f3;color:#475467}.t-pur{background:#f0e9fa;color:#6941c6}
+.mut{color:var(--mute)}.small{font-size:12px}.b{font-weight:600}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.tools .sp{flex:1}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px;cursor:pointer;font:inherit;font-size:12px;color:#34405a}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip .c{opacity:.65;font-size:11px;margin-left:3px}
+input,select,textarea{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;color:var(--ink)}
+input[type=search],input[type=text]{min-width:200px}
+textarea{width:100%;min-height:150px;line-height:1.55}
+button.btn{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:7px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+button.btn.ghost{background:#fff;color:var(--navy);border-color:#cbd2e0}
+button.btn.soft{background:var(--accbg);color:var(--accink);border-color:transparent}
+button.btn.danger{background:#fff;color:#b42318;border-color:#f0c4c0}
 button:disabled{opacity:.45;cursor:default}
 .act{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-table{width:100%;border-collapse:collapse}
-th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:#fafbfc;font-weight:650}
-td{padding:13px 12px;border-bottom:1px solid var(--line2);vertical-align:middle}
-tr.row{cursor:pointer}tr.row:hover td{background:#f8fafc}
-tr.active-row td{background:var(--navybg)}
-.tw{overflow-x:auto}.card.tw{padding:0}
-.card.tw table td:first-child,.card.tw table th:first-child{padding-left:18px}.card.tw table td:last-child,.card.tw table th:last-child{padding-right:18px}
-.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 13px;cursor:pointer;font:inherit;font-size:12.5px;font-weight:550;color:var(--ink2)}
-.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
-.tools #chips{display:flex;gap:6px;flex-wrap:wrap}
-input,select,textarea{font:inherit;font-size:13px;border:1px solid #d0d5dd;border-radius:9px;padding:8px 11px;background:#fff;color:var(--ink)}
-input:focus,select:focus,textarea:focus{outline:2px solid #b2c3e4;outline-offset:0;border-color:var(--navy)}
-input[type=search]{min-width:230px;flex:1}
-textarea{width:100%;min-height:200px;line-height:1.6;resize:vertical}
-.bar{height:6px;background:#edf0f4;border-radius:99px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
-.bar.risk i{background:var(--acc)}
-.tl{margin:10px 0 0;padding:0;list-style:none;border-left:2px solid var(--line)}.tl li{padding:0 0 10px 14px;position:relative;font-size:13px}.tl li:before{content:"";position:absolute;left:-6px;top:5px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
-.kv{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:12px 0;font-size:13px}.kv div:nth-child(odd){color:var(--mute)}
-.drawer{position:fixed;inset:0;background:rgba(16,24,40,.44);display:none;z-index:20}.drawer.on{display:block}
-.panel{position:absolute;right:0;top:0;bottom:0;width:min(640px,100%);background:#fff;padding:26px;overflow:auto;box-shadow:var(--sh2)}
-.x{float:right;border:0;background:var(--grybg);border-radius:9px;width:34px;height:34px;font-size:18px;cursor:pointer;color:var(--mute)}
-.x:hover{background:#e5e9ef}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;z-index:40;display:none;box-shadow:var(--sh2);max-width:90%;text-align:center}
-.why{background:#f8fafc;border:1px solid var(--line2);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13px;line-height:1.6;color:var(--ink2)}
-.mailprev{background:#fff;border:1px solid var(--line);border-radius:10px;padding:0;font-size:13px;margin-top:12px;overflow:hidden}
-.mailprev .mh{color:var(--mute);font-size:12px;background:#fafbfc;border-bottom:1px solid var(--line2);padding:10px 14px;margin:0;line-height:1.7}
-.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--line)}.tabs button{border:0;background:none;font:inherit;font-size:13px;padding:10px 14px;cursor:pointer;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:550}
-.tabs button.on{color:var(--navy);font-weight:650;border-bottom-color:var(--acc)}
-.banner{background:var(--accbg);border:1px solid #f5c6c3;border-radius:10px;padding:11px 15px;margin-bottom:16px;font-size:13px;display:flex;gap:10px;align-items:flex-start}.banner b{color:#b42318}
-.banner.amber{background:var(--ambbg);border-color:#f5ddba}.banner.amber b{color:var(--amb)}
-.dec{font-size:12px;color:var(--grn);font-weight:600}.dec.rej{color:#b42318}
-.src-list a{color:var(--blu);word-break:break-all}.src-list li{margin:5px 0}
-.ofcard .lines li{margin:6px 0;list-style:none}.ofcard ul{padding:0;margin:10px 0}
-.empty{padding:26px 8px;color:var(--mute)}
-.queue-tabs{display:flex;border-bottom:1px solid var(--line);margin-bottom:0;gap:26px;align-items:center}
-.queue-tabs button{font:inherit;font-size:12.5px;background:none;border:0;color:var(--mute);padding:12px 0;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;font-weight:550}
-.queue-tabs button.on{color:var(--navy);border-color:var(--navy);font-weight:650}
-.queue-tabs b{font-size:10.5px;background:var(--grybg);border-radius:99px;padding:2px 7px;margin-left:6px;font-weight:650;color:var(--ink2)}
-.queue-note{margin-left:auto;font-size:10.5px;color:var(--mute2);white-space:nowrap}
-.workbench{display:grid;grid-template-columns:minmax(300px,35%) minmax(0,1fr);border:1px solid var(--line);border-top:0;min-height:600px;background:#fff;border-radius:0 0 var(--r) var(--r);overflow:hidden}
-.queue{border-right:1px solid var(--line);background:#fff}
-.queue-search{padding:14px 16px;border-bottom:1px solid var(--line2)}
-.queue-search input{width:100%;min-width:0;background:#f8fafc;border:1px solid var(--line);font-size:12.5px}
-.queue-row{display:block;width:100%;text-align:left;background:none;color:var(--ink);border:0;border-bottom:1px solid var(--line2);border-left:3px solid transparent;padding:16px 18px 15px 15px;font:inherit;cursor:pointer;transition:background .12s}
-.queue-row:hover{background:#fafbfc}.queue-row.selected{background:var(--navybg);border-left-color:var(--navy)}
-.queue-meta{display:flex;justify-content:space-between;gap:6px;font-size:10.5px;color:var(--mute2);margin-bottom:7px;font-weight:600;letter-spacing:.02em}
-.priority{color:var(--mute)}.priority.urgent{color:#b42318}.priority.urgent:before{content:' ';display:inline-block;width:5px;height:5px;background:var(--acc);border-radius:50%;margin:0 5px 2px 0}
-.queue-row strong{font-size:13px;font-weight:650;display:block;line-height:1.45;color:var(--ink);letter-spacing:-.005em}
-.queue-supplier{font-size:11px;color:var(--mute);margin-top:6px}
-.queue-brief{font-size:11.5px;color:var(--mute);line-height:1.55;margin-top:5px}
-.queue-bottom{font-size:10.5px;color:var(--mute2);display:flex;justify-content:space-between;margin-top:12px}.queue-bottom span{color:var(--blu);font-weight:600}
-.detail-toolbar{display:flex;justify-content:space-between;padding:15px 24px;border-bottom:1px solid var(--line2);font-size:9.5px;letter-spacing:.1em;color:var(--mute2);font-weight:650}
-.detail-body{padding:24px 26px 30px}
-.detail h2{font-size:19px;line-height:1.4;font-weight:650;letter-spacing:-.01em}
-.detail .kv{font-size:12.5px;grid-template-columns:105px 1fr;margin:18px 0;gap:8px}
-.detail .act{border-top:1px solid var(--line2);padding-top:16px;margin-top:22px}
-.detail .small.mut{font-size:10.5px;color:var(--mute2)}
-.detail label{font-size:12.5px}.detail label .small{font-size:11px}
-.decision-receipt{border-left:3px solid #12b76a;padding:12px 15px;background:var(--grnbg);border-radius:0 8px 8px 0;margin-top:20px;font-size:12px;line-height:1.8}
-.blank{padding:70px 35px;color:var(--mute);font-size:12.5px}
-.material-detail{margin-top:20px;padding:22px}
-.material-row{display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line2);padding:14px 0;font-size:13px}
-.material-row:last-of-type{border-bottom:0}
-.material-row .tag{min-width:64px;justify-content:center}
-.material-row .mut{font-size:11.5px;margin-top:3px}
-.production-table{min-width:620px}
-nav.mob{display:none}
-@media(min-width:1600px){main{padding-left:44px;padding-right:44px}.topbar{margin-left:-44px;margin-right:-44px;padding:0 44px}.workbench{min-height:700px}}
-@media(max-width:1100px) and (min-width:901px){.app{grid-template-columns:190px minmax(0,1fr)}aside{padding-left:10px;padding-right:10px}main{padding-left:20px;padding-right:20px}.topbar{margin-left:-20px;margin-right:-20px;padding:0 20px}.workbench{grid-template-columns:290px minmax(0,1fr)}.detail-body{padding:20px}.queue-note{display:none}}
-@media(max-width:900px){.app{display:block}aside{display:none}main{padding:0 14px 96px}.topbar{margin:0 -14px 16px;padding:0 14px;height:54px}.topbar img{display:block;max-height:23px;max-width:110px}.topbar .version{display:none}
-h1{font-size:21px}.heading{margin-bottom:18px}.eyebrow{font-size:9px}.sub{font-size:12px}
-.k4{grid-template-columns:1fr 1fr}.k3{grid-template-columns:1fr}.two{grid-template-columns:1fr}.hide-m{display:none}
-.queue-tabs{gap:20px;overflow:auto}.queue-tabs button{font-size:12px}.queue-note{display:none}
-.workbench{grid-template-columns:1fr;min-height:0}.queue{border-right:0}.queue-row{padding:16px}.queue-row strong{font-size:13.5px}.queue-meta,.queue-supplier,.queue-brief{font-size:11.5px}.queue-bottom{font-size:11px}.detail{display:none}
-.queue-search{padding:13px}.queue-search input{font-size:16px}
-.panel{width:100%;padding:20px;bottom:0;top:0}.panel h2{font-size:19px;line-height:1.45}.panel .kv{font-size:12.5px;grid-template-columns:96px 1fr}.panel textarea{font-size:16px;min-height:260px}.panel input:not([type=radio]){font-size:16px}.panel .why{font-size:12.5px}.panel .btn{font-size:13px;min-height:42px}.panel label{font-size:12.5px}.panel .small.mut{font-size:11px}
-.act{gap:8px}
-input[type=search]{min-width:0;width:100%}
-.kv{grid-template-columns:110px 1fr}
-nav.mob{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);z-index:10;justify-content:space-around;padding:5px 0 calc(5px + env(safe-area-inset-bottom));box-shadow:0 -2px 12px rgba(16,24,40,.06)}
-nav.mob a{color:var(--mute);text-decoration:none;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 3px;flex:1;border-top:2px solid transparent;font-weight:550}
-nav.mob a.on{color:var(--navy);font-weight:650;border-top-color:var(--acc)}
-nav.mob a .n{display:none!important}
-.tools{display:block}.tools input{width:100%;max-width:none;font-size:16px}.tools #chips{margin-top:12px}
-.card.tw{overflow:auto}
-.material-detail{padding:16px}.material-detail .headrow{display:block}.material-row{gap:12px;font-size:12.5px}.material-row .mut{font-size:11.5px}.production-table td{padding:12px}
-table.cmdt,table.cmdt tbody,table.cmdt tr,table.cmdt td{display:block;width:100%}table.cmdt thead{display:none}table.cmdt tr{padding:14px 12px;border-bottom:1px solid var(--line)}table.cmdt td,table.cmdt td.hide-m{padding:4px 0;border:0;display:block;font-size:12.5px}table.cmdt td:first-child{font-weight:650;font-size:13.5px}table.cmdt td.hide-m:before{content:'Data: ';color:var(--mute)}}
-
-</style></head><body>
-<div class="app"><aside id="side"></aside><main>
-<div class="topbar"><img id="tl" alt="GALÁN"><span class="version">AUTOMIO · COMPRES + PRODUCCIÓ v4</span><span class="sp"></span><span class="pill">DEMO · DADES FICTÍCIES</span></div>
-<div id="view"></div></main></div>
-<nav class="mob" id="mob"></nav><div class="drawer" id="dr"><div class="panel" id="pn"></div></div><div class="toast" id="toast"></div>
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:#f8f9fb;font-weight:700;position:sticky;top:0}
+td{padding:8px 12px;border-bottom:1px solid #eef0f4;vertical-align:middle;white-space:nowrap}
+td.wrap{white-space:normal}
+tr.row{cursor:pointer}tr.row:hover td{background:#f6f8fc}
+tr.sel td{background:var(--accbg)}
+.tfoot{display:flex;align-items:center;gap:10px;padding:8px 12px;font-size:11.5px;color:var(--mute);background:#f8f9fb;border-top:1px solid var(--line)}
+.bar{height:6px;background:#eceef2;border-radius:99px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--navy)}
+.bar.risk i{background:var(--red)}.bar.warn i{background:#e8890c}.bar.ok i{background:var(--grn)}
+.drawer{position:fixed;inset:0;background:rgba(15,23,42,.42);display:none;z-index:30}
+.drawer.on{display:block}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(680px,100%);background:#fff;padding:0;overflow-y:auto;box-shadow:-8px 0 30px rgba(15,23,42,.18)}
+.panel .ph{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 22px 0;z-index:2}
+.panel .pb{padding:16px 22px 40px}
+.panel h2{font-size:17px;margin:0;color:var(--navy)}
+.x{float:right;border:0;background:#eef0f3;border-radius:7px;width:30px;height:30px;font-size:16px;cursor:pointer;color:#475467}
+.tabs{display:flex;gap:2px;margin-top:12px}
+.tabs button{border:0;background:none;font:inherit;font-size:12.5px;padding:9px 12px;cursor:pointer;color:var(--mute);border-bottom:2px solid transparent;font-weight:500}
+.tabs button.on{color:var(--acc);font-weight:650;border-bottom-color:var(--acc)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#101828;color:#fff;padding:10px 18px;border-radius:8px;font-size:12.5px;z-index:60;display:none;box-shadow:0 6px 24px rgba(0,0,0,.3)}
+.why{background:var(--accbg);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:12.5px;line-height:1.55;color:var(--accink)}
+.note{background:#f8f9fb;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:#475467}
+.banner{background:var(--ambbg);border:1px solid #f1d19a;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;display:flex;gap:10px;align-items:flex-start;color:#7a4a00}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:12px 0;font-size:12.5px}
+.kv div:nth-child(odd){color:var(--mute)}
+.tl{margin:8px 0 0;padding:0;list-style:none}
+.tl li{padding:0 0 12px 18px;position:relative;font-size:12.5px;border-left:2px solid var(--line);margin-left:5px}
+.tl li:before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
+.tl li b{display:block;color:var(--navy)}
+.tl .w{color:var(--mute);font-size:11.5px}
+.docview{background:#f8f9fb;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:12.5px}
+.mailprev{background:#f7f8fa;border:1px solid var(--line);border-radius:8px;padding:12px;font-size:12.5px;margin-top:10px}
+.mailprev .mh{color:var(--mute);font-size:11.5px;margin-bottom:6px}
+.qitem{display:flex;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:10px;align-items:flex-start;cursor:pointer}
+.qitem:hover{border-color:#c9d0e0;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+.dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none}
+.d-red{background:var(--red)}.d-amb{background:#e8890c}.d-blu{background:var(--navy)}.d-gry{background:#a7b0bf}.d-grn{background:#1f9d55}
+.qitem .b{flex:1;min-width:0}
+.qitem .t{font-weight:600;color:var(--navy);font-size:13px}
+.qitem .m{color:var(--mute);font-size:12px;margin-top:2px}
+.src{font-size:10.5px;color:#98a2b3}
+.chart{display:flex;align-items:flex-end;gap:8px;height:110px;padding-top:6px}
+.chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.chart .col .v{font-size:11px;font-weight:700;color:var(--navy)}
+.chart .col .b{width:100%;max-width:38px;background:var(--accbg2,var(--accbg));border-radius:5px 5px 0 0;background:var(--navy);opacity:.85}
+.chart .col .l{font-size:10.5px;color:var(--mute)}
+.progress-steps{display:flex;gap:0;margin:14px 0}
+.progress-steps .st{flex:1;text-align:center;font-size:11px;color:var(--mute);position:relative;padding-top:16px}
+.progress-steps .st:before{content:"";position:absolute;top:4px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #d0d5dd}
+.progress-steps .st:after{content:"";position:absolute;top:9px;left:calc(-50% + 8px);right:calc(50% + 8px);height:2px;background:#e4e7ec}
+.progress-steps .st:first-child:after{display:none}
+.progress-steps .st.done{color:var(--grn);font-weight:600}
+.progress-steps .st.done:before{background:var(--grn);border-color:var(--grn)}
+.progress-steps .st.done:after{background:var(--grn)}
+.progress-steps .st.now{color:var(--acc);font-weight:700}
+.progress-steps .st.now:before{border-color:var(--acc);background:var(--acc)}
+.ofboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ofcard{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px}
+.ofcard h4{margin:0 0 2px;font-size:13.5px;color:var(--navy)}
+.matrow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed #eef0f4;font-size:12px}
+.matrow:last-child{border:0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:900px){.app{grid-template-columns:1fr}aside{position:fixed;z-index:50;left:-240px;transition:left .2s}aside.open{left:0}.k4{grid-template-columns:repeat(2,1fr)}.two,.k2,.split{grid-template-columns:1fr}.content{padding:14px}}
+</style></head>
+<body><div class="app" id="app"></div>
 <script>
-const C={"key": "galan", "name": "GALÁN", "contact": "Gloria", "today": "2026-11-18", "tagline": "Compres i producció a la mateixa pàgina: cada ordre de fabricació sap quin material li falta i quan arriba.", "logo": "data:image/png;base64,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", "nav": [["avui", "Avui"], ["produccio", "Producció"], ["aprovacions", "Aprovacions"], ["comandes", "Comandes"], ["mes", "Més"]], "alert": {"t": "La OF-121 pot no començar a temps", "d": "Els motor-fus arriben el 05/12 i l’inici previst és el 30/11. Hi ha dues opcions de sincronització preparades.", "link": "Veure a Producció", "go": "produccio", "cls": ""}, "agenda": [["Recepció prevista: PLC i pantalles HMI (GC-26-031)", "Últim component pendent per iniciar la OF-118 el 23/11. Sense confirmació.", "dv 20/11"], ["Inici previst de la OF-118 (retorcedora PRX300)", "Tot el material rebut excepte l’electrònica.", "dl 23/11"], ["Recepció prevista: rodaments (GC-26-036)", "Per a la OF-124. Confirmats per al 24/11.", "dl 24/11"], ["Inici previst de la OF-121 (UP-TWISTER 2X1)", "En risc: els motor-fus arriben el 05/12.", "dl 30/11"]], "sups": {"G1": {"n": "Fusos i Precisió Vic", "cat": "Fusos i peces de precisió", "c": "Pere Guix", "lt": 30}, "G2": {"n": "Rodaments Vallès", "cat": "Rodaments", "c": "Anna Salom", "lt": 14}, "G3": {"n": "Automatismes Tèxtils", "cat": "PLC, pantalles HMI i electrònica", "c": "Jordi Mas", "lt": 21}, "G4": {"n": "Xapa i Mecanitzats Olesa", "cat": "Xassís i bancades", "c": "Marta Puig", "lt": 25}, "G5": {"n": "Motors i Variadors Igualada", "cat": "Motor-fus i variadors", "c": "Oriol Sans", "lt": 35}, "G6": {"n": "Consumibles Tècnics Ter", "cat": "Petit material de taller", "c": "Laia Font", "lt": 5}}, "orders": [{"id": "GC-26-031", "proj": "OF-118 · PRX300", "of": "OF-118", "s": "G3", "od": "2026-10-27", "pd": "2026-11-20", "cd": null, "L": [{"ref": "PLC-TX7", "d": "PLC amb pantalla HMI 7” per a retorcedora", "q": 2, "r": 0}, {"ref": "SNS-ROT", "d": "Sensor de trencada de fil", "q": 48, "r": 0}], "imp": "Últim component pendent per iniciar la OF-118 el 23/11", "ev": [["2026-10-27", "ERP", "Comanda emesa."], ["2026-11-13", "Correu", "Primer seguiment sense resposta."]]}, {"id": "GC-26-033", "proj": "OF-121 · UP-TWISTER 2X1", "of": "OF-121", "s": "G5", "od": "2026-10-15", "pd": "2026-12-05", "cd": "2026-12-05", "L": [{"ref": "MHS-11K", "d": "Motor-fus 11 kW", "q": 24, "r": 0}, {"ref": "VAR-15", "d": "Variador de freqüència 15 kW", "q": 24, "r": 0}], "imp": "Arriben 5 dies després de l’inici previst de la OF-121 (30/11)", "ev": [["2026-10-15", "ERP", "Comanda emesa."], ["2026-11-04", "Correu", "Confirmada per al 05/12."]]}, {"id": "GC-26-035", "proj": "OF-121 · UP-TWISTER 2X1", "of": "OF-121", "s": "G4", "od": "2026-09-30", "pd": "2026-11-10", "cd": "2026-11-10", "L": [{"ref": "XAS-UT2", "d": "Xassís monobloc mecanitzat", "q": 2, "r": 2}], "imp": "Rebut amb 2 peces rebutjades per acabat de pintura", "ev": [["2026-09-30", "ERP", "Comanda emesa."], ["2026-11-10", "ERP", "Rebut complet: 2 xassís."], ["2026-11-11", "Magatzem", "Qualitat rebutja 2 peces per acabat de pintura."]]}, {"id": "GC-26-036", "proj": "OF-124 · BBCA350", "of": "OF-124", "s": "G2", "od": "2026-11-06", "pd": "2026-11-24", "cd": "2026-11-24", "L": [{"ref": "RDM-6210", "d": "Rodament 6210 ZZ", "q": 96, "r": 0}], "imp": "—", "ev": [["2026-11-06", "ERP", "Comanda emesa."], ["2026-11-14", "Correu", "Confirmada per al 24/11."]]}, {"id": "GC-26-029", "s": "G6", "od": "2026-11-09", "pd": "2026-11-17", "cd": "2026-11-17", "L": [{"ref": "KIT-MNT", "d": "Kit de manteniment de taller", "q": 1, "r": 1}], "imp": "—", "ev": [["2026-11-09", "ERP", "Comanda emesa."], ["2026-11-17", "ERP", "Rebut complet."]]}], "of": [{"id": "OF-118", "machine": "Retorcedora PRX300", "sector": "Cordatge tècnic", "start": "dl 23/11", "due": "18/12", "risk": false, "ready": 82, "ap": null, "lines": [{"need": "48 fusos (Fusos i Precisió Vic)", "st": "Rebut", "info": "a màquina"}, {"need": "96 rodaments (Rodaments Vallès)", "st": "Rebut", "info": "a màquina"}, {"need": "PLC + HMI 7” i sensors (GC-26-031)", "st": "Pendent", "info": "previst 20/11, sense confirmar"}]}, {"id": "OF-121", "machine": "UP-TWISTER 2X1", "sector": "Xarxes de pesca", "start": "dl 30/11", "due": "22/01", "risk": true, "ready": 55, "ap": "ap-g1", "lines": [{"need": "2 xassís monobloc (GC-26-035)", "st": "Rebut", "info": "amb 2 peces rebutjades per pintura"}, {"need": "24 motor-fus + 24 variadors (GC-26-033)", "st": "Risc", "info": "arriben 05/12, 5 dies després de l’inici"}]}, {"id": "OF-124", "machine": "Bobinadora BBCA350", "sector": "Fil de cosir", "start": "dl 14/12", "due": "30/01", "risk": true, "ready": 30, "ap": "ap-g2", "lines": [{"need": "96 rodaments (GC-26-036)", "st": "Pendent", "info": "confirmats 24/11"}, {"need": "24 fusos (sense comanda)", "st": "Risc", "info": "estoc sota mínim; cal emetre comanda"}]}], "aps": [{"id": "ap-g1", "type": "Sincronització", "urg": true, "side": "produccio", "order": "GC-26-033", "of": "OF-121", "title": "OF-121: els motor-fus arriben 5 dies després de l’inici", "brief": "Inici previst 30/11; material confirmat per al 05/12.", "why": "La GC-26-033 (24 motor-fus i 24 variadors) està confirmada per al 05/12, però la OF-121 té l’inici previst el 30/11. El sistema detecta el desfasament i prepara dues sortides; la decisió és de producció i compres junts.", "opts": [{"t": "Moure l’inici de la OF-121 a l’11/12", "d": "Marge de 4 dies després de la recepció. Es replantifica la càrrega del taller i s’informa el client si cal."}, {"t": "Demanar enviament parcial de 8 motor-fus", "d": "Permet començar el muntatge elèctric pel primer mòdul el 30/11. Cost d’enviament a negociar."}], "draft": {"to": "Oriol Sans <vendes@motorsigualada-demo.example>", "subj": "Comanda GC-26-033: possible enviament parcial?", "body": "Bon dia Oriol,\n\nLa comanda GC-26-033 (24 motor-fus MHS-11K i 24 variadors) està confirmada per al 05/12, però tenim l’inici de muntatge previst per al 30/11.\n\nSeria possible un enviament parcial de 8 motor-fus per al 27/11? Quin cost tindria?\n\nGràcies,\nGloria\nGalan Textile Machinery (demo)"}}, {"id": "ap-g2", "type": "Comanda nova", "side": "compres", "order": "GC-26-036", "of": "OF-124", "title": "OF-124: emetre comanda de 24 fusos (estoc sota mínim)", "brief": "Sense comanda, la bobinadora del 14/12 queda descoberta.", "why": "L’estoc de fusos està sota el mínim i la OF-124 (inici 14/12) en necessita 24. El termini habitual del proveïdor són 30 dies: emetre la comanda aquesta setmana arriba just. El sistema prepara la comanda; no l’envia mai sola.", "draft": {"to": "Pere Guix <comercial@fusosvic-demo.example>", "subj": "Comanda: 24 fusos per a bobinadora", "body": "Bon dia Pere,\n\nUs demanem oferta i termini per a 24 fusos segons especificació habitual (bobinadora BBCA350). La necessitem per a la primera quinzena de desembre.\n\nGràcies,\nGloria\nGalan Textile Machinery (demo)"}}, {"id": "ap-g3", "type": "Seguiment", "urg": true, "side": "compres", "order": "GC-26-031", "title": "PLC i HMI de la OF-118 sense confirmar; l’inici és el 23/11", "brief": "És l’últim component pendent de la retorcedora.", "why": "La GC-26-031 porta un seguiment sense resposta (13/11) i la OF-118 comença el 23/11. Tot la resta del material ja és rebut. Proposa un segon seguiment amb petició de data ferma.", "draft": {"to": "Jordi Mas <comercial@automatismestextils-demo.example>", "subj": "Comanda GC-26-031: data ferma per al 20/11?", "body": "Bon dia Jordi,\n\nUs vam escriure el 13/11 sense resposta. La comanda GC-26-031 (PLC amb HMI 7” i sensors) és l’últim component pendent per iniciar una ordre de fabricació el 23/11.\n\nEns confirmeu que arriba el 20/11? Si hi ha risc de retard, ho necessitem saber avui.\n\nGràcies,\nGloria\nGalan Textile Machinery (demo)"}}, {"id": "ap-g4", "type": "Reclamació", "side": "compres", "order": "GC-26-035", "title": "2 xassís rebutjats per acabat de pintura (OF-121)", "brief": "Qualitat els ha rebutjat; cal reposició.", "why": "Magatzem va rebutjar 2 peces del lot GC-26-035 per l’acabat de pintura. Afecta la OF-121. Proposa la reclamació amb reposició abans del muntatge; la decisió i el to són vostres.", "draft": {"to": "Marta Puig <qualitat@xapaolesa-demo.example>", "subj": "Reclamació: acabat de pintura, lot GC-26-035", "body": "Bon dia Marta,\n\nDel lot GC-26-035 (2 xassís monobloc), qualitat ha rebutjat les 2 peces per defectes en l’acabat de pintura.\n\nNecessitem reposició o retratament abans de la primera setmana de desembre per no aturar el muntatge. Com ho podem encaixar?\n\nSalutacions,\nGloria\nGalan Textile Machinery (demo)"}}, {"id": "ap-g5", "type": "Substitució", "side": "produccio", "order": "GC-26-031", "of": "OF-118", "title": "Ofereixen una pantalla HMI alternativa en estoc", "brief": "Canvi d’especificació: el valida enginyeria.", "why": "Automatismes Tèxtils ofereix una HMI de 7” d’un model superior amb entrega immediata. Implica canvi d’especificació de la màquina: el sistema ho escala a validació tècnica i no ho deixa decidir a compres ni al flux.", "opts": [{"t": "Enviar a validació tècnica", "d": "Enginyeria revisa la compatibilitat; si és vàlida, es pot salvar el 20/11."}, {"t": "Mantenir el model contractat", "d": "Es rebutja l’alternativa i s’espera la data confirmada."}]}], "ctx": {"whoT": "Qui és Galán", "who": ["Galan Textile Machinery, S.L. (Terrassa). Empresa familiar fundada el 1940; la tercera generació, amb Xavier Galan de gerent, la va reinventar com a fabricant de màquines de retorçat i bobinat per a fils tècnics (cordatge, xarxes de pesca, césped artificial, automoció…).", "Exporta arreu del món i és membre d’amec i d’Eurocord. Les màquines s’adapten a cada client: “totes semblen iguals, però són diferents per a cada aplicació i país”.", "Ja tenen un sistema ERP que, paraules del gerent, “va canviar la manera d’organitzar-nos”, i aposten per la indústria 4.0. Gloria Sánchez és la responsable de compres."], "reviews": ["GoWork: 4,2/5 amb 11 valoracions i 16 ressenyes, gairebé totes d’empleats o candidats (ambient, jornada de dilluns a dijous). Cap queixa pública sobre compres o proveïdors.", "La seva reputació pública ve de la premsa sectorial (Textiles Panamericanos, Via Empresa) i de les associacions, no de portals de ressenyes."], "fit": ["A compres hi ha poc volum i està controlat: la necessitat real està a la unió amb producció, que és el que van traslladar a la primera conversa.", "Per això la demo posa les ordres de fabricació al centre: cada OF mostra el material que li falta, quan arriba i què passa si una compra es mou. Compres i producció decideixen junts, amb aprovacions.", "Com que ja tenen ERP, la proposta és una capa de coordinació a sobre, no un canvi de sistema."], "sources": [["Web oficial de Galán", "https://galan.es/sobre-galan/"], ["\"Galan SL: la reinvención de la industria textil\" — Via Empresa", "https://www.viaempresa.cat/es/empresa/galan-sl-la-reinvencion-de-la-industria-textil_13067_102.html"], ["\"GALAN: Vanguardista Española de Maquinaria Textil\" — Textiles Panamericanos", "https://textilespanamericanos.com/textiles-panamericanos/2024/11/galan-vanguardista-espanola-de-maquinaria-textil/"], ["Opinions d’empleats — GoWork", "https://es.gowork.com/galan-textile-machinery-terrassa"]]}};
-const $=s=>document.querySelector(s);
-const LS=C.key+'-v4';
-let state={route:'avui',tab:'prov',q:'',chip:'all'};
-let D; // decisions
-try{D=JSON.parse(localStorage.getItem(LS)||'{}')}catch(e){D={}}
-function saveD(){try{localStorage.setItem(LS,JSON.stringify(D))}catch(e){}}
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function toast(t){const e=$('#toast');e.textContent=t;e.style.display='block';clearTimeout(e._t);e._t=setTimeout(()=>e.style.display='none',2600)}
-function go(r,x){state.route=r;if(x&&x.tab)state.tab=x.tab;closeDr();render();window.scrollTo(0,0)}
-function navHTML(a){const pend=C.aps.filter(x=>!D[x.id]).length;
- return a.map(([k,t])=>`<a class="${state.route===k?'on':''}" onclick="go('${k}')">${t}${k==='aprovacions'&&pend?`<span class="n">${pend}</span>`:''}</a>`).join('')}
-function nav(){$('#side').innerHTML=`<div class="brand"><img src="${C.logo}" alt="${C.name}"><small>ASSISTENT DE COMPRES</small></div>${navHTML(C.nav)}<div class="side-foot">Res no s'envia ni s'actualitza sense aprovació.<br><br><b>Demo independent</b>, no és un producte oficial de ${C.name}. Dades fictícies.</div>`;
- $('#mob').innerHTML=navHTML(C.nav.filter(([k])=>k!=='mes').concat([['mes','Més']]));}
-function sup(id){return C.sups[id]||{n:id,c:'',cat:''}}
-function ord(id){return C.orders.find(o=>o.id===id)}
-function recvPct(o){const q=o.L.reduce((a,l)=>a+l.q,0),r=o.L.reduce((a,l)=>a+l.r,0);return q?Math.round(r/q*100):0}
-function ordState(o){const today=C.today,p=recvPct(o);if(p===100)return['Rebuda','t-grn'];const ref=o.cd||o.pd;if(ref<today)return['En retard','t-red'];if(o.cd&&o.cd>o.pd)return['Reprogramada','t-amb'];if(p>0)return['Parcial','t-amb'];if(!o.cd)return['Sense confirmar','t-gry'];return['Confirmada','t-blu']}
-function fmtD(d){if(!d)return'—';const[y,m,dd]=d.split('-');return`${dd}/${m}/${y}`}
-function decided(id){return D[id]}
-function kpi(label,val,cls){return `<div class="card kpi ${cls||''}"><b>${val}</b><span>${label}</span></div>`}
-
-/* ---------- AVUI ---------- */
-function vAvui(){const pend=C.aps.filter(a=>!D[a.id]);const open=C.orders.filter(o=>recvPct(o)<100).length;const part=C.orders.filter(o=>recvPct(o)>0&&recvPct(o)<100).length;
- let h=`<div class="heading"><h1>Bon dia, ${C.contact}</h1><div class="sub">${C.tagline} Res no s'envia ni es registra sense la teva aprovació.</div></div>`;
- h+=`<div class="grid ${C.of?'k4':'k3'}" style="margin-bottom:14px">${kpi('Aprovacions pendents',pend.length,pend.length?'warn':'')}${kpi('Comandes obertes',open)}${kpi('Recepcions parcials',part)}${C.of?kpi('Ordres de fabricació en risc',C.of.filter(o=>o.risk).length,C.of.some(o=>o.risk)?'bad':''):''}</div>`;
- if(C.alert)h+=`<div class="banner ${C.alert.cls||''}"><span class="dot ${C.alert.cls==='amber'?'d-amb':'d-red'}" style="margin-top:4px"></span><div><b>${esc(C.alert.t)}</b><br>${esc(C.alert.d)} <a href="#" onclick="go('${C.alert.go}');return false" style="color:var(--navy);font-weight:600">${esc(C.alert.link)}</a></div></div>`;
- h+=`<div class="grid two"><div class="card"><h2>Decisions pendents</h2>`;
- if(!pend.length)h+=`<div class="empty">Tot decidit. Quan entri un correu o canvii una data, la proposta apareixerà aquí.</div>`;
- pend.slice(0,3).forEach(a=>{h+=`<div class="item"><span class="dot ${a.side==='produccio'?'d-blu':a.urg?'d-red':'d-amb'}"></span><div class="b"><span class="tag ${TYPE_TAG[a.type]||'t-gry'}">${a.type}</span>${a.side?` <span class="tag t-blu">${a.side==='produccio'?'Producció':'Compres'}</span>`:''}<div style="margin-top:4px"><b>${esc(a.title)}</b></div><div class="small mut">${esc(a.brief)}</div></div><button class="btn ghost" onclick="go('aprovacions');setTimeout(()=>openAp('${a.id}'),60)">Revisar</button></div>`});
- h+=`</div><div class="card"><h2>Agenda de la setmana</h2>${C.agenda.map(a=>`<div class="item"><span class="dot d-gry"></span><div class="b"><b>${esc(a[0])}</b><div class="small mut">${esc(a[1])}</div></div><span class="small mut" style="white-space:nowrap">${esc(a[2])}</span></div>`).join('')}</div></div>`;
- $('#view').innerHTML=h}
-
-/* ---------- APROVACIONS ---------- */
-const TYPE_TAG={'Seguiment':'t-amb','Canvi de data':'t-red','Factura':'t-red','Recepció':'t-blu','Substitució':'t-amb','Documentació':'t-amb','Preu':'t-red','Comanda nova':'t-grn','Sincronització':'t-blu','Reclamació':'t-red'};
-function vApprov(){const pend=C.aps.filter(a=>!D[a.id]);const done=C.aps.filter(a=>D[a.id]);
- let h=`<div class="heading"><h1>Aprovacions</h1><div class="sub">El sistema prepara i proposa; tu decideixes cas per cas. Aprovar registra la decisió a l'historial. En aquesta demo no s'envia res.</div></div>`;
- if(!pend.length)h+=`<div class="card empty">Cap proposta pendent. Totes les decisions estan preses.</div>`;
- pend.forEach(a=>{const o=ord(a.order);h+=`<div class="card" style="margin-bottom:12px"><div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap"><div style="flex:1;min-width:230px"><span class="tag ${TYPE_TAG[a.type]||'t-gry'}">${a.type}</span>${a.side?` <span class="tag t-blu">${a.side==='produccio'?'Decideix producció':'Decideix compres'}</span>`:''}${a.urg?' <span class="tag t-red">Urgent</span>':''}<h3 style="margin:8px 0 4px;font-size:15px">${esc(a.title)}</h3><div class="small mut">${o?esc(o.id)+(o.proj?` · ${esc(o.proj)}`:'')+(a.of?` · ${a.of}`:''):''}</div><div class="why"><b>Per què ho proposa:</b> ${esc(a.why)}</div></div><button class="btn" onclick="openAp('${a.id}')">Revisar i decidir</button></div></div>`});
- if(done.length){h+=`<div class="card"><h2>Registre de decisions</h2>${done.map(a=>{const d=D[a.id];return `<div class="item"><span class="dot ${d.action==='aprovada'?'d-grn':'d-red'}"></span><div class="b"><b>${esc(a.title)}</b><div class="small"><span class="dec ${d.action==='aprovada'?'':'rej'}">${d.action==='aprovada'?'Aprovada':'Rebutjada'}</span> · ${d.ts}${d.note?` · ${esc(d.note)}`:''}</div></div><button class="btn ghost" onclick="undoAp('${a.id}')">Desfés</button></div>`}).join('')}</div>`}
- $('#view').innerHTML=h}
-function openAp(id){const a=C.aps.find(x=>x.id===id);if(!a)return;const o=ord(a.order);const d=D[id];
- let h=`<button class="x" onclick="closeDr()">×</button><span class="tag ${TYPE_TAG[a.type]||'t-gry'}">${a.type}</span>${a.side?` <span class="tag t-blu">${a.side==='produccio'?'Decideix producció':'Decideix compres'}</span>`:''}<h2 style="margin:10px 0 4px">${esc(a.title)}</h2>`;
- if(o)h+=`<div class="kv"><div>Comanda</div><div><a href="#" onclick="closeDr();openOrder('${o.id}');return false" style="color:var(--navy)">${o.id}</a>${o.proj?` · ${esc(o.proj)}`:''}</div><div>Proveïdor</div><div>${esc(sup(o.s).n)}</div><div>Promesa</div><div>${fmtD(o.pd)}${o.cd?` → confirmada ${fmtD(o.cd)}`:' (sense confirmar)'}</div></div>`;
- h+=`<div class="why"><b>Per què ho proposa:</b> ${esc(a.why)}</div>`;
- if(a.opts){h+=`<h3>Opcions</h3>${a.opts.map((op,i)=>`<label style="display:block;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer"><input type="radio" name="opt" value="${i}" ${i===0?'checked':''} style="margin-right:8px"><b>${esc(op.t)}</b><br><span class="small mut" style="margin-left:24px">${esc(op.d)}</span></label>`).join('')}`}
- if(a.draft)h+=`<h3 style="margin-top:18px">Esborrany preparat (editable)</h3><div class="mailprev"><div class="mh">Per a: ${esc(a.draft.to)}<br>Assumpte: ${esc(a.draft.subj)}</div><textarea id="draftbody">${esc(a.draft.body)}</textarea></div>`;
- if(d){h+=`<div class="act"><span class="dec ${d.action==='aprovada'?'':'rej'}">${d.action==='aprovada'?'Aprovada':'Rebutjada'} · ${d.ts}${d.note?' · '+esc(d.note):''}</span><button class="btn ghost" onclick="undoAp('${a.id}')">Desfés</button></div>`}
- else{h+=`<div class="act"><button class="btn" onclick="decideAp('${a.id}','aprovada')">Aprova${a.draft?' i marca per enviar':''}</button>${a.draft?`<button class="btn soft" onclick="decideAp('${a.id}','aprovada',true)">Aprova amb l'edició</button>`:''}<button class="btn ghost" onclick="rejectAsk('${a.id}')">Rebutja</button></div><div class="small mut" style="margin-top:8px">Simulació: aprovar no envia correus ni escriu a cap ERP; només registra la decisió.</div>`}
- $('#pn').innerHTML=h;$('#dr').classList.add('on')}
-function rejectAsk(id){$('#pn').insertAdjacentHTML('beforeend',`<div id="rejbox" style="margin-top:14px"><h3>Motiu del rebuig</h3><input id="rejnote" style="width:100%" placeholder="Opcional"><div class="act"><button class="btn" onclick="decideAp('${id}','rebutjada')">Confirma el rebuig</button></div></div>`);$('#rejbox').scrollIntoView({behavior:'smooth'})}
-function decideAp(id,action,edited){const a=C.aps.find(x=>x.id===id);let note='';const rj=$('#rejnote');if(rj&&rj.value)note=rj.value;
- const opt=document.querySelector('input[name=opt]:checked');if(opt&&a.opts)note=(note?note+' · ':'')+'Opció: '+a.opts[Number(opt.value)].t;
- if(edited){const tb=$('#draftbody');if(tb)note=(note?note+' · ':'')+'Amb edició manual de l’esborrany'}
- D[id]={action,ts:new Date().toLocaleString('ca-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}),note};saveD();closeDr();
- toast(action==='aprovada'?'Decisió aprovada i registrada (simulada, no s’ha enviat res)':'Proposta rebutjada');render()}
-function undoAp(id){delete D[id];saveD();closeDr();toast('Decisió desfeta');render()}
-
-/* ---------- COMANDES ---------- */
-function vOrders(){let h=`<div class="heading"><h1>Comandes</h1><div class="sub">Lectura de les comandes obertes. El detall mostra l'historial i permet preparar un seguiment, que sempre passa per aprovació.</div></div>`;
- h+=`<div class="tools"><input type="search" placeholder="Cerca per comanda, proveïdor o referència" value="${esc(state.q)}" oninput="state.q=this.value;vOrdersBody()"><span id="chips">${[['all','Totes'],['late','En retard'],['part','Parcials'],['noc','Sense confirmar']].map(([k,t])=>`<button class="chip ${state.chip===k?'on':''}" onclick="state.chip='${k}';vOrdersBody()">${t}</button>`).join('')}</span></div><div class="card tw" id="ot"></div>`;
- $('#view').innerHTML=h;vOrdersBody()}
-function vOrdersBody(){const q=state.q.toLowerCase();const rows=C.orders.filter(o=>{const st=ordState(o)[1];if(state.chip==='late'&&st!=='t-red')return false;if(state.chip==='part'&&recvPct(o)===0||state.chip==='part'&&recvPct(o)===100)return false;if(state.chip==='noc'&&o.cd)return false;
- if(q&&!(o.id+' '+sup(o.s).n+' '+o.L.map(l=>l.ref+' '+l.d).join(' ')).toLowerCase().includes(q))return false;return true});
- $('#ot').innerHTML=`<table class="cmdt"><thead><tr><th>Comanda</th><th>Proveïdor</th>${C.of?'<th>OF</th>':''}<th class="hide-m">Promesa</th><th class="hide-m">Confirmada</th><th>Estat</th><th>Rebut</th></tr></thead><tbody>${rows.map(o=>{const[st,cl]=ordState(o);const p=recvPct(o);return `<tr class="row" onclick="openOrder('${o.id}')"><td>${o.id}${o.proj?`<div class="small mut">${esc(o.proj)}</div>`:''}</td><td>${esc(sup(o.s).n)}</td>${C.of?`<td>${o.of||'—'}</td>`:''}<td class="hide-m">${fmtD(o.pd)}</td><td class="hide-m">${o.cd?fmtD(o.cd):'—'}</td><td><span class="tag ${cl}">${st}</span></td><td><div class="bar ${st==='En retard'?'risk':''}"><i style="width:${p}%"></i></div><span class="small mut">${p}%</span></td></tr>`}).join('')||'<tr><td colspan="7" class="empty">Cap comanda amb aquests filtres.</td></tr>'}</tbody></table>`}
-function openOrder(id){const o=ord(id);if(!o)return;const[st,cl]=ordState(o);const s=sup(o.s);
- let h=`<button class="x" onclick="closeDr()">×</button><span class="tag ${cl}">${st}</span><h2 style="margin:10px 0 2px">${o.id}${o.proj?` · ${esc(o.proj)}`:''}</h2><div class="mut small">${esc(s.n)} · ${esc(s.cat)} · contacte: ${esc(s.c)}</div>`;
- h+=`<div class="kv"><div>Emesa</div><div>${fmtD(o.od)}</div><div>Promesa</div><div>${fmtD(o.pd)}</div><div>Confirmada</div><div>${o.cd?fmtD(o.cd):'No confirmada'}</div>${o.of?`<div>Ordre de fabricació</div><div>${esc(o.of)}</div>`:''}${o.imp?`<div>Impacte</div><div>${esc(o.imp)}</div>`:''}</div>`;
- h+=`<h3>Línies</h3><table><thead><tr><th>Ref.</th><th>Descripció</th><th>Qt.</th><th>Rebut</th></tr></thead><tbody>${o.L.map(l=>`<tr><td class="mono small">${esc(l.ref)}</td><td>${esc(l.d)}</td><td>${l.q}</td><td><div class="bar"><i style="width:${l.q?Math.round(l.r/l.q*100):0}%"></i></div><span class="small mut">${l.r}/${l.q}</span></td></tr>`).join('')}</tbody></table>`;
- h+=`<h3 style="margin-top:18px">Historial</h3><ul class="tl">${o.ev.map(e=>`<li><span class="mut small">${fmtD(e[0])} · ${esc(e[1])}</span><br>${esc(e[2])}</li>`).join('')}</ul>`;
- h+=`<div class="act"><button class="btn ghost" onclick="mkFollow('${o.id}')">Prepara un seguiment</button></div><div class="small mut" style="margin-top:6px">El seguiment no s'envia: crea una proposta a Aprovacions.</div>`;
- $('#pn').innerHTML=h;$('#dr').classList.add('on')}
-function mkFollow(id){const o=ord(id);const s=sup(o.s);const newId='ap-x-'+id;
- if(!C.aps.some(a=>a.id===newId)){C.aps.unshift({id:newId,type:'Seguiment',order:id,title:'Seguiment de la '+id+' ('+s.n+')',brief:'Proposta creada des del detall de la comanda.',why:'Preparada manualment des de la comanda. Sense confirmació actualitzada, el pla queda en risc.',draft:{to:s.c+' <comercial@proveidor-demo.example>',subj:'Estat de la comanda '+id,body:'Bon dia '+s.c.split(' ')[0]+',\n\nEns podeu confirmar l’estat de la comanda '+id+' i la data d’entrega actualitzada?\n\nGràcies,\n'+C.contact+'\n'+C.name+' (demo)'}})}
- closeDr();go('aprovacions');setTimeout(()=>openAp(newId),80)}
-
-/* ---------- PRODUCCIÓ (Galán) ---------- */
-function vProd(){let h=`<div class="heading"><h1>Producció i compres</h1><div class="sub">Cada ordre de fabricació amb el material que li falta i quan arriba. Si una compra es mou, es veu l'efecte aquí i la resposta passa per aprovació.</div></div>`;
- C.of.forEach(f=>{const pct=f.ready;const haves=f.lines.filter(l=>l.st==='Rebut').length;
-  h+=`<div class="card ofcard" style="margin-bottom:12px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start"><div><h3 style="margin:0 0 2px;font-size:15px">${f.id} · ${esc(f.machine)}</h3><div class="small mut">${esc(f.sector)} · inici previst ${esc(f.start)} · lliurament ${esc(f.due)}</div></div>${f.risk?'<span class="tag t-red">En risc</span>':'<span class="tag t-grn">En marxa</span>'}</div><div style="display:flex;align-items:center;gap:10px;margin:12px 0 4px"><div class="bar ${f.risk?'risk':''}" style="flex:1"><i style="width:${pct}%"></i></div><span class="small mut">${pct}% material rebut</span></div><ul>${f.lines.map(l=>`<li class="small"><span class="tag ${l.st==='Rebut'?'t-grn':l.st==='Risc'?'t-red':'t-amb'}">${l.st}</span> ${esc(l.need)} <span class="mut">· ${esc(l.info)}</span></li>`).join('')}</ul>`;
-  if(f.ap){const a=C.aps.find(x=>x.id===f.ap);if(a&&!D[a.id])h+=`<div class="act"><button class="btn" onclick="go('aprovacions');setTimeout(()=>openAp('${a.id}'),60)">Revisar la proposta de sincronització</button></div>`;else if(a&&D[a.id])h+=`<div class="small dec">${D[a.id].action==='aprovada'?'Sincronització aprovada':'Proposta rebutjada'} · ${D[a.id].ts}</div>`}
-  h+=`</div>`});
- h+=`<div class="card"><h2>Com s'actualitza</h2><p class="small mut" style="margin:0">Les recepcions i les dates confirmades de compres alimenten aquesta vista. Cap canvi de planning s'aplica sol: la proposta arriba a Aprovacions i la persona de compres o de producció decideix.</p></div>`;
- $('#view').innerHTML=h}
-
-/* ---------- MÉS ---------- */
-function vMes(){const t=state.tab;let h=`<div class="heading"><h1>Més</h1></div><div class="tabs">${[['prov','Proveïdors'],['ctx','Context públic'],['real','Què és real']].map(([k,tt])=>`<button class="${t===k?'on':''}" onclick="state.tab='${k}';render()">${tt}</button>`).join('')}</div><div id="mb"></div>`;
- $('#view').innerHTML=h;const mb=$('#mb');
- if(t==='prov'){mb.innerHTML=`<div class="card tw"><table><thead><tr><th>Proveïdor</th><th>Àrea</th><th>Contacte</th><th class="hide-m">Termini hab. (dies)</th></tr></thead><tbody>${Object.values(C.sups).map(s=>`<tr><td>${esc(s.n)}</td><td>${esc(s.cat)}</td><td>${esc(s.c)}</td><td class="hide-m">${s.lt}</td></tr>`).join('')}</tbody></table><p class="small mut">Noms i terminis ficticis per a la demo.</p></div>`}
- else if(t==='ctx'){mb.innerHTML=`<div class="grid two"><div class="card"><h2>${esc(C.ctx.whoT)}</h2>${C.ctx.who.map(p=>`<p class="small" style="margin:8px 0">${p}</p>`).join('')}<h3 style="margin-top:14px">Què diuen les ressenyes</h3>${C.ctx.reviews.map(p=>`<p class="small" style="margin:8px 0">${p}</p>`).join('')}</div><div class="card"><h2>Per què aquesta demo</h2>${C.ctx.fit.map(p=>`<p class="small" style="margin:8px 0">${p}</p>`).join('')}<h3 style="margin-top:14px">Fonts públiques</h3><ul class="src-list small">${C.ctx.sources.map(s=>`<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join('')}</ul><p class="small mut">Demo independent, no és un producte oficial de ${C.name}. Logotip públic usat només per a aquesta presentació.</p></div></div>`}
- else{mb.innerHTML=`<div class="card"><h2>Què és real i què és simulat</h2><ul><li><b>Real:</b> interfície, navegació, filtres i registre de decisions al navegador.</li><li><b>Simulat:</b> classificació de correus, esborranys, recepcions, ERP i qualsevol enviament.</li><li><b>Desconnectat:</b> correu, ERP, documents, IA i pagaments.</li><li>Tots els proveïdors, contactes operatius, comandes, ordres de fabricació i xifres són ficticis.</li><li>Cap xifra de la demo és una dada real de ${C.name} ni una promesa d'estalvi.</li></ul><p class="small">El flux és manual per disseny: el sistema classifica, vincula i prepara; la persona aprova, edita o rebutja cada acció. L'automatització total no és l'objectiu d'aquesta proposta.</p><div class="act"><button class="btn ghost" onclick="resetAll()">Reinicia la demo</button></div></div>`}}
-function resetAll(){D={};saveD();toast('Demo reiniciada');go('avui')}
-
-function closeDr(){$('#dr').classList.remove('on')}
-function render(){nav();$('#tl').src=C.logo;({avui:vAvui,aprovacions:vApprov,comandes:vOrders,produccio:vProd,mes:vMes}[state.route]||vAvui)()}
-$('#dr').addEventListener('click',e=>{if(e.target.id==='dr')closeDr()});
-/* Operational workbench, own implementation based on purchasing software patterns. */
-let queueMode='pending',queueQ='',selectedAp=null,selectedOf=null;
-try{const custom=JSON.parse(localStorage.getItem(LS+'-custom')||'[]');custom.forEach(a=>{if(!C.aps.some(x=>x.id===a.id))C.aps.push(a)})}catch(e){}
-function draftGet(id){try{return JSON.parse(localStorage.getItem(LS+'-draft-'+id)||'null')}catch(e){return null}}
-function activeReview(){return $('#dr').classList.contains('on')?$('#pn'):$('#review-detail')}
-function draftSave(id){const el=activeReview()?.querySelector('#draftbody');if(el)try{localStorage.setItem(LS+'-draft-'+id,JSON.stringify(el.value))}catch(e){}}
-function navHTML(a){const icons={avui:'inbox',produccio:'factory',aprovacions:'check',comandes:'list',mes:'more'};return a.map(([k,t])=>`<a role="button" tabindex="0" class="${state.route===k?'on':''}" onclick="go('${k}')" onkeydown="if(event.key==='Enter')go('${k}')"><span class="navicon">${icon(icons[k])}</span>${k==='avui'?'Per revisar':k==='aprovacions'?'Decisions':t}${k==='avui'?`<span class="n">${C.aps.filter(x=>!D[x.id]).length}</span>`:''}</a>`).join('')}
-function icon(k){const paths={inbox:'M3 4h18v15H3z M3 12h5l2 3h4l2-3h5',factory:'M3 21V9l6 4V9l6 4V3h4v18z M7 17h1m3 0h1m3 0h1',check:'M8 4h12v17H4V4h4 M8 3h8v4H8z M8 14l3 3 5-6',list:'M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1',more:'M4 6h16M4 12h16M4 18h16'};return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${paths[k]||paths.list}"/></svg>`}
-function nav(){ $('#side').innerHTML=`<div class="brand"><img src="${C.logo}" alt="${C.name}"><small>ESPAI DE COMPRES</small></div><div class="nav-section">OPERACIONS</div>${navHTML(C.nav)}<div class="side-foot"><div class="identity"><span class="avatar">${esc(C.contact[0])}</span><div>${esc(C.contact)}<br><span class="mut">Entorn de demostració</span></div></div><div class="independent">Demo independent · Dades fictícies<br>No connectada al correu ni a l'ERP</div></div>`;$('#mob').innerHTML=navHTML(C.nav);}
-function queueRows(){return C.aps.filter(a=>(queueMode==='done'?!!D[a.id]:!D[a.id])&&(queueMode!=='urgent'||a.urg)&&(!queueQ||(a.title+' '+a.order+' '+a.type+' '+(ord(a.order)?sup(ord(a.order).s).n:'')).toLowerCase().includes(queueQ.toLowerCase())))}
-function queueFilter(mode){queueMode=mode;selectedAp=null;vAvui()}
-function vAvui(){const pend=C.aps.filter(a=>!D[a.id]),urgent=pend.filter(a=>a.urg);let rows=queueRows();if(!rows.some(a=>a.id===selectedAp))selectedAp=rows[0]?.id;
- $('#view').innerHTML=`<div class="heading headrow"><div><div class="eyebrow">COMPRES / EXCEPCIONS</div><h1>Per revisar</h1><div class="sub">${C.key==='galan'?'Materials i dates que afecten la fabricació.':C.key==='cytecma'?'Components crítics i documentació pendent.':'Compres i canvis pendents per projecte.'}</div></div><span class="snapshot">Escenari · ${fmtD(C.today)}</span></div><div class="queue-tabs"><button class="${queueMode==='pending'?'on':''}" onclick="queueFilter('pending')">Pendents <b>${pend.length}</b></button><button class="${queueMode==='urgent'?'on':''}" onclick="queueFilter('urgent')">Prioritaris <b>${urgent.length}</b></button><button class="${queueMode==='done'?'on':''}" onclick="queueFilter('done')">Resolts <b>${C.aps.length-pend.length}</b></button><span class="queue-note">Aprovació manual · Sense enviaments</span></div><div class="workbench"><section class="queue"><div class="queue-search"><input type="search" aria-label="Cerca incidències" placeholder="Cerca comanda o proveïdor…" value="${esc(queueQ)}" oninput="queueQ=this.value;refreshQueue()"></div><div id="queue-list"></div></section><section class="detail" id="review-detail"></section></div>`;
- refreshQueue(false);if(selectedAp&&!matchMedia('(max-width:900px)').matches)selectAp(selectedAp);else $('#review-detail').innerHTML='<div class="blank"><h2>Cap incidència en aquesta vista</h2><p>Canvia el filtre per veure la resta de propostes.</p></div>';
-}
-function refreshQueue(auto=true){const rows=queueRows();$('#queue-list').innerHTML=rows.map(a=>{const o=ord(a.order);return `<button class="queue-row ${selectedAp===a.id?'selected':''}" onclick="selectAp('${a.id}')"><div class="queue-meta"><span>${esc(a.order)}</span><span class="priority ${a.urg?'urgent':''}">${D[a.id]?'Resolta':a.urg?'Prioritari':esc(a.type)}</span></div><strong>${esc(a.title)}</strong><div class="queue-supplier">${o?esc(sup(o.s).n):'Coordinació interna'}</div><div class="queue-brief">${esc(a.brief)}</div><div class="queue-bottom">${o?.proj?esc(o.proj):a.of?esc(a.of):esc(a.type)}<span>Revisar →</span></div></button>`}).join('')||'<div class="empty">Cap coincidència.</div>';if(auto&&rows.length&&!rows.some(a=>a.id===selectedAp))selectAp(rows[0].id)}
-function selectAp(id){selectedAp=id;openAp(id);if(matchMedia('(max-width:900px)').matches){refreshQueue(false);return}const html=$('#pn').innerHTML;closeDr();$('#pn').innerHTML='';$('#review-detail').innerHTML=`<div class="detail-toolbar"><span>FITXA DE REVISIÓ</span><span>Comanda → Proposta → Decisió</span></div><div class="detail-body">${html}</div>`;$('#review-detail .x')?.remove();refreshQueue(false)}
-const oldOpenAp=openAp;
-openAp=function(id){oldOpenAp(id);const a=C.aps.find(x=>x.id===id),d=D[id],tb=$('#pn #draftbody');$('#pn .x')?.setAttribute('aria-label','Tanca la fitxa');
- if(tb){tb.setAttribute('aria-label','Cos del correu');tb.value=d?.body??draftGet(id)??a.draft.body;tb.textContent=tb.value;tb.setAttribute('oninput',`draftSave('${id}')`)}
- $('#pn').querySelectorAll('.act button').forEach(b=>{if(b.textContent.includes('Aprova amb'))b.remove();else if(b.textContent.startsWith('Aprova'))b.textContent='Aprova la proposta'});
- if(a.opts&&!d){$('#pn').querySelectorAll('input[name=opt]').forEach(r=>{r.checked=false;r.removeAttribute('checked');r.setAttribute('onchange',`chooseOption('${id}',this.value)`)});}
- if(d){if(tb)tb.readOnly=true;$('#pn').querySelectorAll('input[name=opt]').forEach(r=>{r.checked=Number(r.value)===d.option;if(r.checked)r.setAttribute('checked','');else r.removeAttribute('checked');r.disabled=true});$('#pn').insertAdjacentHTML('beforeend',`<div class="decision-receipt"><b>Decisió registrada en aquest navegador</b><div>${esc(d.note||'Sense observacions')}</div><div class="small mut">Simulació. Cap correu enviat ni canvi aplicat a l'ERP.</div></div>`)}
+//META lang=ca|title=Automio OS · Galan — Compres i producció (demo)|acc=#0f7a3d|accbg=#e6f4ea|accink=#0b5f2f|navy=#17335e
+// Demo Galan Textile Machinery — català. Dades fictícies marcades com a exemple. Models reals: PRX, Up-Twister 2x1, BBCA, RTA (galan.es).
+const CFG = {
+  slug:'galan', v:6, company:'Galan', mark:'GA', userIni:'AL', locale:'ca-ES', home:'panel',
+  t:{
+    pill:'DADES D\'EXEMPLE — DEMO SENSE CONNEXIÓ REAL',
+    foot:'Demo d\'Automio per a Galan.<br>Totes les dades són fictícies i les accions només es simulen en aquest navegador. Res no s\'envia ni s\'escriu a cap sistema.',
+    empty:'Sense registres', records:'registres', mailto:'Per a', mailsubj:'Assumpte'
+  },
+  modules:[
+    {sec:'General'},
+    {id:'panel', label:'Tauler', icon:'panel'},
+    {id:'inbox', label:'Aprovacions', icon:'inbox', badge:s=>s.approvals.filter(a=>a.estado==='pendiente').length||''},
+    {sec:'Operativa'},
+    {id:'prod', label:'Producció', icon:'prod', badge:s=>s.ofs.filter(o=>o.risc==='alt').length||''},
+    {id:'compras', label:'Compres', icon:'compras', badge:s=>s.orders.filter(o=>['endarrerit','parcial'].includes(o.estado)).length||''},
+    {id:'prov', label:'Proveïdors', icon:'prov'},
+    {sec:'Sistema'},
+    {id:'act', label:'Activitat', icon:'act'}
+  ],
+  initial:{
+    approvals:[
+      {id:'AP-201', pri:'alta', qui:'producció', tipo:'Replanificació', estado:'pendiente',
+        titulo:'OF-2431 (PRX375-2) en risc: husos amb 9 dies de retard',
+        detalle:'La comanda PC-3110 (12 husos de precisió) passa del 25/11 al 04/12. L\'OF-2431 (retorcedora PRX375-2 per a cordatge tècnic) té muntatge previst el 02/12 i prova amb client el 19/12.',
+        why:'Els husos són camí crític del muntatge: sense ells la màquina no es pot tancar ni provar.',
+        accion:{kind:'replan', proyecto:'OF-2431', delta:'muntatge al 09/12, prova amb client al 22/12 (avís comercial)'}},
+      {id:'AP-202', pri:'alta', qui:'compres', tipo:'Seguiment', estado:'pendiente',
+        titulo:'Variadors de freqüència sense confirmació · PC-3114',
+        detalle:'Els 3 variadors per a la Up-Twister 2x1 (OF-2433) porten una setmana sense confirmació. Proveïdor amb històric de retards el darrer trimestre.',
+        why:'La UP-TWISTER 2X1 va per exportació; un retard aquí mou tota l\'OF-2433.',
+        accion:{kind:'mail', to:'comercial@proveidor-exemple.es', subj:'PC-3114 · Confirmació de data — variadors de freqüència (3 uds)', body:'Bon dia,\n\nnecessitem confirmació ferma de la data de lliurament dels 3 variadors de freqüència (comanda PC-3114). La màquina associada té data de prova amb client i qualsevol desplaçament l\'afecta.\n\nGràcies.'}},
+      {id:'AP-203', pri:'mitjana', qui:'compres + producció', tipo:'Substitució', estado:'pendiente',
+        titulo:'Rodament 6312 esgotat: validar equivalent',
+        detalle:'El rodamient 6312 per a la BBCA350D (OF-2435) està esgotat fins a gener. El mateix proveïdor ofereix l\'equivalent 6312-2RS amb les mateixes mides i càrrega.',
+        why:'Comprés valida preu i data; producció valida que l\'equivalent munta i rendeix igual en la bobinadora.',
+        accion:{kind:'substitucio', material:'Rodament 6312 → 6312-2RS', of:'OF-2435'}}
+    ],
+    ofs:[
+      {id:'OF-2431', maquina:'Retorcedora PRX375-2', client:'Cordatge tècnic (exportació) — exemple', fase:1, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:38, muntatge:'02/12', prova:'19/12', risc:'alt',
+        materials:[{desc:'Husos de precisió (12 uds)', estat:'endarrerit', compra:'PC-3110'},{desc:'Placa d\'acer mecanitzada', estat:'rebut', compra:'PC-3102'},{desc:'Motor-husos i transmissió GPS', estat:'en-curs', compra:'—'}]},
+      {id:'OF-2433', maquina:'Up-Twister 2x1', client:'Xarxes de pesca (exportació) — exemple', fase:2, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:55, muntatge:'28/11', prova:'12/12', risc:'mitja',
+        materials:[{desc:'Variadors de freqüència (3 uds)', estat:'sense-confirmar', compra:'PC-3114'},{desc:'Anelles i travessers', estat:'rebut', compra:'PC-3098'},{desc:'Cablejat i quadre elèctric', estat:'en-curs', compra:'—'}]},
+      {id:'OF-2435', maquina:'Bobinadora BBCA350D', client:'Gespa artificial — exemple', fase:1, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:22, muntatge:'16/12', prova:'15/01', risc:'mitja',
+        materials:[{desc:'Rodaments 6312 (8 uds)', estat:'esgotat', compra:'PC-3116'},{desc:'Xassís soldat', estat:'en-curs', compra:'—'}]},
+      {id:'OF-2428', maquina:'Retorcedora d\'aletes RTA', client:'Monofilaments — exemple', fase:3, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:81, muntatge:'fet 10/11', prova:'25/11', risc:'baix',
+        materials:[{desc:'PLC i pantalla 7"', estat:'rebut', compra:'PC-3090'},{desc:'Sistema detecció de trencaments', estat:'rebut', compra:'PC-3091'}]}
+    ],
+    orders:[
+      {id:'PC-3110', prov:'Mecanismes Finer S.L. (exemple)', of:'OF-2431', estado:'endarrerit', total:9360, entrega:'04/12 (abans 25/11)', lineas:[
+        {desc:'Husos de precisió', qty:12, precio:780, estado:'endarrerit'}]},
+      {id:'PC-3114', prov:'Electrodrive Components S.A. (exemple)', of:'OF-2433', estado:'sense-confirmar', total:4170, entrega:'sense data', lineas:[
+        {desc:'Variador de freqüència 7,5 kW', qty:3, precio:1390, estado:'pendent'}]},
+      {id:'PC-3116', prov:'Rodaments del Vallès S.A. (exemple)', of:'OF-2435', estado:'confirmat', total:312, entrega:'gener (esgotat)', lineas:[
+        {desc:'Rodament 6312', qty:8, precio:39, estado:'esgotat'}]},
+      {id:'PC-3102', prov:'Aceros i Mecanitzats Terri S.L. (exemple)', of:'OF-2431', estado:'rebut', total:5230, entrega:'rebut 08/11', lineas:[
+        {desc:'Placa d\'acer mecanitzada (joc)', qty:1, precio:5230, estado:'rebut'}]},
+      {id:'PC-3098', prov:'Rodaments del Vallès S.A. (exemple)', of:'OF-2433', estado:'rebut', total:1180, entrega:'rebut 04/11', lineas:[
+        {desc:'Anelles i travessers (joc)', qty:1, precio:1180, estado:'rebut'}]},
+      {id:'PC-3118', prov:'Filats i Bobines Carda S.A. (exemple)', of:'—', estado:'enviat', total:740, entrega:'previst 27/11', lineas:[
+        {desc:'Consumibles de prova: fil tècnic PES', qty:40, precio:18.5, estado:'confirmat'}]}
+    ],
+    suppliers:[
+      {id:'PR-11', nombre:'Mecanismes Finer S.L. (exemple)', cat:'Husos i mecanismes de precisió', otif:72, calidad:94, pedidos:8, ultimo:'PC-3110', nota:'Dos retards aquest any; confirmar sempre per escrit.'},
+      {id:'PR-12', nombre:'Electrodrive Components S.A. (exemple)', cat:'Motors, variadors i automatisme', otif:80, calidad:90, pedidos:12, ultimo:'PC-3114', nota:'Bon suport tècnic; confirmacions lentes.'},
+      {id:'PR-13', nombre:'Rodaments del Vallès S.A. (exemple)', cat:'Rodaments i transmissió', otif:91, calidad:96, pedidos:21, ultimo:'PC-3116', nota:'Ràpid amb equivalències.'},
+      {id:'PR-14', nombre:'Aceros i Mecanitzats Terri S.L. (exemple)', cat:'Acer i mecanitzat', otif:88, calidad:93, pedidos:15, ultimo:'PC-3102', nota:'Fiable.'}
+    ],
+    activity:[{ts:new Date().toISOString(), text:'Demo iniciada amb dades d\'exemple.'}]
+  },
+  views:{}
 };
-function chooseOption(id,i){const a=C.aps.find(x=>x.id===id),tb=activeReview()?.querySelector('#draftbody');if(tb&&a.draft){tb.value=`Bon dia,\n\nEn relació amb la comanda ${a.order}, hem revisat la proposta.\n\nDecisió: ${a.opts[Number(i)].t}.\n${a.opts[Number(i)].d}\n\nEns ho podeu confirmar per escrit?\n\nGràcies,\n${C.contact}\n${C.name} (demo)`;draftSave(id)}}
-decideAp=function(id,action){const a=C.aps.find(x=>x.id===id);const scope=activeReview();const opt=scope?.querySelector('input[name=opt]:checked');if(action==='aprovada'&&a.opts&&!opt){toast('Tria una de les opcions abans d’aprovar.');return}let note=scope?.querySelector('#rejnote')?.value||'';if(opt&&a.opts)note=(note?note+' · ':'')+'Opció: '+a.opts[Number(opt.value)].t;const body=scope?.querySelector('#draftbody')?.value||'';draftSave(id);D[id]={action,body,option:opt?Number(opt.value):null,note,ts:new Date().toLocaleString('ca-ES',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})};saveD();closeDr();toast(action==='aprovada'?'Aprovació registrada. No s’ha enviat res.':'Rebuig registrat.');render()};
-const oldFollow=mkFollow;mkFollow=function(id){oldFollow(id);try{localStorage.setItem(LS+'-custom',JSON.stringify(C.aps.filter(a=>a.id.startsWith('ap-x-'))))}catch(e){}};
-vApprov=function(){const done=C.aps.filter(a=>D[a.id]);$('#view').innerHTML=`<div class="heading"><div class="eyebrow">COMPRES / HISTORIAL</div><h1>Decisions</h1><div class="sub">Registre local de les aprovacions i els rebutjos d'aquesta demo.</div></div><div class="card tw"><table><thead><tr><th>Comanda</th><th>Proposta</th><th>Decisió</th><th>Moment</th><th></th></tr></thead><tbody>${done.map(a=>`<tr><td>${a.order}</td><td>${esc(a.title)}</td><td><span class="tag ${D[a.id].action==='aprovada'?'t-grn':'t-red'}">${D[a.id].action==='aprovada'?'Aprovada':'Rebutjada'}</span></td><td>${D[a.id].ts}</td><td><button class="btn ghost" onclick="openAp('${a.id}')">Veure</button></td></tr>`).join('')||'<tr><td colspan="5" class="empty">Encara no hi ha decisions registrades. Revisa una proposta per començar.</td></tr>'}</tbody></table></div><div class="act"><button class="btn" onclick="go('avui')">Revisar pendents</button></div>`};
-vProd=function(){if(!selectedOf)selectedOf=C.of.find(f=>f.risk)?.id||C.of[0].id;const f=C.of.find(x=>x.id===selectedOf);$('#view').innerHTML=`<div class="heading"><div class="eyebrow">FABRICACIÓ / DISPONIBILITAT DE MATERIAL</div><h1>Producció i compres</h1><div class="sub">Ordres de fabricació, materials pendents i decisions compartides.</div></div><div class="card tw"><table class="production-table"><thead><tr><th>Ordre / màquina</th><th>Inici previst</th><th>Lliurament</th><th>Material rebut</th><th>Estat</th></tr></thead><tbody>${C.of.map(o=>`<tr class="row ${o.id===selectedOf?'active-row':''}" onclick="selectedOf='${o.id}';vProd()"><td><b>${o.id}</b><div class="mut small">${esc(o.machine)}</div></td><td>${esc(o.start)}</td><td>${esc(o.due)}</td><td>${o.lines.filter(l=>l.st==='Rebut').length} / ${o.lines.length} necessitats</td><td><span class="tag ${o.risk?'t-red':'t-grn'}">${o.risk?'Material pendent':'En termini'}</span></td></tr>`).join('')}</tbody></table></div><div class="material-detail card"><div class="headrow"><div><div class="eyebrow">MATERIALS DE ${f.id}</div><h2>${esc(f.machine)}</h2></div><span class="small mut">${esc(f.sector)}</span></div>${f.lines.map(l=>`<div class="material-row"><span class="tag ${l.st==='Rebut'?'t-grn':l.st==='Risc'?'t-red':'t-amb'}">${esc(l.st)}</span><div><b>${esc(l.need)}</b><div class="mut">${esc(l.info)}</div></div></div>`).join('')}${f.ap?`<div class="act"><button class="btn" onclick="openAp('${f.ap}')">${D[f.ap]?'Veure la decisió':'Revisar opcions amb compres'}</button></div>`:''}<p class="small mut">No es replanifica cap ordre ni s'actualitza l'ERP. Els canvis es revisen i s'aproven manualment.</p></div>`};
-const oldOrders=vOrders;vOrders=function(){oldOrders();$('#view .sub').textContent='Comandes, dates confirmades i recepcions parcials.'};
-const oldOB=vOrdersBody;vOrdersBody=function(){oldOB();document.querySelectorAll('#chips .chip').forEach((b,i)=>b.classList.toggle('on',['all','late','part','noc'][i]===state.chip))};
-const oldReset=resetAll;resetAll=function(){for(const a of C.aps)localStorage.removeItem(LS+'-draft-'+a.id);localStorage.removeItem(LS+'-custom');C.aps=C.aps.filter(a=>!a.id.startsWith('ap-x-'));queueMode='pending';selectedAp=null;oldReset()};
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDr()});
 
-const prevMes=vMes;vMes=function(){prevMes();if(state.tab==='real')$('#mb').insertAdjacentHTML('beforeend',`<p class="small mut" style="margin-top:18px">Referències de producte: <a href="https://www.cybrosys.com/odoo/odoo-books/v19/purchase/orders-menu/" target="_blank" rel="noopener">Odoo Purchase</a> · <a href="https://support.sourceday.com/hc/en-us/articles/5031289206292-Managing-POs-from-the-dashboard-accept-update-respond" target="_blank" rel="noopener">SourceDay PO Collaboration</a>. Estructura de llistes, detall i revisió de canvis; implementació pròpia, sense afiliació.</p>`)};
+// ---------- helpers ----------
+const EST_O = {borrador:['t-gry','Esborrany'],enviat:['t-blu','Enviada'],confirmat:['t-blu','Confirmada'],'sense-confirmar':['t-amb','Sense confirmar'],endarrerit:['t-red','Endarrerida'],parcial:['t-amb','Recepció parcial'],rebut:['t-grn','Rebuda'],esgotat:['t-red','Esgotat']};
+const EST_L = {'pendent':['t-gry','Pendent'],'confirmat':['t-blu','Confirmat'],'rebut':['t-grn','Rebut'],'endarrerit':['t-red','Endarrerit'],'esgotat':['t-red','Esgotat']};
+const EST_M = {'sense-confirmar':['t-amb','Sense confirmar'],'endarrerit':['t-red','Endarrerit'],'esgotat':['t-red','Esgotat'],'pendent':['t-amb','Pendent'],'en-curs':['t-blu','En curs'],'rebut':['t-grn','Rebut']};
+const tag = (m,k)=> m[k]?`<span class="tag ${m[k][0]}">${m[k][1]}</span>`:'';
 
-rejectAsk=function(id){const p=activeReview();if(p.querySelector('#rejbox'))return;p.insertAdjacentHTML('beforeend',`<div id="rejbox" style="margin-top:16px"><h3>Motiu del rebuig</h3><input id="rejnote" aria-label="Motiu del rebuig" style="width:100%" placeholder="Opcional"><div class="act"><button class="btn" onclick="decideAp('${id}','rebutjada')">Confirma el rebuig</button></div></div>`);p.querySelector('#rejbox').scrollIntoView({behavior:'smooth'})};
+// ---------- Panel ----------
+CFG.views.panel = c => {
+  const obertes = S.orders.filter(o=>!['rebut'].includes(o.estado));
+  const risc = S.orders.filter(o=>['endarrerit','sense-confirmar','esgotat'].includes(o.estado)).length;
+  const pend = S.approvals.filter(a=>a.estado==='pendiente');
+  const ofsrisc = S.ofs.filter(o=>o.risc!=='baix').length;
+  c.innerHTML = `
+  <div class="row-head"><div><h1>Tauler compres ↔ producció</h1><div class="sub">Cada ordre de fabricació mostra el material pendent, quan arriba i què passa si una compra es mou.</div></div><div class="sp"></div><button class="btn ghost" onclick="resetDemo()">Reiniciar demo</button></div>
+  <div class="banner"><b>Demo amb dades d'exemple.</b>&nbsp;Ordres de fabricació, comandes i proveïdors ficticis. Els models de màquina (PRX375-2, Up-Twister 2x1, BBCA350D, RTA) són reals de Galan. Res no surt d'aquest navegador.</div>
+  <div class="grid k4">
+    <div class="card kpi"><b>${S.ofs.length}</b><span>ordres de fabricació</span><div class="d mut">${ofsrisc} amb risc</div></div>
+    <div class="card kpi"><b>${obertes.length}</b><span>comandes obertes</span><div class="d mut">${fmtE(S.orders.reduce((t,o)=>t+o.total,0))} compromesos (exemple)</div></div>
+    <div class="card kpi ${risc?'bad':''}"><b>${risc}</b><span>compres amb incidència</span><div class="d mut">retard, esgotat o sense confirmar</div></div>
+    <div class="card kpi ${pend.length?'warn':'ok'}"><b>${pend.length}</b><span>aprovacions pendents</span><div class="d mut">compres i producció</div></div>
+  </div>
+  <div class="grid two">
+    <div class="card"><h3>Decisions pendents</h3>${pend.length?pend.map(qitemHTML).join(''):'<div class="note">Sense decisions pendents.</div>'}</div>
+    <div class="card"><h3>Què passa si una compra es mou</h3>
+      ${S.ofs.filter(o=>o.risc!=='baix').map(o=>`<div class="matrow"><span class="dot ${o.risc==='alt'?'d-red':'d-amb'}"></span><div style="flex:1"><b>${o.id}</b> · ${esc(o.maquina)}<div class="mut small">muntatge ${o.muntatge} · prova ${o.prova}</div></div><span class="tag ${o.risc==='alt'?'t-red':'t-amb'}">${o.risc==='alt'?'risc alt':'risc mitjà'}</span></div>`).join('')}
+      <div class="note" style="margin-top:12px">El sistema detecta l'impacte i proposa la decisió a qui correspon (compres o producció). Mai replanifica sol.</div></div>
+  </div>`;
+  c.querySelectorAll('.qitem').forEach((q,i)=>q.addEventListener('click',()=>openApproval(pend[i].id)));
+};
 
-const _pv=new URLSearchParams(location.search);
-if(_pv.get('v'))state.route=_pv.get('v');
-if(_pv.get('t'))state.tab=_pv.get('t');
-render();
-if(_pv.get('ap'))openAp(_pv.get('ap'));
-if(_pv.get('o'))openOrder(_pv.get('o'));
+function qitemHTML(a){
+  const dot = a.pri==='alta'?'d-red':a.pri==='mitjana'?'d-amb':'d-gry';
+  return `<div class="qitem" data-id="${a.id}"><span class="dot ${dot}"></span><div class="b"><div class="t">${esc(a.titulo)}</div><div class="m">${esc(a.detalle)}</div></div><span class="tag t-gry">${esc(a.qui)}</span></div>`;
+}
+
+// ---------- Inbox ----------
+CFG.views.inbox = c => {
+  const pend = S.approvals.filter(a=>a.estado==='pendiente');
+  const done = S.approvals.filter(a=>a.estado!=='pendiente');
+  c.innerHTML = `<div class="row-head"><div><h1>Aprovacions</h1><div class="sub">Algunes decisions són de compres, d'altres de producció, i algunes de totes dues. El sistema proposa; la persona decideix.</div></div></div>
+  <h2 style="margin:6px 0 12px">Pendents (${pend.length})</h2>
+  ${pend.length?pend.map(qitemHTML).join(''):'<div class="note">Sense decisions pendents.</div>'}
+  ${done.length?`<h2 style="margin:22px 0 12px">Resoltes (${done.length})</h2>`+done.map(a=>`<div class="qitem" data-id="${a.id}"><span class="dot d-grn"></span><div class="b"><div class="t">${esc(a.titulo)}</div><div class="m">${esc(a.estado)} · ${esc(a.resolucion||'')}</div></div></div>`).join(''):''}`;
+  c.querySelectorAll('.qitem').forEach(q=>q.addEventListener('click',()=>openApproval(q.dataset.id)));
+};
+
+function openApproval(id){
+  const a = S.approvals.find(x=>x.id===id); if(!a) return;
+  const body = a.estado==='pendiente' ? `
+    <div class="why"><b>Per què importa:</b> ${esc(a.why)}</div>
+    ${a.accion.kind==='mail'?`<h3>Correu proposat (editable)</h3><textarea id="ap-mail">${a.accion.body}</textarea>`:''}
+    ${a.accion.kind==='replan'?`<div class="note">Acció proposada: ${esc(a.accion.delta)}. Producció rep la nova data i comercial avisa el client. Tot queda registrat a l'OF.</div>`:''}
+    ${a.accion.kind==='substitucio'?`<div class="note">Acció proposada: validar ${esc(a.accion.material)} per a ${esc(a.accion.of)}. Comprés confirma preu i data; producció confirma muntatge i rendiment.</div>`:''}
+    <div class="act">
+      ${a.accion.kind==='mail'?`<button class="btn" onclick="resolveApproval('${id}','mail')">Aprovar i enviar (simulat)</button>`:''}
+      ${a.accion.kind==='replan'?`<button class="btn" onclick="resolveApproval('${id}','replan')">Aprovar replanificació (simulat)</button>`:''}
+      ${a.accion.kind==='substitucio'?`<button class="btn" onclick="resolveApproval('${id}','substitucio')">Validar substitució (simulat)</button>`:''}
+      <button class="btn ghost" onclick="toast('Esborrany desat (simulat)')">Desar esborrany</button>
+      <button class="btn danger" onclick="resolveApproval('${id}','rebutjada')">Rebutjar</button>
+    </div>`
+  : `<div class="note">Resolta: ${esc(a.estado)} · ${esc(a.resolucion||'')}</div>`;
+  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${esc(a.titulo)}</h2><div class="sub">${a.id} · ${esc(a.tipo)} · decideix: ${esc(a.qui)}</div></div><div class="pb"><p>${esc(a.detalle)}</p>${body}</div>`);
+}
+function resolveApproval(id, how){
+  const a = S.approvals.find(x=>x.id===id); if(!a) return;
+  if(how==='mail'){ a.estado='aprovada'; a.resolucion='correu registrat com a enviat (simulat)'; logAct(`Aprovat: ${a.titulo}`); }
+  else if(how==='replan'){
+    a.estado='aprovada'; a.resolucion='replanificació aplicada (simulat)';
+    const o=S.ofs.find(x=>x.id===a.accion.proyecto); if(o){ o.muntatge='09/12'; o.prova='22/12'; o.risc='mitja'; }
+    logAct(`Replanificació aprovada: ${a.accion.proyecto} (simulat).`);
+  }
+  else if(how==='substitucio'){
+    a.estado='aprovada'; a.resolucion='equivalent validat (simulat)';
+    const o=S.ofs.find(x=>x.id===a.accion.of); if(o){ const m=o.materials.find(m=>m.desc.includes('6312')); if(m){m.desc='Rodaments 6312-2RS (8 uds)'; m.estat='en-curs';} o.risc='baix'; }
+    const pc=S.orders.find(x=>x.id==='PC-3116'); if(pc){ pc.lineas[0].desc='Rodament 6312-2RS'; pc.lineas[0].estado='confirmat'; pc.estado='confirmat'; pc.entrega='previst 02/12'; }
+    logAct(`Substitució validada: ${a.accion.material} (simulat).`);
+  }
+  else { a.estado='rebutjada'; a.resolucion='rebutjada per l\'usuari'; logAct(`Rebutjada: ${a.titulo}`); }
+  save(); closeDrawer(); renderView(); toast(how==='rebutjada'?'Decisió rebutjada':'Aprovat i registrat (simulat)');
+}
+
+// ---------- Producció ----------
+CFG.views.prod = c => {
+  c.innerHTML = `<div class="row-head"><div><h1>Producció</h1><div class="sub">Ordres de fabricació amb el material que les alimenta: el que falta, quan arriba i quina compra el porta.</div></div></div>
+  <div class="ofboard">${S.ofs.map(o=>`
+    <div class="ofcard" style="cursor:pointer" data-id="${o.id}">
+      <div class="row-head"><h4>${o.id} · ${esc(o.maquina)}</h4><div class="sp"></div><span class="tag ${o.risc==='alt'?'t-red':o.risc==='mitja'?'t-amb':'t-grn'}">${o.risc==='alt'?'risc alt':o.risc==='mitja'?'risc mitjà':'en marxa'}</span></div>
+      <div class="mut small" style="margin-bottom:6px">${esc(o.client)}</div>
+      ${steps(o.fases,o.fase)}
+      <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div class="bar ${o.risc==='alt'?'risk':''}" style="flex:1"><i style="width:${o.progres}%"></i></div><b>${o.progres}%</b></div>
+      <div class="small"><b>Material:</b></div>
+      ${o.materials.map(m=>`<div class="matrow"><span class="dot ${['endarrerit','esgotat'].includes(m.estat)?'d-red':['sense-confirmar','pendent'].includes(m.estat)?'d-amb':m.estat==='en-curs'?'d-blu':'d-grn'}"></span><div style="flex:1">${esc(m.desc)}<div class="mut small">${m.compra!=='—'?'compra '+m.compra:'fabricació pròpia'}</div></div>${tag(EST_M,m.estat)}</div>`).join('')}
+      <div class="mut small" style="margin-top:8px">Muntatge: <b>${o.muntatge}</b> · Prova amb client: <b>${o.prova}</b></div>
+    </div>`).join('')}</div>`;
+  c.querySelectorAll('.ofcard').forEach(k=>k.addEventListener('click',()=>openOF(k.dataset.id)));
+};
+function openOF(id){
+  const o = S.ofs.find(x=>x.id===id);
+  const rel = S.orders.filter(p=>p.of===id);
+  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${o.id} · ${esc(o.maquina)}</h2><div class="sub">${esc(o.client)} · muntatge ${o.muntatge} · prova ${o.prova}</div></div>
+  <div class="pb">
+    ${steps(o.fases,o.fase)}
+    <h3 style="margin-top:16px">Material i compres vinculades</h3>
+    ${o.materials.map(m=>`<div class="matrow"><span class="dot ${['endarrerit','esgotat'].includes(m.estat)?'d-red':['sense-confirmar','pendent'].includes(m.estat)?'d-amb':m.estat==='en-curs'?'d-blu':'d-grn'}"></span><div style="flex:1">${esc(m.desc)}<div class="mut small">${m.compra!=='—'?'compra '+m.compra:'fabricació pròpia'}</div></div>${tag(EST_M,m.estat)}</div>`).join('')}
+    ${rel.length?`<h3 style="margin-top:16px">Comandes</h3>`+rel.map(p=>`<div class="matrow"><div style="flex:1"><b>${p.id}</b> · ${esc(p.prov)}</div>${tag(EST_O,p.estado)}<span class="b">${fmtE(p.total)}</span></div>`).join(''):''}
+    <div class="note" style="margin-top:14px">Si una compra es mou, Automio proposa replanificar l'OF i avisar comercial; la decisió és de l'equip.</div>
+  </div>`);
+}
+
+// ---------- Compres ----------
+let FLT = {estado:'totes', q:''};
+CFG.views.compras = c => {
+  const counts = {totes:S.orders.length};
+  ['endarrerit','sense-confirmar','esgotat','enviat','confirmat','rebut'].forEach(k=>counts[k]=S.orders.filter(o=>o.estado===k).length);
+  let rows = S.orders.filter(o=>(FLT.estado==='totes'||o.estado===FLT.estado) && (!FLT.q || (o.id+o.prov+o.of).toLowerCase().includes(FLT.q)));
+  c.innerHTML = `<div class="row-head"><div><h1>Comandes de compra</h1><div class="sub">Cada comanda penja d'una ordre de fabricació: el retard d'una compra es veu a producció a l'instant.</div></div><div class="sp"></div><button class="btn ghost" onclick="novaComanda()">+ Nova comanda (esborrany)</button></div>
+  ${chipRow([{key:'totes',label:'Totes',count:counts.totes},{key:'endarrerit',label:'Endarrerides',count:counts.endarrerit},{key:'sense-confirmar',label:'Sense confirmar',count:counts['sense-confirmar']},{key:'esgotat',label:'Esgotades',count:counts.esgotat},{key:'rebut',label:'Rebudes',count:counts.rebut}], FLT.estado, 'setFltEstado')}
+  <div class="tools"><input type="search" placeholder="Cercar comanda, proveïdor u OF…" value="${esc(FLT.q)}" oninput="setFltQ(this.value)"></div>
+  <div id="tbl">${tableHTML([
+    {k:'id',l:'Comanda',f:o=>`<b>${o.id}</b>`},
+    {k:'prov',l:'Proveïdor',f:o=>esc(o.prov),wrap:true},
+    {k:'of',l:'OF vinculada',f:o=>o.of==='—'?'<span class="mut">—</span>':`<span class="tag t-blu">${o.of}</span>`},
+    {k:'lin',l:'Línies',f:o=>o.lineas.length,num:true},
+    {k:'total',l:'Total',f:o=>fmtE(o.total),num:true},
+    {k:'ent',l:'Lliurament',f:o=>esc(o.entrega),wrap:true},
+    {k:'est',l:'Estat',f:o=>tag(EST_O,o.estado)}
+  ], rows)}</div>`;
+  attachRowClicks(c, rows, openOrder);
+};
+function setFltEstado(k){FLT.estado=k;renderView();}
+function setFltQ(v){FLT.q=v.toLowerCase();renderView();const i=document.querySelector('input[type=search]');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}}
+
+function openOrder(o){ drawerState = {tab:'lin', render:()=>renderOrderDrawer(o.id)}; renderOrderDrawer(o.id); }
+function renderOrderDrawer(oid){
+  const o = S.orders.find(x=>x.id===oid);
+  const tabs = [{id:'lin',l:'Línies'},{id:'seg',l:'Seguiment'},{id:'doc',l:'Documents'}];
+  let body='';
+  if(drawerState.tab==='lin'){
+    body = tableHTML([
+      {k:'d',l:'Descripció',f:l=>esc(l.desc),wrap:true},
+      {k:'q',l:'Ud.',f:l=>l.qty,num:true},
+      {k:'p',l:'Preu ud.',f:l=>fmtE(l.precio),num:true},
+      {k:'e',l:'Estat',f:l=>tag(EST_L,l.estado)}
+    ], o.lineas, {foot:`Total: ${fmtE(o.total)}`});
+  } else if(drawerState.tab==='seg'){
+    body = `<ul class="tl">
+      <li><b>Comanda emesa</b><span class="w">fa 10 dies · compres</span></li>
+      ${o.estado!=='borrador'?'<li><b>Enviada al proveïdor</b><span class="w">fa 9 dies</span></li>':''}
+      ${['confirmat','parcial','rebut'].includes(o.estado)?'<li><b>Confirmada pel proveïdor</b><span class="w">fa 7 dies</span></li>':''}
+      ${o.estado==='endarrerit'?'<li><b>Avís de retard</b><span class="w">fa 2 dies · nova data comunicada</span></li>':''}
+      ${o.estado==='rebut'?'<li><b>Recepció registrada</b><span class="w">material a magatzem</span></li>':''}
+      ${o.estado==='esgotat'?'<li><b>Sense estoc al proveïdor</b><span class="w">proposada equivalència</span></li>':''}
+    </ul><div class="note">Historial d'exemple. En producció s'alimenta dels correus i recepcions reals.</div>`;
+  } else {
+    body = `<div class="docview">📄 Comanda ${o.id}.pdf (exemple)<br><span class="mut">Albarà — pendent</span></div>
+    <div class="act"><button class="btn ghost" onclick="toast('Document adjuntat (simulat)')">Adjuntar document (simulat)</button></div>`;
+  }
+  const acciones = [];
+  if(o.estado!=='rebut'){
+    acciones.push(`<button class="btn" onclick="mailSeguimiento('${o.id}')">Preparar seguiment</button>`);
+    if(o.lineas.some(l=>l.estado!=='rebut')) acciones.push(`<button class="btn soft" onclick="recepcioParcial('${o.id}')">Registrar recepció</button>`);
+  }
+  document.querySelector('#drawer .panel').innerHTML = `<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${o.id} · ${esc(o.prov)}</h2><div class="sub">${o.of!=='—'?'OF '+o.of+' · ':''}lliurament: ${esc(o.entrega)} · ${tag(EST_O,o.estado)}</div>${drawerTabs(tabs, drawerState.tab)}</div><div class="pb">${body}<div class="act">${acciones.join('')}</div></div>`;
+}
+function mailSeguimiento(oid){
+  const o = S.orders.find(x=>x.id===oid);
+  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>Seguiment de ${o.id}</h2><div class="sub">El correu el revises abans que surti (simulat)</div></div>
+  <div class="pb"><textarea id="sg-mail">Bon dia,\n\nescrivim sobre la comanda ${o.id} (${o.lineas.map(l=>l.desc).join('; ')}). Estat actual: ${EST_O[o.estado][1].toLowerCase()}. Necessitem confirmació de data i qualsevol incidència que pugui afectar ${o.of!=='—'?'l\''+o.of:'la planificació'}.\n\nGràcies.</textarea>
+  <div class="act"><button class="btn" onclick="enviarSeguiment('${o.id}')">Aprovar i enviar (simulat)</button><button class="btn ghost" onclick="openOrder(S.orders.find(x=>x.id==='${o.id}'))">Tornar</button></div></div>`);
+}
+function enviarSeguiment(oid){ logAct(`Seguiment de ${oid} aprovat i registrat com a enviat (simulat).`); save(); closeDrawer(); renderView(); toast('Correu registrat com a enviat (simulat)'); }
+function recepcioParcial(oid){
+  const o = S.orders.find(x=>x.id===oid);
+  const pend = o.lineas.filter(l=>l.estado!=='rebut');
+  if(!pend.length) return;
+  const l = pend[0]; l.estado='rebut';
+  o.estado = o.lineas.every(x=>x.estado==='rebut') ? 'rebut' : 'parcial';
+  const of = S.ofs.find(x=>x.id===o.of); if(of){ const m=of.materials.find(m=>m.compra===oid); if(m) m.estat='rebut'; }
+  logAct(`Recepció registrada a ${oid}: ${l.desc} (simulat).`);
+  save(); renderOrderDrawer(oid); renderShell(); toast('Recepció registrada (simulat)');
+}
+function novaComanda(){
+  const n = 'PC-' + (3119 + S.orders.filter(o=>o.id.startsWith('PC-')).length);
+  S.orders.unshift({id:n, prov:'(sense assignar)', of:'—', estado:'borrador', total:0, entrega:'—', lineas:[{desc:'Línia nova (editar)', qty:1, precio:0, estado:'pendent'}]});
+  logAct(`Esborrany ${n} creat (simulat).`); save(); renderView(); toast('Esborrany creat'); openOrder(S.orders[0]);
+}
+
+// ---------- Proveïdors ----------
+CFG.views.prov = c => {
+  c.innerHTML = `<div class="row-head"><div><h1>Proveïdors</h1><div class="sub">Fiabilitat i comportament històric (dades d'exemple).</div></div></div>
+  ${tableHTML([
+    {k:'n',l:'Proveïdor',f:p=>`<b>${esc(p.nombre)}</b><div class="mut small">${esc(p.cat)}</div>`,wrap:true},
+    {k:'o',l:'Lliuraments a temps',f:p=>`<div style="display:flex;align-items:center;gap:8px"><div class="bar ${p.otif<80?'risk':p.otif<90?'warn':'ok'}" style="width:90px"><i style="width:${p.otif}%"></i></div>${p.otif}%</div>`},
+    {k:'q',l:'Qualitat',f:p=>`<div style="display:flex;align-items:center;gap:8px"><div class="bar ok" style="width:90px"><i style="width:${p.calidad}%"></i></div>${p.calidad}%</div>`},
+    {k:'pd',l:'Comandes',f:p=>p.pedidos,num:true},
+    {k:'u',l:'Darrera',f:p=>p.ultimo},
+    {k:'nt',l:'Nota',f:p=>`<span class="mut small">${esc(p.nota)}</span>`,wrap:true}
+  ], S.suppliers)}
+  <div class="note" style="margin-top:12px">Noms de proveïdors ficticis marcats com a exemple. Els índexs es calcularien de les recepcions reals.</div>`;
+};
+
+// ---------- Activitat ----------
+CFG.views.act = c => {
+  c.innerHTML = `<div class="row-head"><div><h1>Activitat</h1><div class="sub">Tot el fet en aquesta demo, amb hora.</div></div><div class="sp"></div><button class="btn ghost" onclick="resetDemo()">Reiniciar demo</button></div>
+  <ul class="tl">${S.activity.map(a=>`<li><b>${esc(a.text)}</b><span class="w">${new Date(a.ts).toLocaleString('ca-ES')}</span></li>`).join('')}</ul>`;
+};
+
+// Automio OS · demo framework (datos de ejemplo, todo simulado en local)
+const LSKEY = 'automio-demo-' + CFG.slug;
+let S = loadState();
+function loadState(){
+  try{ const raw = localStorage.getItem(LSKEY); if(raw){ const p = JSON.parse(raw); if(p && p.v === CFG.v) return p.s; } }catch(e){}
+  return JSON.parse(JSON.stringify(CFG.initial));
+}
+function save(){ try{ localStorage.setItem(LSKEY, JSON.stringify({v:CFG.v, s:S})); }catch(e){} }
+function resetDemo(){ localStorage.removeItem(LSKEY); location.reload(); }
+
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtN = (n,d=0) => Number(n).toLocaleString(CFG.locale,{minimumFractionDigits:d,maximumFractionDigits:d});
+const fmtE = n => fmtN(n,2) + ' €';
+const $ = sel => document.querySelector(sel);
+const el = html => { const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; };
+
+let VIEW = location.hash ? location.hash.slice(1) : CFG.home;
+let drawerState = null;
+
+const ICONS = {
+  panel:'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z',
+  inbox:'M3 5h18v14H3zM3 7l9 6 9-6',
+  compras:'M4 4h2l2.5 11h10L21 7H7M9 20a1 1 0 100-2 1 1 0 000 2M18 20a1 1 0 100-2 1 1 0 000 2',
+  prov:'M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6',
+  docs:'M7 3h7l5 5v13H7zM14 3v5h5',
+  prod:'M4 20V10l5 3v-3l5 3V6h6v14z',
+  cert:'M12 3l2.5 5 5.5.8-4 4 1 5.7-5-2.7-5 2.7 1-5.7-4-4L9.5 8z',
+  act:'M12 8v5l3 2M12 21a9 9 0 110-18 9 9 0 010 18',
+  conf:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1',
+  proj:'M3 7h18M3 7v13h18V7M3 7l2-4h14l2 4M10 11h4',
+  logi:'M1 8h13v9H1zM14 11h4l3 3v3h-7zM5.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3M16.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3',
+  spare:'M14 7a4 4 0 105.6 5.6L14 7zm0 0L8 13m-3 8l6-6',
+  search:'M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35'
+};
+function icon(name){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[name]||ICONS.panel}"/></svg>`; }
+
+function renderShell(){
+  const mods = CFG.modules.map(m => {
+    if(m.sec) return `<div class="sec">${esc(m.sec)}</div>`;
+    const badge = m.badge ? `<span class="n">${typeof m.badge==='function'?m.badge(S):m.badge}</span>` : '';
+    return `<a data-v="${m.id}" class="${VIEW===m.id?'on':''}" onclick="go('${m.id}')">${icon(m.icon)}<span>${esc(m.label)}</span>${badge}</a>`;
+  }).join('');
+  document.getElementById('app').innerHTML = `
+  <aside id="side">
+    <div class="brand"><div class="logo"><div class="mark">${esc(CFG.mark)}</div><div><div class="bn">${esc(CFG.company)}</div><div class="bs">AUTOMIO OS · DEMO</div></div></div></div>
+    <nav>${mods}</nav>
+    <div class="side-foot">${CFG.t.foot}</div>
+  </aside>
+  <main>
+    <div class="topbar">
+      <div class="crumb">${esc(CFG.company)} · ${esc((CFG.modules.find(m=>m.id===VIEW)||{}).label||'')}</div>
+      <div class="sp"></div>
+      <span class="pill">${CFG.t.pill}</span>
+      <div class="avatar">${esc(CFG.userIni)}</div>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
+  <div class="drawer" id="drawer" onclick="if(event.target===this)closeDrawer()"></div>
+  <div class="toast" id="toast"></div>`;
+  renderView();
+}
+function go(v){ VIEW=v; location.hash=v; renderShell(); window.scrollTo(0,0); }
+window.addEventListener('hashchange',()=>{ const v=location.hash.slice(1); if(v&&v!==VIEW){VIEW=v;renderShell();} });
+
+function renderView(){
+  const m = CFG.modules.find(x=>x.id===VIEW) || CFG.modules.find(x=>x.id===CFG.home);
+  const c = document.getElementById('content'); if(!c) return;
+  c.innerHTML = '';
+  (CFG.views[m.id]||CFG.views[CFG.home])(c);
+  document.querySelector('.topbar .crumb').innerHTML = `${esc(CFG.company)} · ${esc(m.label)}`;
+  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on', a.dataset.v===m.id));
+}
+
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2800); }
+
+function openDrawer(html){ const d=$('#drawer'); d.innerHTML=`<div class="panel">${html}</div>`; d.classList.add('on'); }
+function closeDrawer(){ $('#drawer').classList.remove('on'); drawerState=null; }
+
+function logAct(text){ S.activity.unshift({ts:new Date().toISOString(), text}); if(S.activity.length>200)S.activity.length=200; save(); }
+
+function chipRow(groups, active, onpick){
+  // groups: [{key,label,count}]
+  return `<div class="tools">${groups.map(g=>`<button class="chip ${active===g.key?'on':''}" onclick="${onpick}('${g.key}')">${esc(g.label)}${g.count!=null?` <span class="c">${g.count}</span>`:''}</button>`).join('')}</div>`;
+}
+
+function tableHTML(cols, rows, opts={}){
+  const rowFn = opts.rowFn || (()=> '');
+  const head = cols.map(c=>`<th style="${c.w?`width:${c.w}`:''}">${esc(c.l)}</th>`).join('');
+  const body = rows.length ? rows.map((r,i)=>`<tr class="row" data-i="${i}" ${rowFn(r,i)}>${cols.map(c=>`<td class="${c.wrap?'wrap':''}" style="${c.num?'text-align:right':''}">${c.f(r)}</td>`).join('')}</tr>`).join('') : `<tr><td colspan="${cols.length}" class="mut" style="text-align:center;padding:26px">${esc(opts.empty||CFG.t.empty)}</td></tr>`;
+  const foot = opts.foot || `${rows.length} ${CFG.t.records}`;
+  return `<div class="tw"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table><div class="tfoot">${foot}</div></div>`;
+}
+
+function attachRowClicks(root, rows, onclick){
+  root.querySelectorAll('tr.row').forEach(tr=>tr.addEventListener('click',ev=>{
+    if(ev.target.closest('button')||ev.target.closest('input')||ev.target.closest('select')||ev.target.closest('a')) return;
+    onclick(rows[+tr.dataset.i]);
+  }));
+}
+
+function steps(items, cur){
+  return `<div class="progress-steps">${items.map((s,i)=>`<div class="st ${i<cur?'done':i===cur?'now':''}">${esc(s)}</div>`).join('')}</div>`;
+}
+
+function kv(pairs){ return `<div class="kv">${pairs.map(([k,v])=>`<div>${esc(k)}</div><div>${v}</div>`).join('')}</div>`; }
+
+function mailPreview(m){
+  return `<div class="mailprev"><div class="mh">${esc(CFG.t.mailto)}: ${esc(m.to)} · ${esc(CFG.t.mailsubj)}: ${esc(m.subj)}</div>${m.body}</div>`;
+}
+
+function drawerTabs(tabs, active){
+  return `<div class="tabs">${tabs.map(t=>`<button class="${t.id===active?'on':''}" onclick="drawerState.tab='${t.id}';renderDrawerBody()">${esc(t.l)}</button>`).join('')}</div>`;
+}
+function renderDrawerBody(){ if(drawerState&&drawerState.render) drawerState.render(); }
+
+document.addEventListener('DOMContentLoaded', renderShell);
+
 </script></body></html>
