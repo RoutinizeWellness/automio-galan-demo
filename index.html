@@ -56,7 +56,26 @@ h1{font-size:19px;margin:0;color:var(--navy);letter-spacing:-.01em}
 .sub{color:var(--mute);margin:3px 0 16px;font-size:12.5px}
 .row-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
 .row-head .sp{flex:1}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0;transition:box-shadow .18s ease,transform .18s ease}
+.card:hover{box-shadow:0 6px 18px rgba(15,23,42,.07)}
+.chip,.btn{transition:all .15s ease}
+.chip:hover{border-color:#aab4c6}
+tr.row{transition:background .12s ease}
+.panel{animation:slidein .22s ease}
+@keyframes slidein{from{transform:translateX(40px);opacity:.4}to{transform:none;opacity:1}}
+.bulkbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;border-radius:12px;padding:10px 16px;display:none;gap:14px;align-items:center;z-index:45;box-shadow:0 10px 30px rgba(13,20,36,.35);font-size:12.5px}
+.bulkbar.on{display:flex}
+.bulkbar .bb-n{font-weight:700}
+.bulkbar button{border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;border-radius:8px;padding:6px 12px;font:inherit;font-size:12px;cursor:pointer}
+.bulkbar button:hover{background:rgba(255,255,255,.16)}
+.empty{padding:38px 20px;text-align:center;color:var(--mute)}
+.empty .et{font-weight:650;color:var(--navy);margin-bottom:4px;font-size:13px}
+.cbxsel{width:15px;height:15px;accent-color:var(--acc);cursor:pointer}
+.donut-wrap{display:flex;align-items:center;gap:18px}
+.donut-legend{font-size:12px;display:grid;gap:7px;flex:1}
+.donut-legend .dl{display:flex;align-items:center;gap:8px}
+.donut-legend .sw{width:10px;height:10px;border-radius:3px;flex:none}
+.donut-legend .dlb{margin-left:auto;font-weight:650}
 .card h3{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);margin:0 0 12px;font-weight:700}
 .grid{display:grid;gap:14px;margin-bottom:14px}
 .k5{grid-template-columns:repeat(5,1fr)}.k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}.k2{grid-template-columns:1fr 1fr}.two{grid-template-columns:1.65fr 1fr}.two-r{grid-template-columns:1fr 1.65fr}
@@ -201,6 +220,7 @@ aside{display:none}
 <nav class="mnav" id="mnav"></nav>
 <div class="drawer" id="drawer"><div class="panel"><div class="ph"><button class="x" onclick="closeDrawer()">×</button><div id="d-head"></div><div class="tabs" id="d-tabs"></div></div><div class="pb" id="d-body"></div></div></div>
 <div class="toast" id="toast"></div>
+<div class="bulkbar" id="bulkbar"><span class="bb-n" id="bb-n"></span><button onclick="bulkAct('seg')">Preparar seguiment</button><button onclick="bulkAct('rev')">Marcar per revisar</button><button onclick="bulkClear()">Desfer selecció</button></div>
 <script>
 /* Automio OS · Demo per a Galan — DADES D'EXEMPLE (tot fictici: clients, comandes, preus, estocs).
    Real i verificable (galan.es): gamas de màquina (PRX, CR, UNI, UP-TWISTER 2x1, RTA, BBCA, EPCA, BBJ),
@@ -523,7 +543,22 @@ const riscTag=r=>({alt:'<span class="tag t-red">Risc alt</span>',mitja:'<span cl
 const pcTag=e=>({retard:'<span class="tag t-red">Retard</span>',parcial:'<span class="tag t-amb">Recepció parcial</span>',rebuda:'<span class="tag t-grn">Rebuda</span>','en-curs':'<span class="tag t-nvy">En curs</span>','pendent-conf':'<span class="tag t-amb">Pendent confirmació</span>','pendent-ap':'<span class="tag t-red">Pendent aprovar</span>'}[e]||e);
 const faseSt=s=>({done:'Feta',cur:'En curs',next:'Següent',wait:'Pendent',blocked:'Bloquejada'}[s]);
 function bar(v,mx,cls){const p=Math.min(100,Math.round(v/mx*100));return `<div class="bar ${cls||''}"><i style="width:${p}%"></i></div>`}
+function donutSVG(items){const R=46,C=2*Math.PI*R;let acc=0;const total=items.reduce((a,b)=>a+b.v,0);
+ const segs=items.map(i=>{const frac=i.v/total;const s=`<circle r="${R}" cx="60" cy="60" fill="none" stroke="${i.c}" stroke-width="17" stroke-dasharray="${frac*C} ${C}" stroke-dashoffset="${-acc*C}" transform="rotate(-90 60 60)"/>`;acc+=frac;return s}).join('');
+ return `<svg width="120" height="120" viewBox="0 0 120 120">${segs}<text x="60" y="57" text-anchor="middle" font-size="21" font-weight="750" fill="var(--navy)">${total}</text><text x="60" y="73" text-anchor="middle" font-size="9" fill="var(--mute)">OF</text></svg>`}
+function areaSVG(vals,w,h){const mx=Math.max(...vals),mn=Math.min(...vals)-4;const X=i=>i/(vals.length-1)*w,Y=v=>h-(v-mn)/(mx-mn)*h;
+ const pts=vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+ return `<svg width="100%" viewBox="0 0 ${w} ${h+22}" preserveAspectRatio="none"><defs><linearGradient id="ag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c8102e" stop-opacity=".22"/><stop offset="1" stop-color="#c8102e" stop-opacity="0"/></linearGradient></defs><polygon points="0,${h} ${pts} ${w},${h}" fill="url(#ag)"/><polyline points="${pts}" fill="none" stroke="#c8102e" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>${vals.map((v,i)=>i%2?`<circle cx="${X(i)}" cy="${Y(v)}" r="2.6" fill="#fff" stroke="#c8102e" stroke-width="1.8"/>`:'').join('')}<text x="2" y="${h+16}" font-size="9" fill="var(--mute)">gen</text><text x="${w-16}" y="${h+16}" font-size="9" fill="var(--mute)">des</text></svg>`}
 function spark(a){const mx=Math.max(...a);return `<div class="spark">${a.map(v=>`<i style="height:${Math.round(v/mx*100)}%" class="${v===mx?'hi':''}"></i>`).join('')}</div>`}
+const SEL=new Set();
+function selRow(){document.querySelectorAll('input.cbxsel[data-id]').forEach(c=>{c.checked?SEL.add(c.dataset.id):SEL.delete(c.dataset.id)});
+ const bb=$('#bulkbar');if(SEL.size){$('#bb-n').textContent=`${SEL.size} seleccionada${SEL.size>1?'es':''}`;bb.classList.add('on')}else bb.classList.remove('on')}
+function selAll(master){document.querySelectorAll('input.cbxsel[data-id]').forEach(c=>{c.checked=master.checked});selRow()}
+function bulkAct(k){toast(k==='seg'?`Seguiment preparat per a ${SEL.size} comandes — queda a la cua d'aprovacions`:`${SEL.size} elements marcats per revisar`);bulkClear()}
+function bulkClear(){SEL.clear();document.querySelectorAll('input.cbxsel').forEach(c=>c.checked=false);$('#bulkbar').classList.remove('on')}
+function emptyRow(cols,msg){return `<tr class="emptyrow" style="display:none"><td colspan="${cols}"><div class="empty"><div class="et">${msg||'Sense resultats'}</div><div class="small">Prova d'ajustar el filtre o la cerca</div></div></td></tr>`}
+function chkEmpty(tableSel){const rows=[...document.querySelectorAll(tableSel+' tr.row')];const vis=rows.filter(r=>r.style.display!=='none').length;
+ const er=document.querySelector(tableSel+' .emptyrow');if(er)er.style.display=vis?'none':''}
 function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2600)}
 
 /* ---------- NAV ---------- */
@@ -549,6 +584,11 @@ function vTauler(){
    ${D.approvals.filter(a=>a.sev!=='gry').slice(0,5).map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':'amb'}"></div><div class="b"><div class="b" style="font-size:12.5px">${a.t}</div><div class="small mut">${a.who} · ${a.id}</div></div><span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':'t-pur'}">${a.tip==='compres'?'Compres':a.tip==='produccio'?'Producció':a.tip==='mixta'?'Mixta':a.tip==='qualitat'?'Qualitat':'Logística'}</span></div>`).join('')}
    <button class="btn soft" style="width:100%;justify-content:center" onclick="go('aprovacions')">Veure la cua completa (9)</button>
   </div>
+ </div>
+ <div class="grid two">
+  <div class="card"><h3>Ordres de fabricació per estat</h3><div class="donut-wrap">${donutSVG([{v:5,c:'#16233f'},{v:2,c:'#175cd3'},{v:2,c:'#e8890c'},{v:1,c:'#3aa76d'}])}<div class="donut-legend">${[['#16233f','En taller',5],['#175cd3','Proves / embalatge',2],['#e8890c','Enginyeria',2],['#3aa76d','Entregada (novembre)',1]].map(d=>`<div class="dl"><span class="sw" style="background:${d[0]}"></span>${d[1]}<span class="dlb">${d[2]}</span></div>`).join('')}</div></div></div>
+  <div class="card"><h3>Puntualitat de proveïdors (OTIF) · 12 mesos</h3>${areaSVG([88,90,86,91,89,92,90,87,88,85,84,87],560,110)}
+  <div class="small mut" style="margin-top:6px">Baixada de la tardor: el PLC de Vallès i una bancada externa. Objectiu 92% — el seguiment AP-87 n'és la primera acció.</div></div>
  </div>
  <div class="grid two-r">
   <div class="card"><h3>Capacitat per centre · properes 6 setmanes (% càrrega)</h3><div class="cap">
@@ -648,9 +688,9 @@ function vCompres(){
   <div class="card kpi"><b>${D.pcs.filter(p=>p.est==='en-curs'||p.est==='parcial').length}</b><span>En curs o parcials</span></div>
   <div class="card kpi ok"><b>${D.pcs.filter(p=>p.est==='rebuda').length}</b><span>Rebudes aquest mes</span></div>
  </div>
- <div class="tw"><table><tr><th>Comanda</th><th>Proveïdor</th><th>Contingut</th><th>Import</th><th>Confirmada</th><th>Revisada</th><th>OF que alimenta</th><th>Estat</th></tr>
- ${D.pcs.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="wrap small">${p.items}</td><td class="b">${p.imp}</td><td class="small">${p.conf}</td><td class="small">${p.rev}</td><td class="small wrap">${p.of}</td><td>${pcTag(p.est)}</td></tr>`).join('')}
- </table><div class="tfoot">Clic a una comanda per veure línies, historial i el seguiment preparat</div></div>`;
+ <div class="tw"><table><tr><th style="width:30px"><input type="checkbox" class="cbxsel" onclick="selAll(this)"></th><th>Comanda</th><th>Proveïdor</th><th>Contingut</th><th>Import</th><th>Confirmada</th><th>Revisada</th><th>OF que alimenta</th><th>Estat</th></tr>
+ ${D.pcs.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td onclick="event.stopPropagation()"><input type="checkbox" class="cbxsel" data-id="${p.id}" onchange="selRow()"></td><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="wrap small">${p.items}</td><td class="b">${p.imp}</td><td class="small">${p.conf}</td><td class="small">${p.rev}</td><td class="small wrap">${p.of}</td><td>${pcTag(p.est)}</td></tr>`).join('')}
+ </table><div class="tfoot">Clic a una comanda per veure línies, historial i el seguiment preparat · selecciona per accions massives</div></div>`;
 }
 
 function vSolicituds(){
@@ -671,11 +711,12 @@ function vEstoc(){
  <div class="tools"><button class="chip on">Tots <span class="c">${D.stock.length}</span></button><button class="chip" onclick="filSt(this)">Sota mínim / baixos <span class="c">${D.stock.filter(s=>s.est!=='ok').length}</span></button><div class="sp"></div><input type="search" placeholder="Filtra per referència, nom…" oninput="filStq(this.value)"></div>
  <div class="tw"><table id="st-t"><tr><th>Referència</th><th>Article</th><th>Família</th><th>Estoc</th><th>Mínim</th><th>Cobertura</th><th>Ubicació</th><th>Estat</th><th>Darrer moviment</th></tr>
  ${D.stock.map(s=>`<tr class="row" data-est="${s.est}" data-q="${(s.ref+' '+s.nom).toLowerCase()}"><td class="b">${s.ref}</td><td class="wrap">${s.nom}</td><td class="small">${s.fam}</td><td class="b">${s.st}</td><td class="small">${s.min}</td><td class="small">${s.cob}</td><td class="small">${s.ub}</td><td>${estTag(s.est)}</td><td class="wrap small mut">${s.mov}</td></tr>`).join('')}
+ ${emptyRow(9,'Cap article coincideix')}
  </table><div class="tfoot">Sota mínim es proposa reposició a la cua d'aprovacions, mai automàtica</div></div>`;
 }
 function filSt(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');
- document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.est==='ok'?'none':'')}
-function filStq(q){q=q.toLowerCase();document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.q.includes(q)?'':'none')}
+ document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.est==='ok'?'none':'');chkEmpty('#st-t')}
+function filStq(q){q=q.toLowerCase();document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.q.includes(q)?'':'none');chkEmpty('#st-t')}
 
 function vProveidors(){
  return `<div class="row-head"><h1>Proveïdors</h1><span class="sub">Rendiment 12 mesos: puntualitat (OTIF), terminis i incidències</span></div>
