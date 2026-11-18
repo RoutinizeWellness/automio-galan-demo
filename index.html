@@ -1,526 +1,809 @@
 <!doctype html>
-<html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
-<title>Automio OS · Galan — Compres i producció (demo)</title>
-<style>:root{--bg:#eef0f4;--card:#fff;--ink:#1c2b43;--mute:#667085;--line:#e3e7ee;--side:#fff;--red:#d92d20;--redbg:#fee4e2;--amb:#b54708;--ambbg:#fff3df;--grn:#067647;--grnbg:#dcfae6;--acc:#0f7a3d;--accbg:#e6f4ea;--accink:#0b5f2f;--navy:#17335e}
+<html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow">
+<title>Automio OS · Galan — Producció i compres (demo)</title>
+<link rel="icon" href="assets/logo-galan-mini.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eef1f5;--card:#fff;--ink:#17233b;--mute:#667085;--line:#e4e8ef;--line2:#eef1f6;
+--red:#c8102e;--redbg:#fde7ea;--redink:#a40d24;
+--amb:#b54708;--ambbg:#fef3e2;
+--grn:#067647;--grnbg:#dcfae6;
+--acc:#c8102e;--accbg:#fdeef0;--accink:#a40d24;
+--navy:#16233f;--side:#121c30;--side2:#1b2740;--sidetxt:#c6cede;--sidemute:#7d8aa3;
+--blu:#175cd3;--blubg:#eaf1fd;--pur:#6941c6;--purbg:#f2edfb;--gry:#475467;--grybg:#eef1f4}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{font:13px/1.45 "Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
-.app{display:grid;grid-template-columns:232px 1fr;min-height:100vh}
-aside{background:var(--side);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto}
-.brand{padding:14px 16px 12px;border-bottom:1px solid var(--line)}
+.app{display:grid;grid-template-columns:236px 1fr;min-height:100vh}
+aside{background:var(--side);position:sticky;top:0;height:100vh;display:flex;flex-direction:column;overflow-y:auto;scrollbar-width:thin}
+.brand{padding:14px 14px 12px;border-bottom:1px solid rgba(255,255,255,.07)}
 .brand .logo{display:flex;align-items:center;gap:9px}
-.brand .mark{width:30px;height:30px;border-radius:7px;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;letter-spacing:.02em}
-.brand .bn{font-weight:700;font-size:13.5px;color:var(--navy)}
-.brand .bs{font-size:10px;letter-spacing:.14em;color:#8a94a6;font-weight:600;margin-top:2px}
-nav{padding:10px 8px;flex:1}
-nav .sec{font-size:10px;letter-spacing:.12em;color:#98a2b3;font-weight:700;padding:12px 10px 5px;text-transform:uppercase}
-nav a{display:flex;align-items:center;gap:9px;color:#34405a;text-decoration:none;padding:7px 10px;border-radius:7px;cursor:pointer;font-weight:500;font-size:13px;margin-bottom:1px}
-nav a svg{width:16px;height:16px;stroke:#667085;flex:none}
-nav a:hover{background:#f2f4f8}
-nav a.on{background:var(--accbg);color:var(--accink);font-weight:600}
-nav a.on svg{stroke:var(--acc)}
-nav a .n{margin-left:auto;background:var(--acc);color:#fff;border-radius:99px;font-size:10.5px;padding:0 6px;line-height:16px;font-weight:700}
-.side-foot{font-size:11px;color:var(--mute);border-top:1px solid var(--line);padding:10px 14px;line-height:1.55}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:none}
+.brand .bn{font-weight:700;font-size:13.5px;color:#fff}
+.brand .bs{font-size:9.5px;letter-spacing:.14em;color:var(--sidemute);font-weight:600;margin-top:2px;text-transform:uppercase}
+.clientbox{margin:10px 14px;background:#fff;border-radius:10px;padding:9px 10px;display:flex;align-items:center;gap:9px}
+.clientbox img{width:84px;height:auto;display:block}
+.clientbox .cb-t{font-size:9.5px;letter-spacing:.1em;color:#98a2b3;font-weight:700;text-transform:uppercase;margin-bottom:3px}
+nav{padding:8px 8px;flex:1}
+nav .sec{font-size:9.5px;letter-spacing:.13em;color:#5d6b86;font-weight:700;padding:12px 10px 5px;text-transform:uppercase}
+nav a{display:flex;align-items:center;gap:9px;color:var(--sidetxt);text-decoration:none;padding:7px 10px;border-radius:8px;cursor:pointer;font-weight:500;font-size:12.8px;margin-bottom:1px}
+nav a svg{width:16px;height:16px;stroke:#8d9ab3;flex:none}
+nav a:hover{background:var(--side2)}
+nav a.on{background:rgba(200,16,46,.16);color:#fff;font-weight:600}
+nav a.on svg{stroke:#ff6b7d}
+nav a .n{margin-left:auto;background:var(--acc);color:#fff;border-radius:99px;font-size:10px;padding:0 6px;line-height:16px;font-weight:700}
+nav a .n.warn{background:#e8890c}
+.side-foot{font-size:10.5px;color:var(--sidemute);border-top:1px solid rgba(255,255,255,.07);padding:10px 14px;line-height:1.55}
 main{min-width:0;display:flex;flex-direction:column}
 .topbar{height:52px;display:flex;align-items:center;gap:12px;background:#fff;border-bottom:1px solid var(--line);padding:0 22px;position:sticky;top:0;z-index:15}
-.topbar .crumb{font-weight:600;color:var(--navy);font-size:13.5px}
-.topbar .gsearch{flex:1;max-width:420px;position:relative}
-.topbar .gsearch input{width:100%;border:1px solid var(--line);background:#f6f7f9;border-radius:8px;padding:7px 12px 7px 32px;font-size:12.5px}
+.topbar .crumb{font-weight:650;color:var(--navy);font-size:13.5px;white-space:nowrap}
+.topbar .gsearch{flex:1;max-width:430px;position:relative}
+.topbar .gsearch input{width:100%;border:1px solid var(--line);background:#f6f7f9;border-radius:8px;padding:7px 12px 7px 32px;font-size:12.5px;outline:none}
+.topbar .gsearch input:focus{border-color:#e8a4ad;background:#fff}
 .topbar .gsearch svg{position:absolute;left:10px;top:8px;width:15px;height:15px;stroke:#98a2b3}
+.gsearch .sr{position:absolute;top:36px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 12px 32px rgba(15,23,42,.14);z-index:40;display:none;overflow:hidden}
+.gsearch .sr.on{display:block}
+.gsearch .sr div{padding:8px 12px;font-size:12.5px;cursor:pointer;display:flex;gap:8px;align-items:center}
+.gsearch .sr div:hover{background:#f6f8fc}
 .topbar .sp{flex:1}
-.pill{font-size:10.5px;font-weight:700;letter-spacing:.05em;background:var(--ambbg);color:var(--amb);border:1px solid #f1d19a;border-radius:99px;padding:4px 11px;white-space:nowrap}
+.pill{font-size:10px;font-weight:700;letter-spacing:.05em;background:var(--ambbg);color:var(--amb);border:1px solid #f1d19a;border-radius:99px;padding:4px 11px;white-space:nowrap}
+.bell{position:relative;width:32px;height:32px;border-radius:8px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer;background:#fff}
+.bell svg{width:16px;height:16px;stroke:#475467}
+.bell .bd{position:absolute;top:-4px;right:-4px;background:var(--acc);color:#fff;border-radius:99px;font-size:9.5px;font-weight:700;min-width:16px;height:16px;display:flex;align-items:center;justify-content:center;padding:0 4px}
 .avatar{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
-.content{padding:20px 22px 60px}
+.content{padding:20px 22px 70px}
 h1{font-size:19px;margin:0;color:var(--navy);letter-spacing:-.01em}
 .sub{color:var(--mute);margin:3px 0 16px;font-size:12.5px}
 .row-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:4px}
 .row-head .sp{flex:1}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
-.card h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0}
+.card h3{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);margin:0 0 12px;font-weight:700}
 .grid{display:grid;gap:14px;margin-bottom:14px}
-.k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}.k2{grid-template-columns:1fr 1fr}.two{grid-template-columns:1.6fr 1fr}
-.kpi b{font-size:24px;display:block;line-height:1.1;color:var(--navy);font-weight:750}
-.kpi span{color:var(--mute);font-size:12px}
+.k5{grid-template-columns:repeat(5,1fr)}.k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}.k2{grid-template-columns:1fr 1fr}.two{grid-template-columns:1.65fr 1fr}.two-r{grid-template-columns:1fr 1.65fr}
+.kpi b{font-size:23px;display:block;line-height:1.1;color:var(--navy);font-weight:750;letter-spacing:-.02em}
+.kpi span{color:var(--mute);font-size:11.8px}
 .kpi .d{font-size:11px;margin-top:4px}
 .kpi.bad b{color:var(--red)}.kpi.warn b{color:var(--amb)}.kpi.ok b{color:var(--grn)}
-.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:600;white-space:nowrap}
-.t-red{background:var(--redbg);color:#b42318}.t-amb{background:var(--ambbg);color:var(--amb)}.t-grn{background:var(--grnbg);color:var(--grn)}.t-blu{background:var(--accbg);color:var(--accink)}.t-gry{background:#eef0f3;color:#475467}.t-pur{background:#f0e9fa;color:#6941c6}
-.mut{color:var(--mute)}.small{font-size:12px}.b{font-weight:600}
+.tag{display:inline-block;border-radius:6px;padding:2px 8px;font-size:10.8px;font-weight:600;white-space:nowrap}
+.t-red{background:var(--redbg);color:var(--redink)}.t-amb{background:var(--ambbg);color:var(--amb)}.t-grn{background:var(--grnbg);color:var(--grn)}.t-blu{background:var(--blubg);color:var(--blu)}.t-gry{background:var(--grybg);color:var(--gry)}.t-pur{background:var(--purbg);color:var(--pur)}.t-nvy{background:#e7ecf5;color:var(--navy)}
+.mut{color:var(--mute)}.small{font-size:11.8px}.b{font-weight:600}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
 .tools .sp{flex:1}
 .chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px;cursor:pointer;font:inherit;font-size:12px;color:#34405a}
 .chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
 .chip .c{opacity:.65;font-size:11px;margin-left:3px}
-input,select,textarea{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;color:var(--ink)}
-input[type=search],input[type=text]{min-width:200px}
+input,select,textarea{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:#fff;color:var(--ink);outline:none}
+input:focus,select:focus,textarea:focus{border-color:#e8a4ad}
+input[type=search],input[type=text]{min-width:190px}
 textarea{width:100%;min-height:150px;line-height:1.55}
-button.btn{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:7px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+button.btn{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:8px;padding:7px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 button.btn.ghost{background:#fff;color:var(--navy);border-color:#cbd2e0}
 button.btn.soft{background:var(--accbg);color:var(--accink);border-color:transparent}
-button.btn.danger{background:#fff;color:#b42318;border-color:#f0c4c0}
+button.btn.danger{background:#fff;color:var(--redink);border-color:#f0c4c6}
 button:disabled{opacity:.45;cursor:default}
 .act{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
 table{width:100%;border-collapse:collapse;font-size:12.5px}
-th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:#f8f9fb;font-weight:700;position:sticky;top:0}
-td{padding:8px 12px;border-bottom:1px solid #eef0f4;vertical-align:middle;white-space:nowrap}
+th{font-size:10.3px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);white-space:nowrap;background:#f8f9fb;font-weight:700;position:sticky;top:0}
+td{padding:8px 12px;border-bottom:1px solid var(--line2);vertical-align:middle;white-space:nowrap}
 td.wrap{white-space:normal}
-tr.row{cursor:pointer}tr.row:hover td{background:#f6f8fc}
+tr.row{cursor:pointer}tr.row:hover td{background:#f7f9fc}
 tr.sel td{background:var(--accbg)}
 .tfoot{display:flex;align-items:center;gap:10px;padding:8px 12px;font-size:11.5px;color:var(--mute);background:#f8f9fb;border-top:1px solid var(--line)}
-.bar{height:6px;background:#eceef2;border-radius:99px;overflow:hidden;min-width:70px}.bar i{display:block;height:100%;background:var(--navy)}
+.bar{height:6px;background:#eceef2;border-radius:99px;overflow:hidden;min-width:64px}.bar i{display:block;height:100%;background:var(--navy);border-radius:99px}
 .bar.risk i{background:var(--red)}.bar.warn i{background:#e8890c}.bar.ok i{background:var(--grn)}
-.drawer{position:fixed;inset:0;background:rgba(15,23,42,.42);display:none;z-index:30}
+.drawer{position:fixed;inset:0;background:rgba(13,20,36,.45);display:none;z-index:30}
 .drawer.on{display:block}
-.panel{position:absolute;right:0;top:0;bottom:0;width:min(680px,100%);background:#fff;padding:0;overflow-y:auto;box-shadow:-8px 0 30px rgba(15,23,42,.18)}
+.panel{position:absolute;right:0;top:0;bottom:0;width:min(760px,100%);background:#fff;padding:0;overflow-y:auto;box-shadow:-10px 0 34px rgba(13,20,36,.2)}
 .panel .ph{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);padding:16px 22px 0;z-index:2}
-.panel .pb{padding:16px 22px 40px}
+.panel .pb{padding:16px 22px 44px}
 .panel h2{font-size:17px;margin:0;color:var(--navy)}
 .x{float:right;border:0;background:#eef0f3;border-radius:7px;width:30px;height:30px;font-size:16px;cursor:pointer;color:#475467}
-.tabs{display:flex;gap:2px;margin-top:12px}
-.tabs button{border:0;background:none;font:inherit;font-size:12.5px;padding:9px 12px;cursor:pointer;color:var(--mute);border-bottom:2px solid transparent;font-weight:500}
+.tabs{display:flex;gap:2px;margin-top:12px;overflow-x:auto}
+.tabs button{border:0;background:none;font:inherit;font-size:12.5px;padding:9px 12px;cursor:pointer;color:var(--mute);border-bottom:2px solid transparent;font-weight:500;white-space:nowrap}
 .tabs button.on{color:var(--acc);font-weight:650;border-bottom-color:var(--acc)}
-.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#101828;color:#fff;padding:10px 18px;border-radius:8px;font-size:12.5px;z-index:60;display:none;box-shadow:0 6px 24px rgba(0,0,0,.3)}
-.why{background:var(--accbg);border-radius:8px;padding:10px 12px;margin:10px 0;font-size:12.5px;line-height:1.55;color:var(--accink)}
-.note{background:#f8f9fb;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:12.5px;color:#475467}
-.banner{background:var(--ambbg);border:1px solid #f1d19a;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;display:flex;gap:10px;align-items:flex-start;color:#7a4a00}
-.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 12px;margin:12px 0;font-size:12.5px}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#101828;color:#fff;padding:10px 18px;border-radius:9px;font-size:12.5px;z-index:60;display:none;box-shadow:0 6px 24px rgba(0,0,0,.3)}
+.why{background:var(--accbg);border-radius:9px;padding:10px 12px;margin:10px 0;font-size:12.5px;line-height:1.55;color:var(--accink)}
+.note{background:#f8f9fb;border:1px solid var(--line);border-radius:9px;padding:10px 12px;font-size:12.5px;color:#475467}
+.banner{background:var(--ambbg);border:1px solid #f1d19a;border-radius:11px;padding:10px 14px;margin-bottom:14px;font-size:12.5px;display:flex;gap:10px;align-items:flex-start;color:#7a4a00}
+.kv{display:grid;grid-template-columns:160px 1fr;gap:6px 12px;margin:12px 0;font-size:12.5px}
 .kv div:nth-child(odd){color:var(--mute)}
 .tl{margin:8px 0 0;padding:0;list-style:none}
 .tl li{padding:0 0 12px 18px;position:relative;font-size:12.5px;border-left:2px solid var(--line);margin-left:5px}
 .tl li:before{content:"";position:absolute;left:-6px;top:4px;width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--navy)}
 .tl li b{display:block;color:var(--navy)}
 .tl .w{color:var(--mute);font-size:11.5px}
-.docview{background:#f8f9fb;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:12.5px}
-.mailprev{background:#f7f8fa;border:1px solid var(--line);border-radius:8px;padding:12px;font-size:12.5px;margin-top:10px}
+.docview{background:#f8f9fb;border:1px solid var(--line);border-radius:11px;padding:14px;font-size:12.5px}
+.mailprev{background:#f7f8fa;border:1px solid var(--line);border-radius:9px;padding:12px;font-size:12.5px;margin-top:10px}
 .mailprev .mh{color:var(--mute);font-size:11.5px;margin-bottom:6px}
-.qitem{display:flex;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;margin-bottom:10px;align-items:flex-start;cursor:pointer}
+.qitem{display:flex;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:11px;background:#fff;margin-bottom:10px;align-items:flex-start;cursor:pointer}
 .qitem:hover{border-color:#c9d0e0;box-shadow:0 2px 8px rgba(15,23,42,.06)}
 .dot{width:9px;height:9px;border-radius:50%;margin-top:5px;flex:none}
 .d-red{background:var(--red)}.d-amb{background:#e8890c}.d-blu{background:var(--navy)}.d-gry{background:#a7b0bf}.d-grn{background:#1f9d55}
 .qitem .b{flex:1;min-width:0}
-.qitem .t{font-weight:600;color:var(--navy);font-size:13px}
-.qitem .m{color:var(--mute);font-size:12px;margin-top:2px}
-.src{font-size:10.5px;color:#98a2b3}
-.chart{display:flex;align-items:flex-end;gap:8px;height:110px;padding-top:6px}
-.chart .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
-.chart .col .v{font-size:11px;font-weight:700;color:var(--navy)}
-.chart .col .b{width:100%;max-width:38px;background:var(--accbg2,var(--accbg));border-radius:5px 5px 0 0;background:var(--navy);opacity:.85}
-.chart .col .l{font-size:10.5px;color:var(--mute)}
-.progress-steps{display:flex;gap:0;margin:14px 0}
-.progress-steps .st{flex:1;text-align:center;font-size:11px;color:var(--mute);position:relative;padding-top:16px}
-.progress-steps .st:before{content:"";position:absolute;top:4px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #d0d5dd}
-.progress-steps .st:after{content:"";position:absolute;top:9px;left:calc(-50% + 8px);right:calc(50% + 8px);height:2px;background:#e4e7ec}
-.progress-steps .st:first-child:after{display:none}
-.progress-steps .st.done{color:var(--grn);font-weight:600}
-.progress-steps .st.done:before{background:var(--grn);border-color:var(--grn)}
-.progress-steps .st.done:after{background:var(--grn)}
-.progress-steps .st.now{color:var(--acc);font-weight:700}
-.progress-steps .st.now:before{border-color:var(--acc);background:var(--acc)}
-.ofboard{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.ofcard{border:1px solid var(--line);border-radius:10px;background:#fff;padding:14px}
-.ofcard h4{margin:0 0 2px;font-size:13.5px;color:var(--navy)}
-.matrow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed #eef0f4;font-size:12px}
-.matrow:last-child{border:0}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media (max-width:900px){.app{grid-template-columns:1fr}aside{position:fixed;z-index:50;left:-240px;transition:left .2s}aside.open{left:0}.k4{grid-template-columns:repeat(2,1fr)}.two,.k2,.split{grid-template-columns:1fr}.content{padding:14px}}
-</style></head>
-<body><div class="app" id="app"></div>
+.phase{display:flex;gap:0;align-items:stretch;margin:14px 0 6px;overflow-x:auto;padding-bottom:4px}
+.pstep{flex:1;min-width:86px;text-align:center;position:relative;padding-top:20px;font-size:10.8px;color:var(--mute)}
+.pstep:before{content:"";position:absolute;top:7px;left:0;right:0;height:2px;background:var(--line)}
+.pstep .st-dot{position:absolute;top:1px;left:50%;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid var(--line)}
+.pstep.done .st-dot{background:var(--grn);border-color:var(--grn)}
+.pstep.done:before{background:var(--grn)}
+.pstep.cur .st-dot{background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 4px var(--accbg)}
+.pstep.cur{color:var(--accink);font-weight:650}
+.pstep.blocked .st-dot{background:var(--red);border-color:var(--red)}
+.pstep.blocked{color:var(--redink);font-weight:650}
+.gantt{display:grid;gap:5px}
+.grow{display:grid;grid-template-columns:150px 1fr 74px;gap:8px;align-items:center;font-size:11.8px}
+.gtrack{height:16px;background:#f0f2f6;border-radius:5px;position:relative;overflow:hidden}
+.gfill{position:absolute;top:0;bottom:0;border-radius:5px;background:var(--navy)}
+.gfill.risk{background:var(--red)}.gfill.warn{background:#e8890c}.gfill.ok{background:#3aa76d}
+.cap{display:grid;gap:7px}
+.caprow{display:grid;grid-template-columns:128px 1fr 46px;gap:8px;align-items:center;font-size:11.8px}
+.spark{display:flex;align-items:flex-end;gap:3px;height:44px}
+.spark i{flex:1;background:#dfe3ec;border-radius:3px 3px 0 0;min-height:3px}
+.spark i.hi{background:var(--acc)}
+.hbar{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:11.8px}
+.hbar .lb{width:150px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .tr{flex:1;height:14px;background:#f0f2f6;border-radius:5px;overflow:hidden}
+.hbar .fl{height:100%;border-radius:5px;background:var(--navy)}
+.hbar .vl{width:76px;text-align:right;font-weight:600;white-space:nowrap}
+.chk{display:flex;gap:9px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12.5px}
+.chk .cbx{width:16px;height:16px;border-radius:5px;border:1.5px solid #c6ccd8;flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800}
+.chk.done .cbx{background:var(--grn);border-color:var(--grn)}
+.chk.done .ct{text-decoration:line-through;color:var(--mute)}
+.chk.fail .cbx{background:var(--red);border-color:var(--red)}
+.sup-h{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.sup-av{width:42px;height:42px;border-radius:10px;background:var(--accbg);color:var(--accink);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex:none}
+.lot{display:inline-block;background:#f1f4f9;border:1px solid var(--line);border-radius:5px;padding:1px 7px;font-size:11px;font-weight:600;color:var(--navy);margin:1px 2px 1px 0}
+.mnav{display:none}
+.mlogo{display:none;width:64px;height:auto;flex:none}
+@media(max-width:980px){
+.mlogo{display:block}
+.app{grid-template-columns:1fr}
+aside{display:none}
+.k5,.k4{grid-template-columns:repeat(2,1fr)}
+.k3{grid-template-columns:1fr}
+.k2,.two,.two-r{grid-template-columns:1fr}
+.content{padding:14px 12px 92px}
+.topbar{padding:0 12px}
+.topbar .crumb{display:none}
+.panel{width:100%}
+.mnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--side);z-index:50;padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+.mnav a{display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--sidemute);font-size:9.8px;font-weight:600;text-decoration:none;padding:4px 8px;border-radius:8px;position:relative}
+.mnav a svg{width:19px;height:19px;stroke:var(--sidemute)}
+.mnav a.on{color:#fff}.mnav a.on svg{stroke:#ff6b7d}
+.mnav a .n{position:absolute;top:0;right:4px;background:var(--acc);color:#fff;border-radius:99px;font-size:9px;min-width:15px;height:15px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-weight:700}
+.grow{grid-template-columns:96px 1fr 56px}
+.caprow{grid-template-columns:88px 1fr 40px}
+.hbar .lb{width:96px}
+}
+</style></head><body>
+<div class="app">
+<aside>
+<div class="brand"><div class="logo"><div class="mark">A</div><div><div class="bn">Automio OS</div><div class="bs">Producció · Compres</div></div></div>
+<div class="clientbox"><div><div class="cb-t">Preparada per a</div><img src="assets/logo-galan.webp" alt="Galan — Twisting and winding machines"></div></div>
+</div>
+<nav id="nav"></nav>
+<div class="side-foot">Demo funcional amb dades fictícies.<br>Cap acció no s'aplica sola: tot passa per aprovació.<br><span class="mut">Fonts públiques: galan.es</span></div>
+</aside>
+<main>
+<div class="topbar">
+<img class="mlogo" src="assets/logo-galan.webp" alt="Galan">
+<div class="crumb" id="crumb">Tauler</div>
+<div class="gsearch"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="gs" type="search" placeholder="Cerca OF, comanda, article, proveïdor…" autocomplete="off"><div class="sr" id="gsr"></div></div>
+<div class="sp"></div>
+<span class="pill">DADES D'EXEMPLE</span>
+<div class="bell" id="bell" onclick="go('aprovacions')"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="bd" id="bell-n">9</span></div>
+<div class="avatar">GS</div>
+</div>
+<div class="content" id="view"></div>
+</main>
+</div>
+<nav class="mnav" id="mnav"></nav>
+<div class="drawer" id="drawer"><div class="panel"><div class="ph"><button class="x" onclick="closeDrawer()">×</button><div id="d-head"></div><div class="tabs" id="d-tabs"></div></div><div class="pb" id="d-body"></div></div></div>
+<div class="toast" id="toast"></div>
 <script>
-//META lang=ca|title=Automio OS · Galan — Compres i producció (demo)|acc=#0f7a3d|accbg=#e6f4ea|accink=#0b5f2f|navy=#17335e
-// Demo Galan Textile Machinery — català. Dades fictícies marcades com a exemple. Models reals: PRX, Up-Twister 2x1, BBCA, RTA (galan.es).
-const CFG = {
-  slug:'galan', v:6, company:'Galan', mark:'GA', userIni:'AL', locale:'ca-ES', home:'panel',
-  t:{
-    pill:'DADES D\'EXEMPLE — DEMO SENSE CONNEXIÓ REAL',
-    foot:'Demo d\'Automio per a Galan.<br>Totes les dades són fictícies i les accions només es simulen en aquest navegador. Res no s\'envia ni s\'escriu a cap sistema.',
-    empty:'Sense registres', records:'registres', mailto:'Per a', mailsubj:'Assumpte'
-  },
-  modules:[
-    {sec:'General'},
-    {id:'panel', label:'Tauler', icon:'panel'},
-    {id:'inbox', label:'Aprovacions', icon:'inbox', badge:s=>s.approvals.filter(a=>a.estado==='pendiente').length||''},
-    {sec:'Operativa'},
-    {id:'prod', label:'Producció', icon:'prod', badge:s=>s.ofs.filter(o=>o.risc==='alt').length||''},
-    {id:'compras', label:'Compres', icon:'compras', badge:s=>s.orders.filter(o=>['endarrerit','parcial'].includes(o.estado)).length||''},
-    {id:'prov', label:'Proveïdors', icon:'prov'},
-    {sec:'Sistema'},
-    {id:'act', label:'Activitat', icon:'act'}
+/* Automio OS · Demo per a Galan — DADES D'EXEMPLE (tot fictici: clients, comandes, preus, estocs).
+   Real i verificable (galan.es): gamas de màquina (PRX, CR, UNI, UP-TWISTER 2x1, RTA, BBCA, EPCA, BBJ),
+   Display CTB, PLC amb exportació SQL a l'ERP, detectors de fil trencat, inversors EtherCat, receptor de 100 receptes. */
+const D = {
+
+nav:[
+ {sec:"GENERAL"},
+ {id:"tauler",t:"Tauler",i:"dash"},
+ {id:"aprovacions",t:"Aprovacions",i:"check",n:9},
+ {sec:"PRODUCCIÓ"},
+ {id:"produccio",t:"Ordres de fabricació",i:"factory"},
+ {id:"capacitat",t:"Capacitat i centres",i:"gauge"},
+ {id:"taller",t:"Seguiment de taller",i:"wrench"},
+ {id:"qualitat",t:"Qualitat i proves",i:"shield"},
+ {sec:"COMPRES"},
+ {id:"compres",t:"Comandes de compra",i:"cart"},
+ {id:"solicituds",t:"Sol·licituds",i:"file",n:4},
+ {id:"estoc",t:"Estoc i articles",i:"box"},
+ {id:"proveidors",t:"Proveïdors",i:"truck"},
+ {sec:"ANÀLISI"},
+ {id:"informes",t:"Informes",i:"chart"},
+ {id:"activitat",t:"Activitat",i:"clock"}
+],
+
+kpis:[
+ {v:"9",l:"OF actives",d:"3 amb risc de retard",cls:""},
+ {v:"3",l:"OF amb risc",d:"OF-2641 · OF-2644 · OF-2645",cls:"bad"},
+ {v:"4",l:"Comandes amb incidència",d:"1 retard crític (PLC)",cls:"warn"},
+ {v:"2",l:"Recepcions pendents",d:"avui i demà",cls:""},
+ {v:"87%",l:"OTIF proveïdors 12 m",d:"objectiu 92%",cls:"warn"}
+],
+
+ofs:[
+ {id:"OF-2641",maq:"PRX375/4",desc:"Reunidora-retorcedora d'aro · 112 husos",cli:"Cordeles Tècniques València S.A.",aplic:"Cordatge tècnic PA 6.6 · 9.400 dtex",fase:6,fases:10,lliur:"12/12/2026",risc:"alt",riscTxt:"PLC S7-1200 retardat +6 d (PC-2315)",prog:58,horesP:412,horesR:398,resp:"M. Camps",
+  bom:[
+   {art:"Bancada mecanitzada PRX375 (S355JR)",tip:"Mecanitzat propi + acer",req:1,stock:1,comprat:0,rebut:1,lot:"Colada AC-2619 · Cert. 3.1",pc:"—",eta:"—",est:"ok"},
+   {art:"Husos Galan Ø45 (joc de 112)",tip:"Fabricació pròpia",req:112,stock:64,comprat:0,rebut:64,lot:"Sèrie HU-2511",pc:"—",eta:"—",est:"ok"},
+   {art:"Motor SIMOTICS 1LE1503 15 kW (×4)",tip:"Siemens",req:4,stock:4,comprat:0,rebut:4,lot:"Nº sèrie registrats",pc:"PC-2328",eta:"Rebut 04/11",est:"ok"},
+   {art:"PLC SIMATIC S7-1200 + I/O (×2)",tip:"Siemens",req:2,stock:0,comprat:2,rebut:0,lot:"—",pc:"PC-2315",eta:"21/11 (era 15/11)",est:"risc"},
+   {art:"Inversors EtherCat (×112)",tip:"Siemens SINAMICS",req:112,stock:112,comprat:0,rebut:112,lot:"—",pc:"PC-2328",eta:"Rebut 04/11",est:"ok"},
+   {art:"Display CTB 10\" (propi)",tip:"Subconjunt propi",req:1,stock:1,comprat:0,rebut:1,lot:"CTB-10-0182",pc:"—",eta:"—",est:"ok"},
+   {art:"Detectors de fil trencat (×112)",tip:"Electrònica",req:112,stock:112,comprat:0,rebut:112,lot:"Lote DF-3308",pc:"PC-2325",eta:"Rebut 30/10",est:"ok"},
+   {art:"Rodaments SKF 6210-2Z (×48)",tip:"SKF",req:48,stock:48,comprat:0,rebut:48,lot:"Lote SK-7781",pc:"PC-2318",eta:"Rebut parcial 12/11",est:"ok"},
+   {art:"Quadre elèctric: components Schneider",tip:"Schneider Electric",req:1,stock:0,comprat:1,rebut:0,lot:"—",pc:"PC-2322",eta:"25/11 (sense confirmar)",est:"warn"},
+   {art:"Cablejat i canalització",tip:"Diversos",req:1,stock:0,comprat:1,rebut:0,lot:"—",pc:"PC-2330",eta:"24/11",est:"ok"}
   ],
-  initial:{
-    approvals:[
-      {id:'AP-201', pri:'alta', qui:'producció', tipo:'Replanificació', estado:'pendiente',
-        titulo:'OF-2431 (PRX375-2) en risc: husos amb 9 dies de retard',
-        detalle:'La comanda PC-3110 (12 husos de precisió) passa del 25/11 al 04/12. L\'OF-2431 (retorcedora PRX375-2 per a cordatge tècnic) té muntatge previst el 02/12 i prova amb client el 19/12.',
-        why:'Els husos són camí crític del muntatge: sense ells la màquina no es pot tancar ni provar.',
-        accion:{kind:'replan', proyecto:'OF-2431', delta:'muntatge al 09/12, prova amb client al 22/12 (avís comercial)'}},
-      {id:'AP-202', pri:'alta', qui:'compres', tipo:'Seguiment', estado:'pendiente',
-        titulo:'Variadors de freqüència sense confirmació · PC-3114',
-        detalle:'Els 3 variadors per a la Up-Twister 2x1 (OF-2433) porten una setmana sense confirmació. Proveïdor amb històric de retards el darrer trimestre.',
-        why:'La UP-TWISTER 2X1 va per exportació; un retard aquí mou tota l\'OF-2433.',
-        accion:{kind:'mail', to:'comercial@proveidor-exemple.es', subj:'PC-3114 · Confirmació de data — variadors de freqüència (3 uds)', body:'Bon dia,\n\nnecessitem confirmació ferma de la data de lliurament dels 3 variadors de freqüència (comanda PC-3114). La màquina associada té data de prova amb client i qualsevol desplaçament l\'afecta.\n\nGràcies.'}},
-      {id:'AP-203', pri:'mitjana', qui:'compres + producció', tipo:'Substitució', estado:'pendiente',
-        titulo:'Rodament 6312 esgotat: validar equivalent',
-        detalle:'El rodamient 6312 per a la BBCA350D (OF-2435) està esgotat fins a gener. El mateix proveïdor ofereix l\'equivalent 6312-2RS amb les mateixes mides i càrrega.',
-        why:'Comprés valida preu i data; producció valida que l\'equivalent munta i rendeix igual en la bobinadora.',
-        accion:{kind:'substitucio', material:'Rodament 6312 → 6312-2RS', of:'OF-2435'}}
-    ],
-    ofs:[
-      {id:'OF-2431', maquina:'Retorcedora PRX375-2', client:'Cordatge tècnic (exportació) — exemple', fase:1, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:38, muntatge:'02/12', prova:'19/12', risc:'alt',
-        materials:[{desc:'Husos de precisió (12 uds)', estat:'endarrerit', compra:'PC-3110'},{desc:'Placa d\'acer mecanitzada', estat:'rebut', compra:'PC-3102'},{desc:'Motor-husos i transmissió GPS', estat:'en-curs', compra:'—'}]},
-      {id:'OF-2433', maquina:'Up-Twister 2x1', client:'Xarxes de pesca (exportació) — exemple', fase:2, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:55, muntatge:'28/11', prova:'12/12', risc:'mitja',
-        materials:[{desc:'Variadors de freqüència (3 uds)', estat:'sense-confirmar', compra:'PC-3114'},{desc:'Anelles i travessers', estat:'rebut', compra:'PC-3098'},{desc:'Cablejat i quadre elèctric', estat:'en-curs', compra:'—'}]},
-      {id:'OF-2435', maquina:'Bobinadora BBCA350D', client:'Gespa artificial — exemple', fase:1, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:22, muntatge:'16/12', prova:'15/01', risc:'mitja',
-        materials:[{desc:'Rodaments 6312 (8 uds)', estat:'esgotat', compra:'PC-3116'},{desc:'Xassís soldat', estat:'en-curs', compra:'—'}]},
-      {id:'OF-2428', maquina:'Retorcedora d\'aletes RTA', client:'Monofilaments — exemple', fase:3, fases:['Enginyeria','Mecanitzat','Muntatge','Prova','Enviament'], progres:81, muntatge:'fet 10/11', prova:'25/11', risc:'baix',
-        materials:[{desc:'PLC i pantalla 7"', estat:'rebut', compra:'PC-3090'},{desc:'Sistema detecció de trencaments', estat:'rebut', compra:'PC-3091'}]}
-    ],
-    orders:[
-      {id:'PC-3110', prov:'Mecanismes Finer S.L. (exemple)', of:'OF-2431', estado:'endarrerit', total:9360, entrega:'04/12 (abans 25/11)', lineas:[
-        {desc:'Husos de precisió', qty:12, precio:780, estado:'endarrerit'}]},
-      {id:'PC-3114', prov:'Electrodrive Components S.A. (exemple)', of:'OF-2433', estado:'sense-confirmar', total:4170, entrega:'sense data', lineas:[
-        {desc:'Variador de freqüència 7,5 kW', qty:3, precio:1390, estado:'pendent'}]},
-      {id:'PC-3116', prov:'Rodaments del Vallès S.A. (exemple)', of:'OF-2435', estado:'confirmat', total:312, entrega:'gener (esgotat)', lineas:[
-        {desc:'Rodament 6312', qty:8, precio:39, estado:'esgotat'}]},
-      {id:'PC-3102', prov:'Aceros i Mecanitzats Terri S.L. (exemple)', of:'OF-2431', estado:'rebut', total:5230, entrega:'rebut 08/11', lineas:[
-        {desc:'Placa d\'acer mecanitzada (joc)', qty:1, precio:5230, estado:'rebut'}]},
-      {id:'PC-3098', prov:'Rodaments del Vallès S.A. (exemple)', of:'OF-2433', estado:'rebut', total:1180, entrega:'rebut 04/11', lineas:[
-        {desc:'Anelles i travessers (joc)', qty:1, precio:1180, estado:'rebut'}]},
-      {id:'PC-3118', prov:'Filats i Bobines Carda S.A. (exemple)', of:'—', estado:'enviat', total:740, entrega:'previst 27/11', lineas:[
-        {desc:'Consumibles de prova: fil tècnic PES', qty:40, precio:18.5, estado:'confirmat'}]}
-    ],
-    suppliers:[
-      {id:'PR-11', nombre:'Mecanismes Finer S.L. (exemple)', cat:'Husos i mecanismes de precisió', otif:72, calidad:94, pedidos:8, ultimo:'PC-3110', nota:'Dos retards aquest any; confirmar sempre per escrit.'},
-      {id:'PR-12', nombre:'Electrodrive Components S.A. (exemple)', cat:'Motors, variadors i automatisme', otif:80, calidad:90, pedidos:12, ultimo:'PC-3114', nota:'Bon suport tècnic; confirmacions lentes.'},
-      {id:'PR-13', nombre:'Rodaments del Vallès S.A. (exemple)', cat:'Rodaments i transmissió', otif:91, calidad:96, pedidos:21, ultimo:'PC-3116', nota:'Ràpid amb equivalències.'},
-      {id:'PR-14', nombre:'Aceros i Mecanitzats Terri S.L. (exemple)', cat:'Acer i mecanitzat', otif:88, calidad:93, pedidos:15, ultimo:'PC-3102', nota:'Fiable.'}
-    ],
-    activity:[{ts:new Date().toISOString(), text:'Demo iniciada amb dades d\'exemple.'}]
-  },
-  views:{}
+  ruta:[
+   {n:"10 · Enginyeria i disseny",c:"ENG",hp:64,hr:66,op:"A. Ferrer",st:"done",nota:"Pla de conjunt rev. C aprovat"},
+   {n:"20 · Mecanitzat CNC bancada",c:"CNC1",hp:88,hr:91,op:"J. Rovira",st:"done",nota:"Dins de tolerància"},
+   {n:"30 · Caldereria i soldadura",c:"CAL",hp:40,hr:44,op:"S. Vidal",st:"done",nota:"NC-41 pintura (tancada amb retraball)"},
+   {n:"40 · Pintura",c:"PIN",hp:24,hr:26,op:"Extern · Pintures Rubí",st:"done",nota:""},
+   {n:"50 · Premuntatge mecànic",c:"MON1",hp:56,hr:58,op:"L. Batlle",st:"done",nota:""},
+   {n:"60 · Muntatge mecànic línia",c:"MON1",hp:72,hr:60,op:"L. Batlle · J. Rovira",st:"cur",nota:"62% — pendents rodatges guiafil"},
+   {n:"70 · Quadre elèctric i cablejat",c:"ELEC",hp:48,hr:0,op:"R. Masip",st:"next",nota:"Bloqueja: PLC PC-2315"},
+   {n:"80 · Automatització: PLC + CTB + receptes",c:"AUT",hp:24,hr:0,op:"A. Ferrer",st:"wait",nota:"Receta client: 9.400 dtex · S 320 / Z 320"},
+   {n:"90 · Proves i qualitat",c:"PROV",hp:16,hr:0,op:"R. Masip",st:"wait",nota:"Marxa en buit 8 h + torsió S/Z"},
+   {n:"100 · Embalatge i expedicció",c:"EMB",hp:16,hr:0,op:"—",st:"wait",nota:"Caixa marítima 12,2 m"}
+  ]},
+ {id:"OF-2642",maq:"CRG300",desc:"Reunidora-retorcedora anell · 48 husos · 2 cares",cli:"Turf Ibèrica S.L.",aplic:"Fil gespa artificial PE 11.000 dtex",fase:4,fases:10,lliur:"20/01/2027",risc:"mitja",riscTxt:"Bancada mecanitzada externa: confirmar setmana 48",prog:34,horesP:388,horesR:122,resp:"J. Rovira",
+  bom:[
+   {art:"Bancada mecanitzada CRG300 (S355JR)",tip:"Mecanitzats Prat (extern)",req:1,stock:0,comprat:1,rebut:0,lot:"Colada pendent",pc:"PC-2327",eta:"28/11",est:"warn"},
+   {art:"Anells i cursores Galan (joc)",tip:"Accessoris originals",req:48,stock:48,comprat:0,rebut:48,lot:"Sèrie AC-1140",pc:"—",eta:"—",est:"ok"},
+   {art:"Motors 11 kW (×2)",tip:"Siemens SIMOTICS",req:2,stock:2,comprat:0,rebut:2,lot:"—",pc:"PC-2328",eta:"Rebut 04/11",est:"ok"},
+   {art:"PLC S7-1200 + Display CTB 7\"",tip:"Siemens + propi",req:1,stock:0,comprat:1,rebut:0,lot:"—",pc:"PC-2315",eta:"21/11",est:"warn"},
+   {art:"Corretges dentades Gates (joc)",tip:"Gates",req:2,stock:2,comprat:0,rebut:2,lot:"—",pc:"PC-2326",eta:"Rebut 06/11",est:"ok"},
+   {art:"Pneumàtica Festo (cilindres, vàlvules)",tip:"Festo",req:1,stock:0,comprat:1,rebut:0,lot:"—",pc:"PC-2331",eta:"Pendent aprovar comanda",est:"risc"}
+  ],
+  ruta:[
+   {n:"10 · Enginyeria i disseny",c:"ENG",hp:72,hr:74,op:"A. Ferrer",st:"done",nota:"Variant 2 cares independents"},
+   {n:"20 · Mecanitzat CNC",c:"CNC1",hp:96,hr:48,op:"J. Rovira",st:"cur",nota:"Plató superior 60%"},
+   {n:"30 · Caldereria i soldadura",c:"CAL",hp:48,hr:0,op:"S. Vidal",st:"next",nota:"Espera bancada externa"},
+   {n:"40 · Pintura",c:"PIN",hp:24,hr:0,op:"Extern",st:"wait",nota:""},
+   {n:"50 · Premuntatge mecànic",c:"MON2",hp:64,hr:0,op:"—",st:"wait",nota:""},
+   {n:"60 · Muntatge línia",c:"MON2",hp:80,hr:0,op:"—",st:"wait",nota:""},
+   {n:"70 · Quadre elèctric",c:"ELEC",hp:40,hr:0,op:"—",st:"wait",nota:""},
+   {n:"80 · Automatització",c:"AUT",hp:24,hr:0,op:"—",st:"wait",nota:""},
+   {n:"90 · Proves i qualitat",c:"PROV",hp:16,hr:0,op:"—",st:"wait",nota:""},
+   {n:"100 · Embalatge i expedicció",c:"EMB",hp:16,hr:0,op:"—",st:"wait",nota:""}
+  ]},
+ {id:"OF-2643",maq:"UPTW550/3",desc:"Up-Twister 2x1 · doble torsió + aro en línia",cli:"Xarxes del Sud S.L.",aplic:"Cordel pesca PES 3 × 6.000 dtex",fase:8,fases:10,lliur:"28/11/2026",risc:"baix",riscTxt:"Proves en curs, dins de termini",prog:86,horesP:296,horesR:284,resp:"R. Masip",
+  bom:[
+   {art:"Conjunt mecànic complet",tip:"Propi",req:1,stock:1,comprat:0,rebut:1,lot:"Traçat per sèrie",pc:"—",eta:"—",est:"ok"},
+   {art:"Display CTB 10\" + PLC S7-1200",tip:"Propi + Siemens",req:1,stock:1,comprat:0,rebut:1,lot:"CTB-10-0179",pc:"—",eta:"—",est:"ok"},
+   {art:"Detectors fil trencat amb unió de husos",tip:"Electrònica",req:96,stock:96,comprat:0,rebut:96,lot:"Lote DF-3308",pc:"—",eta:"—",est:"ok"}
+  ],
+  ruta:[
+   {n:"10–70 · Enginyeria a muntatge",c:"—",hp:236,hr:240,op:"Equip MON1",st:"done",nota:"Tancat 07/11"},
+   {n:"80 · Automatització: receptes S/Z",c:"AUT",hp:28,hr:30,op:"A. Ferrer",st:"done",nota:"12 receptes carregades"},
+   {n:"90 · Proves i qualitat",c:"PROV",hp:20,hr:14,op:"R. Masip",st:"cur",nota:"Marxa en buit superada 6/8 h · prova de torsió pendent"},
+   {n:"100 · Desmuntatge parcial i embalatge",c:"EMB",hp:12,hr:0,op:"—",st:"wait",nota:"Caixa i film a estoc"}
+  ]},
+ {id:"OF-2644",maq:"RTA-180",desc:"Retorcedora d'aletes · fils gruixuts",cli:"Amarres Atlàntic S.A.",aplic:"HMPE 60.000 dtex · amarratge",fase:2,fases:10,lliur:"15/02/2027",risc:"alt",riscTxt:"Desviació +18 h mecanitzat: recalcular data",prog:18,horesP:420,horesR:96,resp:"J. Rovira",
+  bom:[
+   {art:"Bancada i bressol (fonduï + mecanitzat)",tip:"Fonició externa + CNC2",req:1,stock:0,comprat:1,rebut:1,lot:"Peça fosa F-2290 rebuda",pc:"PC-2320",eta:"Rebut 10/11",est:"ok"},
+   {art:"Aletes retorsió Ø180 (joc de 36)",tip:"Fabricació pròpia",req:36,stock:12,comprat:0,rebut:12,lot:"En curs CNC2",pc:"—",eta:"—",est:"warn"},
+   {art:"Motor 22 kW + variador",tip:"Siemens",req:2,stock:1,comprat:1,rebut:1,lot:"—",pc:"PC-2328",eta:"2n motor 02/12",est:"ok"},
+   {art:"Rodaments SKF 6314 (×24)",tip:"SKF",req:24,stock:0,comprat:24,rebut:12,lot:"—",pc:"PC-2318",eta:"Resta 26/11",est:"warn"}
+  ],
+  ruta:[
+   {n:"10 · Enginyeria",c:"ENG",hp:80,hr:80,op:"A. Ferrer",st:"done",nota:""},
+   {n:"20 · Mecanitzat CNC",c:"CNC2",hp:120,hr:96,op:"J. Rovira",st:"cur",nota:"+18 h desviació: aletes Ø180 exigent"},
+   {n:"30 · Caldereria",c:"CAL",hp:56,hr:0,op:"—",st:"next",nota:""},
+   {n:"40 · Pintura",c:"PIN",hp:28,hr:0,op:"—",st:"wait",nota:""},
+   {n:"50–60 · Muntatge",c:"MON2",hp:104,hr:0,op:"—",st:"wait",nota:""},
+   {n:"70–80 · Elèctric + automatització",c:"ELEC/AUT",hp:56,hr:0,op:"—",st:"wait",nota:""},
+   {n:"90 · Proves: marxa en buit + vibració",c:"PROV",hp:24,hr:0,op:"—",st:"wait",nota:""},
+   {n:"100 · Embalatge",c:"EMB",hp:12,hr:0,op:"—",st:"wait",nota:""}
+  ]},
+ {id:"OF-2645",maq:"BBCA500D",desc:"Bobinadora de precisió · cursada 500",cli:"Filatures Reus S.A.",aplic:"Fil tècnic PES · bobines 12 kg",fase:1,fases:10,lliur:"10/03/2027",risc:"mitja",riscTxt:"Enginyeria: definir variant cursada amb client",prog:9,horesP:340,horesR:28,resp:"A. Ferrer",
+  bom:[
+   {art:"Conjunt bobinatge precisió",tip:"Propi",req:1,stock:0,comprat:0,rebut:0,lot:"—",pc:"—",eta:"—",est:"warn"},
+   {art:"Guiats ceràmics + tensors (joc)",tip:"Diversos",req:24,stock:24,comprat:0,rebut:24,lot:"—",pc:"—",eta:"—",est:"ok"}
+  ],
+  ruta:[
+   {n:"10 · Enginyeria i disseny",c:"ENG",hp:96,hr:28,op:"A. Ferrer",st:"cur",nota:"Reunió variant cursada: 25/11"},
+   {n:"20–100 · Resta de fases",c:"—",hp:244,hr:0,op:"—",st:"wait",nota:""}
+  ]},
+ {id:"OF-2638",maq:"PRX250/12",desc:"Reunidora-retorcedora d'aro · 132 husos",cli:"Hidràulica Levante S.L.",aplic:"Fil manguera automoció PET 4.700 dtex",fase:9,fases:10,lliur:"21/11/2026",risc:"baix",riscTxt:"Embalatge i reserva marítima en curs",prog:94,horesP:352,horesR:344,resp:"M. Camps",
+  bom:[{art:"Conjunt complet traçat",tip:"Propi",req:1,stock:1,comprat:0,rebut:1,lot:"Dossier de qualitat en curs",pc:"—",eta:"—",est:"ok"}],
+  ruta:[
+   {n:"10–90 · Enginyeria a proves",c:"—",hp:328,hr:332,op:"Equip complet",st:"done",nota:"Proves superades 14/11 · informe qualitat OK"},
+   {n:"100 · Embalatge i expedicció",c:"EMB",hp:24,hr:16,op:"S. Vidal",st:"cur",nota:"Reserva marítima PC-2334 pendent confirmar"}
+  ]},
+ {id:"OF-2639",maq:"UNI 1X1",desc:"Ampliació modular · 12 posicions independents",cli:"Cordeles Tècniques València S.A.",aplic:"Ampliació línia existent · 9.400 dtex",fase:5,fases:10,lliur:"05/01/2027",risc:"mitja",riscTxt:"Husos: espera recepció parcial PC-2318",prog:41,horesP:188,horesR:82,resp:"L. Batlle",
+  bom:[
+   {art:"Mòduls UNI 1X1 (×12)",tip:"Propi",req:12,stock:9,comprat:0,rebut:9,lot:"—",pc:"—",eta:"—",est:"warn"},
+   {art:"Rodaments SKF 6210-2Z (×24)",tip:"SKF",req:24,stock:0,comprat:24,rebut:12,lot:"—",pc:"PC-2318",eta:"Parcial: resta 26/11",est:"warn"}
+  ],
+  ruta:[
+   {n:"10–40 · Enginyeria a pintura",c:"—",hp:96,hr:98,op:"—",st:"done",nota:""},
+   {n:"50 · Premuntatge mòduls",c:"MON2",hp:48,hr:30,op:"L. Batlle",st:"cur",nota:"9/12 mòduls · espera rodaments"},
+   {n:"60–100 · Resta",c:"—",hp:44,hr:0,op:"—",st:"wait",nota:""}
+  ]},
+ {id:"OF-2646",maq:"BBJAP",desc:"Bobinadora automàtica bobines petites",cli:"Tèxtils Osona S.L.",aplic:"Bobines poques metres · mostraris",fase:1,fases:10,lliur:"30/03/2027",risc:"baix",riscTxt:"Enginyeria inicial",prog:4,horesP:210,horesR:8,resp:"A. Ferrer",
+  bom:[{art:"Conjunt BBJ + curs de precisió",tip:"Propi",req:1,stock:0,comprat:0,rebut:0,lot:"—",pc:"—",eta:"—",est:"warn"}],
+  ruta:[{n:"10 · Enginyeria",c:"ENG",hp:64,hr:8,op:"A. Ferrer",st:"cur",nota:""},{n:"20–100 · Resta",c:"—",hp:146,hr:0,op:"—",st:"wait",nota:""}]},
+ {id:"OF-2640",maq:"CRB225",desc:"Reunidora-retorcedora · 2 cares col·lectives",cli:"Nets & Ropes Maroc SARL",aplic:"Xarxes PE 26.600 dtex",fase:10,fases:10,lliur:"07/11/2026",risc:"ok",riscTxt:"Entregada · instal·lació a destí setmana 47",prog:100,horesP:305,horesR:312,resp:"M. Camps",
+  bom:[{art:"Conjunt complet",tip:"Propi",req:1,stock:1,comprat:0,rebut:1,lot:"Dossier tancat",pc:"—",eta:"—",est:"ok"}],
+  ruta:[{n:"10–100 · Cicle complet",c:"—",hp:305,hr:312,op:"—",st:"done",nota:"Marxa en buit 8 h OK · torsió S/Z OK"}]},
+ {id:"OF-2647",maq:"EPCA",desc:"Bobinadora de precisió (estoc)",cli:"Per a estoc",aplic:"Reposició catàleg EN STOCK",fase:3,fases:10,lliur:"15/01/2027",risc:"baix",riscTxt:"Dins de pla",prog:26,horesP:190,horesR:44,resp:"S. Vidal",
+  bom:[{art:"Conjunt EPCA",tip:"Propi",req:1,stock:0,comprat:0,rebut:0,lot:"—",pc:"—",eta:"—",est:"warn"}],
+  ruta:[
+   {n:"10–20 · Enginyeria i mecanitzat",c:"—",hp:88,hr:88,op:"—",st:"done",nota:""},
+   {n:"30 · Caldereria",c:"CAL",hp:40,hr:34,op:"S. Vidal",st:"cur",nota:""},
+   {n:"40–100 · Resta",c:"—",hp:62,hr:0,op:"—",st:"wait",nota:""}
+  ]}
+],
+
+pcs:[
+ {id:"PC-2315",prov:"Distribucions Elèctriques Vallès S.L.",items:"PLC S7-1200 ×4 · I/O · fonts",imp:"8.940 €",sol:"28/10/2026",conf:"15/11/2026",rev:"21/11/2026",est:"retard",of:"OF-2641, OF-2642",
+  lines:[{a:"PLC SIMATIC S7-1200 CPU 1215C",q:4,u:"ud",p:"1.485 €",eta:"21/11"},{a:"Mòduls I/O SM1223",q:8,u:"ud",p:"168 €",eta:"21/11"},{a:"Fonts SITOP 24 V 10 A",q:4,u:"ud",p:"142 €",eta:"21/11"}],
+  hist:"30/10 confirmada per al 15/11 · 12/11 el proveïdor mou a 21/11 per falta de CPU · 13/11 seguiment preparat (AP-87)"},
+ {id:"PC-2318",prov:"Rodaments i Transmissions BCN S.A.",items:"Rodaments SKF 6210-2Z ×48 · 6314 ×24",imp:"3.312 €",sol:"30/10/2026",conf:"12/11/2026",rev:"Parcial: 36/72 rebut · resta 26/11",est:"parcial",of:"OF-2641, OF-2639, OF-2644",
+  lines:[{a:"SKF 6210-2Z",q:48,u:"ud",p:"38 €",eta:"36 rebut 12/11 · 12 pendent 26/11"},{a:"SKF 6314",q:24,u:"ud",p:"62 €",eta:"12 rebut 12/11 · 12 pendent 26/11"}],
+  hist:"12/11 recepció parcial 36 ud, inspecció OK · proposta d'alliberar husos OF-2639 (AP-91)"},
+ {id:"PC-2320",prov:"Aceros del Besòs S.L.",items:"Xapa S355JR 12–25 mm · colada AC-2619",imp:"6.780 €",sol:"15/10/2026",conf:"28/10/2026",rev:"Rebut 28/10",est:"rebuda",of:"OF-2641, OF-2642",
+  lines:[{a:"Xapa S355JR 12 mm",q:2200,u:"kg",p:"1,12 €/kg",eta:"Rebut"},{a:"Xapa S355JR 25 mm",q:3900,u:"kg",p:"1,10 €/kg",eta:"Rebut"}],
+  hist:"28/10 rebut amb certificat 3.1 colada AC-2619 · inspecció OK"},
+ {id:"PC-2322",prov:"Distribucions Elèctriques Vallès S.L.",items:"Components quadre Schneider (OF-2641)",imp:"2.410 €",sol:"08/11/2026",conf:"—",rev:"Sense confirmar",est:"pendent-conf",of:"OF-2641",
+  lines:[{a:"Guardamotors GV2 + contactors LC1D",q:1,u:"joc",p:"1.180 €",eta:"25/11 proposada"},{a:"Material borna i canal",q:1,u:"joc",p:"640 €",eta:"25/11 proposada"},{a:"Etiquetat i borna marxa",q:1,u:"joc",p:"590 €",eta:"25/11 proposada"}],
+  hist:"08/11 enviada · 14/11 encara sense confirmació de data"},
+ {id:"PC-2325",prov:"Electrònica de Precisió Martorell S.L.",items:"Detectors fil trencat ×208",imp:"4.576 €",sol:"22/10/2026",conf:"30/10/2026",rev:"Rebut 30/10",est:"rebuda",of:"OF-2641, OF-2643",
+  lines:[{a:"Detector fil trencat amb unió husos",q:208,u:"ud",p:"22 €",eta:"Rebut"}],
+  hist:"30/10 rebut, inspecció OK · lote DF-3308"},
+ {id:"PC-2326",prov:"Rodaments i Transmissions BCN S.A.",items:"Corretges dentades Gates (jocs CRG300)",imp:"1.240 €",sol:"28/10/2026",conf:"06/11/2026",rev:"Rebut 06/11",est:"rebuda",of:"OF-2642",
+  lines:[{a:"Corretja dentada Gates Poly Chain (joc)",q:2,u:"joc",p:"620 €",eta:"Rebut"}],
+  hist:"06/11 rebut, inspecció OK"},
+ {id:"PC-2327",prov:"Mecanitzats Prat S.L.",items:"Bancada CRG300 mecanitzada",imp:"11.900 €",sol:"20/10/2026",conf:"28/11/2026",rev:"28/11/2026",est:"en-curs",of:"OF-2642",
+  lines:[{a:"Bancada CRG300 mecanitzada segons pla rev. C",q:1,u:"ud",p:"11.900 €",eta:"28/11"}],
+  hist:"05/11 mecanitzat en curs (60%) · recordar confirmació setmana 48"},
+ {id:"PC-2328",prov:"Distribucions Elèctriques Vallès S.L.",items:"Motors SIMOTICS + inversors EtherCat",imp:"21.360 €",sol:"10/10/2026",conf:"04/11/2026",rev:"Rebut 04/11 · 2n motor RTA 02/12",est:"parcial",of:"OF-2641, OF-2642, OF-2644",
+  lines:[{a:"Motor SIMOTICS 1LE1503 15 kW",q:6,u:"ud",p:"1.940 €",eta:"Rebut 04/11"},{a:"Motor 22 kW RTA",q:2,u:"ud",p:"2.610 €",eta:"1 rebut · 1 pendent 02/12"},{a:"Inversors EtherCat SINAMICS",q:112,u:"ud",p:"34 €",eta:"Rebut 04/11"}],
+  hist:"04/11 rebut principal · 22 kW (2a ud) previst 02/12"},
+ {id:"PC-2330",prov:"Electrònica de Precisió Martorell S.L.",items:"Cablejat i canalització OF-2641",imp:"1.890 €",sol:"11/11/2026",conf:"24/11/2026",rev:"24/11/2026",est:"en-curs",of:"OF-2641",
+  lines:[{a:"Manguera apantallada + canalització (joc)",q:1,u:"joc",p:"1.890 €",eta:"24/11"}],
+  hist:"12/11 confirmada"},
+ {id:"PC-2331",prov:"Pneumàtica Industrial Catalana S.L.",items:"Cilindres i vàlvules Festo (CRG300)",imp:"4.820 €",sol:"14/11/2026",conf:"—",rev:"Pendent aprovar",est:"pendent-ap",of:"OF-2642",
+  lines:[{a:"Cilindre Festo DSBC-63 (×4) + vàlvules",q:1,u:"joc",p:"3.410 €",eta:"3 setmanes des d'aprovació"},{a:"Racords i tubs PU",q:1,u:"joc",p:"1.410 €",eta:"ídem"}],
+  hist:"14/11 pressupost rebut · pendent aprovació (AP-90) — si s'aprova aquesta setmana, arriba per muntatge"},
+ {id:"PC-2333",prov:"Embalatges Industrials Tarraco S.L.",items:"Caixes marítimes fusta (OF-2638)",imp:"2.150 €",sol:"06/11/2026",conf:"18/11/2026",rev:"18/11/2026",est:"en-curs",of:"OF-2638",
+  lines:[{a:"Caixa marítima 12,2 m + bases",q:2,u:"ud",p:"1.075 €",eta:"18/11"}],
+  hist:"10/11 confirmada"},
+ {id:"PC-2334",prov:"Logística Tarraco S.L.",items:"Transport marítim BCN → Casablanca (OF-2638)",imp:"3.400 €",sol:"12/11/2026",conf:"—",rev:"Reserva pendent",est:"pendent-conf",of:"OF-2638",
+  lines:[{a:"Contenidor 40' OT + assegurança",q:1,u:"servei",p:"3.400 €",eta:"Sortida setmana 48"}],
+  hist:"12/11 cotització · pendent confirmar reserva (AP-94)"}
+],
+
+stock:[
+ {ref:"HU-45-PRX",nom:"Hus Galan Ø45 (PRX)",fam:"Fabricació pròpia",st:64,min:40,cob:"38 d",ub:"B-02-01",est:"ok",mov:"+64 fabricació pròpia 08/11"},
+ {ref:"RB-6210-2Z",nom:"Rodament SKF 6210-2Z",fam:"Rodaments",st:12,min:24,cob:"9 d",ub:"A-01-03",est:"baix",mov:"−36 OF-2641/2639 · +12 previst 26/11"},
+ {ref:"RB-6314",nom:"Rodament SKF 6314",fam:"Rodaments",st:12,min:12,cob:"22 d",ub:"A-01-04",est:"ok",mov:"−12 OF-2644"},
+ {ref:"MT-1LE1503",nom:"Motor SIMOTICS 1LE1503 15 kW",fam:"Motors",st:4,min:2,cob:"45 d",ub:"A-03-01",est:"ok",mov:"+6 PC-2328 · −2 OF-2642"},
+ {ref:"MT-22K-RTA",nom:"Motor 22 kW (RTA)",fam:"Motors",st:1,min:1,cob:"limit",ub:"A-03-02",est:"baix",mov:"2a ud prevista 02/12"},
+ {ref:"PLC-S7-1215",nom:"PLC SIMATIC S7-1200 CPU 1215C",fam:"Automatització",st:0,min:2,cob:"0 d",ub:"A-04-01",est:"sota-min",mov:"Tot reservat OF-2641/2642 · PC-2315 retardada"},
+ {ref:"CTB-10",nom:"Display CTB 10\" (subconjunt propi)",fam:"Electrònica pròpia",st:3,min:2,cob:"61 d",ub:"B-05-02",est:"ok",mov:"+1 muntatge intern 06/11"},
+ {ref:"DF-3308",nom:"Detector fil trencat c/unió husos",fam:"Electrònica",st:208,min:96,cob:"72 d",ub:"A-04-03",est:"ok",mov:"+208 PC-2325"},
+ {ref:"INV-ECAT",nom:"Inversor EtherCat SINAMICS",fam:"Automatització",st:112,min:48,cob:"64 d",ub:"A-04-02",est:"ok",mov:"+112 PC-2328"},
+ {ref:"XG-S355-12",nom:"Xapa S355JR 12 mm",fam:"Acer",st:2200,min:1500,cob:"41 d",ub:"PATIO-1",est:"ok",mov:"Colada AC-2619 · cert. 3.1"},
+ {ref:"XG-S355-25",nom:"Xapa S355JR 25 mm",fam:"Acer",st:3900,min:2000,cob:"55 d",ub:"PATIO-1",est:"ok",mov:"Colada AC-2619 · cert. 3.1"},
+ {ref:"BOB-BOT-300",nom:"Bobina botella 300 (accessori original)",fam:"Accessoris Galan",st:240,min:120,cob:"58 d",ub:"B-03-02",est:"ok",mov:""},
+ {ref:"TUB-250",nom:"Tub 250 mm (accessori original)",fam:"Accessoris Galan",st:180,min:96,cob:"44 d",ub:"B-03-03",est:"ok",mov:""},
+ {ref:"CUR-PRX375",nom:"Cursor PRX375 (accessori original)",fam:"Accessoris Galan",st:520,min:224,cob:"66 d",ub:"B-03-04",est:"ok",mov:""},
+ {ref:"GUA-CER-12",nom:"Guiat ceràmic + tensor",fam:"Guiatge fil",st:24,min:24,cob:"limit",ub:"A-02-05",est:"baix",mov:"Tot reservat OF-2645"},
+ {ref:"COR-GT-PC14",nom:"Corretja dentada Gates Poly Chain",fam:"Transmissió",st:2,min:1,cob:"52 d",ub:"A-02-01",est:"ok",mov:"+2 PC-2326"},
+ {ref:"EMB-1220",nom:"Caixa marítima 12,2 m",fam:"Embalatge",st:0,min:1,cob:"—",ub:"—",est:"sota-min",mov:"PC-2333 prevista 18/11"},
+ {ref:"PIN-RAL7035",nom:"Pintura RAL 7035 tèxtil",fam:"Pintura",st:45,min:30,cob:"39 d",ub:"PATIO-2",est:"ok",mov:"Litre, kg"}
+],
+
+suppliers:[
+ {id:"S1",nom:"Distribucions Elèctriques Vallès S.L.",cat:"Automatització i motors (Siemens)",otif:82,lead:"21 d",inc:3,compres:"38.710 €",trend:[9,9,8,8,9,8,7,8,9,6,7,5],
+  note:"Retard actual del PLC (PC-2315) mou OF-2641 i OF-2642. Històric bo fins al T4.",contact:"comercial@devalles.example · 93 000 00 01"},
+ {id:"S2",nom:"Rodaments i Transmissions BCN S.A.",cat:"Rodaments SKF · corretges Gates",otif:91,lead:"14 d",inc:1,compres:"12.980 €",trend:[8,9,9,10,9,9,8,9,9,9,9,8],
+  note:"Fiables. Recepcions parcials ben comunicades.",contact:"vendes@rtbcn.example · 93 000 00 02"},
+ {id:"S3",nom:"Aceros del Besòs S.L.",cat:"Xapa i perforat S355JR",otif:95,lead:"12 d",inc:0,compres:"21.400 €",trend:[9,10,9,9,10,9,9,10,9,9,10,9],
+  note:"Sempre amb certificat 3.1 de colada. Zero incidències 12 m.",contact:"aceros@besos.example · 93 000 00 03"},
+ {id:"S4",nom:"Mecanitzats Prat S.L.",cat:"Mecanitzat extern de bancades",otif:78,lead:"35 d",inc:2,compres:"34.600 €",trend:[7,8,7,8,7,8,7,8,8,7,8,8],
+  note:"Qualitat bona, terminis justos. Convé pedir amb marge i confirmar setmanalment.",contact:"planificacio@mecprat.example · 93 000 00 04"},
+ {id:"S5",nom:"Electrònica de Precisió Martorell S.L.",cat:"Detectors i cablejat",otif:97,lead:"9 d",inc:0,compres:"9.320 €",trend:[10,9,10,10,9,10,10,9,10,10,9,10],
+  note:"El millor del quadre. Candidat a acord marc detectors.",contact:"epm@martorell.example · 93 000 00 05"},
+ {id:"S6",nom:"Pneumàtica Industrial Catalana S.L.",cat:"Festo",otif:88,lead:"18 d",inc:1,compres:"6.150 €",trend:[8,9,8,9,9,8,9,9,8,9,8,9],
+  note:"PC-2331 pendent d'aprovar: si entra aquesta setmana, arriba per muntatge CRG300.",contact:"pic@catalana.example · 93 000 00 06"},
+ {id:"S7",nom:"Embalatges Industrials Tarraco S.L.",cat:"Caixes marítimes fusta",otif:93,lead:"10 d",inc:0,compres:"4.300 €",trend:[9,9,9,10,9,9,9,10,9,9,9,9],
+  note:"",contact:"eit@tarraco.example · 93 000 00 07"},
+ {id:"S8",nom:"Logística Tarraco S.L.",cat:"Transport terrestre i marítim",otif:90,lead:"—",inc:1,compres:"11.200 €",trend:[9,9,8,9,9,9,9,8,9,9,9,9],
+  note:"Reserva marítima OF-2638 pendent de confirmar.",contact:"operacions@logtarraco.example · 93 000 00 08"}
+],
+
+approvals:[
+ {id:"AP-87",tip:"compres",sev:"red",t:"Enviar seguiment a Vallès pel PLC retardat",ctx:"PC-2315 · PLC S7-1200 · confirmat 15/11 → mogut a 21/11 sense avisar",impact:"OF-2641: quadre elèctric i proves es mouen +6 d si no s'accelera. OF-2642 també depèn d'aquesta comanda.",
+  who:"Glòria (compres)",mail:{to:"comercial@devalles.example",sub:"PC-2315 · PLC S7-1200 — necessitem acció per al 15/11",body:"Bon dia,\n\nLa comanda PC-2315 (4 × CPU 1215C + I/O) estava confirmada per al 15/11 i ens l'heu moguda al 21/11 sense avisar. Aquest PLC alimenta dues màquines en curs (PRX375/4 i CRG300) i el retard mou proves i lliurament.\n\nUs demanem:\n1. Enviament parcial de 2 CPU aquesta setmana, o\n2. Alternativa en estoc equivalent (S7-1200 F o CPU 1214C) que puguem validar.\n\nNecessitem resposta avui abans de les 17:00 per replanificar producció.\n\nGràcies,\nGlòria Sánchez · Compres · Galan"}},
+ {id:"AP-88",tip:"produccio",sev:"red",t:"Replanificar OF-2641: proves +6 dies i avisar client",ctx:"Si el PLC no arriba abans del 15/11, la fase 70 (quadre) no pot arrencar i les proves del 05/12 es mouen al 11/12.",impact:"Lliurament OF-2641 passa de 12/12 a 18/12. Client: Cordeles Tècniques València. Alternativa: muntar quadre amb PLC de reserva (redueix a +2 d).",
+  who:"Responsable de producció",mail:null},
+ {id:"AP-89",tip:"mixta",sev:"amb",t:"Validar substitució: SKF 6214-2RS esgotat → equivalent FAG",ctx:"L'equivalent FAG 6214-2RSR compleix mateixes dimensions i càrrega. Estoc immediat a Rodaments i Transmissions BCN.",impact:"Evita aturar premuntatge OF-2639 4 dies. Diferència de preu: +0,80 €/ud (24 ud). Qualitat ja ho ha revisat: equivalència dimensional OK.",
+  who:"Glòria + producció",mail:null},
+ {id:"AP-90",tip:"compres",sev:"amb",t:"Aprovar comanda PC-2331 (Festo, 4.820 €)",ctx:"Cilindres i vàlvules per al CRG300 (OF-2642). Pressupost rebut 14/11, dins de preu habitual.",impact:"Si s'aprova aquesta setmana: recepció setmana 50, a temps per muntatge. Si s'endarrereix una setmana, el muntatge ja queda just.",
+  who:"Glòria (compres)",mail:null},
+ {id:"AP-91",tip:"mixta",sev:"amb",t:"Acceptar recepció parcial PC-2318 i alliberar 60% dels husos d'OF-2639",ctx:"36/72 rodaments rebuts i inspeccionats OK. Amb 36 es poden alliberar 9 dels 12 mòduls UNI 1X1.",impact:"El premuntatge avança 1 setmana malgrat la recepció parcial. Resta arriba 26/11.",
+  who:"Glòria + producció",mail:null},
+ {id:"AP-92",tip:"qualitat",sev:"amb",t:"Tancar NC-41 (pintura bancada PRX375) amb retraball intern de 12 h",ctx:"Defecte d'adherència en 2 zones de la bancada d'OF-2641. Pintures Rubí assumeix el retraball; cal decidir si es fa internament per no moure la fase.",impact:"Retraball intern: +12 h PIN, zero retard net (hi ha marge setmana 47). Si ho fa el proveïdor: +4 dies.",
+  who:"Qualitat + producció",mail:null},
+ {id:"AP-93",tip:"compres",sev:"gry",t:"Comanda urgent de detectors de fil (sobreestoc controlat)",ctx:"El lote DF-3308 cobreix 72 dies, però els dos projectes grans del T1 en consumiran el doble del previst.",impact:"Comanda de 96 ud (2.112 €) manté cobertura fins a maig sense risc de ruptura.",
+  who:"Glòria (compres)",mail:null},
+ {id:"AP-94",tip:"logistica",sev:"amb",t:"Confirmar reserva marítima OF-2638 (sortida setmana 48)",ctx:"Contenidor 40' OT BCN → Casablanca per al PRX250/12. Cotització Logística Tarraco: 3.400 € amb assegurança.",impact:"Si es confirma avui, l'embalatge de setmana 47 enllaça amb la sortida. Sense reserva, el lliurament 21/11 queda en risc.",
+  who:"Glòria + logística",mail:{to:"operacions@logtarraco.example",sub:"Reserva 40' OT BCN–Casablanca · setmana 48",body:"Bon dia,\n\nConfirmem la reserva del contenidor 40' Open Top per a la setmana 48 segons la vostra cotització (3.400 € amb assegurança).\n\nCàrrega: maquinària embalada en 2 caixes de fusta (12,2 m total). Disponible a molls a partir de dimecres.\n\nConfirmeu-nos data de tall de documentació i instruccions d'etiquetat.\n\nGràcies,\nGalan · Logística"}},
+ {id:"AP-95",tip:"produccio",sev:"gry",t:"Registrar desviació +18 h mecanitzat OF-2644 i recalcular data",ctx:"Aletes Ø180 (HMPE 60.000 dtex) han resultat més exigents del previst al CNC2.",impact:"Amb la desviació registrada, el lliurament passa de 15/02 a 22/02. Client encara no cal avisar-lo (marge contractual de 2 setmanes).",
+  who:"Responsable de producció",mail:null}
+],
+
+capacity:[
+ {c:"ENG · Enginyeria",w:[62,58,71,66,60,55],op:"2 persones"},
+ {c:"CNC1 · Mecanitzat",w:[104,118,96,88,72,60],op:"2 torns"},
+ {c:"CNC2 · Mecanitzat",w:[92,101,110,84,66,58],op:"1 centre"},
+ {c:"CAL · Caldereria",w:[55,48,62,58,44,40],op:"2 persones"},
+ {c:"PIN · Pintura",w:[38,42,36,40,30,26],op:"extern + cabina"},
+ {c:"MON1 · Muntatge",w:[86,92,88,90,76,64],op:"3 persones"},
+ {c:"MON2 · Muntatge",w:[70,78,82,74,60,52],op:"2 persones"},
+ {c:"ELEC · Elèctric",w:[44,66,72,58,40,32],op:"1 persona"},
+ {c:"AUT · Automatització",w:[38,52,48,44,36,30],op:"1 persona"},
+ {c:"PROV · Proves",w:[52,40,58,62,44,38],op:"pista proves"},
+ {c:"EMB · Embalatge",w:[30,44,28,36,24,20],op:"1 persona"}
+],
+weeks:["S47","S48","S49","S50","S51","S52"],
+
+quality:{
+ insp:[
+  {id:"INS-118",pc:"PC-2318",qu:"36 rodaments SKF",res:"OK",d:"12/11 · dimensions i duresa conformes"},
+  {id:"INS-119",pc:"PC-2325",qu:"208 detectors fil",res:"OK",d:"30/10 · test funcional 100%"},
+  {id:"INS-121",pc:"PC-2320",qu:"Xapa S355JR colada AC-2619",res:"OK amb cert. 3.1",d:"28/10 · certificat verificat i arxivat"}
+ ],
+ ncs:[
+  {id:"NC-41",of:"OF-2641",t:"Adherència pintura bancada PRX375 (2 zones)",st:"Pendent decisió",d:"Retraball intern 12 h proposat (AP-92)"},
+  {id:"NC-38",of:"OF-2640",t:"Cursor marcat en prova de torsió",st:"Tancada 06/11",d:"Substituït · client informat"}
+ ],
+ proves:[
+  {id:"PR-2643",of:"OF-2643",maq:"UPTW550/3",items:[
+   {t:"Marxa en buit 8 h sense alarma",done:true},
+   {t:"RPM husos estable a consigna (±0,5%)",done:true},
+   {t:"Prova de torsió S/Z amb fil client (PES 3×6.000)",done:false},
+   {t:"Detectors de fil trencat: resposta i unió de husos",done:true},
+   {t:"Comptador de metres individual i col·lectiu",done:true},
+   {t:"Exportació de dades PLC → ERP (taula SQL)",done:true},
+   {t:"Receptes: desar i recuperar 3 receptes client",done:false},
+   {t:"Informe final de qualitat i dossier",done:false}
+  ]}
+ ]
+},
+
+informes:{
+ gast:[["Vallès (Siemens)",38710],["Mecanitzats Prat",34600],["Aceros Besòs",21400],["Rodaments BCN",12980],["Logística Tarraco",11200],["Electrònica Martorell",9320],["Pneumàtica Catalana",6150],["Embalatges Tarraco",4300]],
+ horesFase:[["Enginyeria",392],["Mecanitzat",812],["Caldereria",264],["Pintura",118],["Muntatge",918],["Elèctric",206],["Automatització",148],["Proves",172],["Embalatge",96]],
+ mes:[["jul",2],["ago",1],["set",2],["oct",3],["nov",2]]
+},
+
+activity:[
+ {d:"avui 09:12",t:"Recepció parcial PC-2318 inspeccionada: 36 rodaments OK",by:"Qualitat"},
+ {d:"avui 08:47",t:"OF-2641 · muntatge línia 62%: pendents rodatges guiafil",by:"L. Batlle"},
+ {d:"ahir 17:20",t:"PC-2315: Vallès mou el PLC a 21/11 sense avisar — seguiment preparat",by:"Automio"},
+ {d:"ahir 16:05",t:"OF-2643 · marxa en buit 6/8 h superada sense alarma",by:"R. Masip"},
+ {d:"ahir 11:30",t:"Pressupost Festo rebut: 4.820 €, dins de preu habitual",by:"Automio"},
+ {d:"13/11 15:44",t:"NC-41 oberta: adherència pintura bancada PRX375",by:"Qualitat"},
+ {d:"13/11 09:02",t:"OF-2644 · desviació +18 h CNC2 detectada a l'imputació",by:"J. Rovira"},
+ {d:"12/11 18:10",t:"Cotització transport marítim OF-2638: 3.400 €",by:"Logística Tarraco"},
+ {d:"12/11 10:26",t:"Recepció parcial PC-2318: 36/72 rodaments",by:"Magatzem"},
+ {d:"10/11 12:00",t:"Peça fosa F-2290 (RTA-180) rebuda i inspeccionada",by:"Qualitat"},
+ {d:"08/11 16:40",t:"64 husos Ø45 fabricats i traçats (sèrie HU-2511)",by:"Producció"},
+ {d:"07/11 09:15",t:"OF-2640 (CRB225) entregada — dossier de qualitat tancat",by:"M. Camps"}
+]
 };
+</script>
+<script>
+const $=s=>document.querySelector(s);
+const IC={dash:'<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',check:'<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>',factory:'<path d="M2 20h20M4 20V8l6 4V8l6 4V4h4v16"/>',gauge:'<path d="M12 15l4-6"/><path d="M4 15a8 8 0 1 1 16 0"/>',wrench:'<path d="M14.7 6.3a4.5 4.5 0 0 0-6 6L3 18l3 3 5.7-5.7a4.5 4.5 0 0 0 6-6L14 13l-3-3 3.7-3.7z"/>',shield:'<path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z"/><path d="m9 12 2 2 4-4"/>',cart:'<circle cx="9" cy="21" r="1.6"/><circle cx="19" cy="21" r="1.6"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.7a2 2 0 0 0 2-1.6L22 7H6"/>',file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/>',box:'<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',truck:'<rect x="1" y="4" width="14" height="11" rx="1"/><path d="M15 8h4l3 3v4h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="18" cy="18" r="1.8"/>',chart:'<path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>'};
+const icon=n=>`<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${IC[n]||IC.dash}</svg>`;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const TITLES={tauler:"Tauler",aprovacions:"Aprovacions",produccio:"Ordres de fabricació",capacitat:"Capacitat i centres de treball",taller:"Seguiment de taller",qualitat:"Qualitat i proves",compres:"Comandes de compra",solicituds:"Sol·licituds de compra",estoc:"Estoc i articles",proveidors:"Proveïdors",informes:"Informes",activitat:"Activitat"};
+const OF=id=>D.ofs.find(o=>o.id===id), PC=id=>D.pcs.find(p=>p.id===id), AP=id=>D.approvals.find(a=>a.id===id), SUP=id=>D.suppliers.find(s=>s.id===id);
+const estTag=e=>({ok:'<span class="tag t-grn">OK</span>',warn:'<span class="tag t-amb">Atenció</span>',risc:'<span class="tag t-red">Risc</span>',baix:'<span class="tag t-amb">Estoc baix</span>','sota-min':'<span class="tag t-red">Sota mínim</span>',limit:'<span class="tag t-amb">Just</span>'}[e]||e);
+const riscTag=r=>({alt:'<span class="tag t-red">Risc alt</span>',mitja:'<span class="tag t-amb">Risc mitjà</span>',baix:'<span class="tag t-grn">Risc baix</span>',ok:'<span class="tag t-grn">Entregada</span>'}[r]);
+const pcTag=e=>({retard:'<span class="tag t-red">Retard</span>',parcial:'<span class="tag t-amb">Recepció parcial</span>',rebuda:'<span class="tag t-grn">Rebuda</span>','en-curs':'<span class="tag t-nvy">En curs</span>','pendent-conf':'<span class="tag t-amb">Pendent confirmació</span>','pendent-ap':'<span class="tag t-red">Pendent aprovar</span>'}[e]||e);
+const faseSt=s=>({done:'Feta',cur:'En curs',next:'Següent',wait:'Pendent',blocked:'Bloquejada'}[s]);
+function bar(v,mx,cls){const p=Math.min(100,Math.round(v/mx*100));return `<div class="bar ${cls||''}"><i style="width:${p}%"></i></div>`}
+function spark(a){const mx=Math.max(...a);return `<div class="spark">${a.map(v=>`<i style="height:${Math.round(v/mx*100)}%" class="${v===mx?'hi':''}"></i>`).join('')}</div>`}
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2600)}
 
-// ---------- helpers ----------
-const EST_O = {borrador:['t-gry','Esborrany'],enviat:['t-blu','Enviada'],confirmat:['t-blu','Confirmada'],'sense-confirmar':['t-amb','Sense confirmar'],endarrerit:['t-red','Endarrerida'],parcial:['t-amb','Recepció parcial'],rebut:['t-grn','Rebuda'],esgotat:['t-red','Esgotat']};
-const EST_L = {'pendent':['t-gry','Pendent'],'confirmat':['t-blu','Confirmat'],'rebut':['t-grn','Rebut'],'endarrerit':['t-red','Endarrerit'],'esgotat':['t-red','Esgotat']};
-const EST_M = {'sense-confirmar':['t-amb','Sense confirmar'],'endarrerit':['t-red','Endarrerit'],'esgotat':['t-red','Esgotat'],'pendent':['t-amb','Pendent'],'en-curs':['t-blu','En curs'],'rebut':['t-grn','Rebut']};
-const tag = (m,k)=> m[k]?`<span class="tag ${m[k][0]}">${m[k][1]}</span>`:'';
+/* ---------- NAV ---------- */
+function renderNav(){
+ $('#nav').innerHTML=D.nav.map(n=>n.sec?`<div class="sec">${n.sec}</div>`:`<a data-v="${n.id}" onclick="go('${n.id}')">${icon(n.i)}<span>${n.t}</span>${n.n?`<span class="n${n.id==='solicituds'?' warn':''}">${n.n}</span>`:''}</a>`).join('');
+ $('#mnav').innerHTML=['tauler','produccio','compres','aprovacions','informes'].map(id=>{const n=D.nav.find(x=>x.id===id);return `<a data-v="${id}" onclick="go('${id}')">${icon(n.i)}${id==='aprovacions'?`<span class="n">${n.n}</span>`:''}<span>${id==='produccio'?'Producció':n.t.split(' ')[0]}</span></a>`}).join('');
+}
+function go(v){location.hash='#/'+v}
+function currentView(){return (location.hash.replace('#/','')||'tauler').split('/')[0]}
 
-// ---------- Panel ----------
-CFG.views.panel = c => {
-  const obertes = S.orders.filter(o=>!['rebut'].includes(o.estado));
-  const risc = S.orders.filter(o=>['endarrerit','sense-confirmar','esgotat'].includes(o.estado)).length;
-  const pend = S.approvals.filter(a=>a.estado==='pendiente');
-  const ofsrisc = S.ofs.filter(o=>o.risc!=='baix').length;
-  c.innerHTML = `
-  <div class="row-head"><div><h1>Tauler compres ↔ producció</h1><div class="sub">Cada ordre de fabricació mostra el material pendent, quan arriba i què passa si una compra es mou.</div></div><div class="sp"></div><button class="btn ghost" onclick="resetDemo()">Reiniciar demo</button></div>
-  <div class="banner"><b>Demo amb dades d'exemple.</b>&nbsp;Ordres de fabricació, comandes i proveïdors ficticis. Els models de màquina (PRX375-2, Up-Twister 2x1, BBCA350D, RTA) són reals de Galan. Res no surt d'aquest navegador.</div>
-  <div class="grid k4">
-    <div class="card kpi"><b>${S.ofs.length}</b><span>ordres de fabricació</span><div class="d mut">${ofsrisc} amb risc</div></div>
-    <div class="card kpi"><b>${obertes.length}</b><span>comandes obertes</span><div class="d mut">${fmtE(S.orders.reduce((t,o)=>t+o.total,0))} compromesos (exemple)</div></div>
-    <div class="card kpi ${risc?'bad':''}"><b>${risc}</b><span>compres amb incidència</span><div class="d mut">retard, esgotat o sense confirmar</div></div>
-    <div class="card kpi ${pend.length?'warn':'ok'}"><b>${pend.length}</b><span>aprovacions pendents</span><div class="d mut">compres i producció</div></div>
+/* ---------- VIEWS ---------- */
+function vTauler(){
+ const risks=D.ofs.filter(o=>o.risc==='alt'||o.risc==='mitja');
+ const nextRec=D.pcs.filter(p=>['en-curs','pendent-conf','parcial','retard'].includes(p.est));
+ return `<div class="row-head"><h1>Tauler</h1><span class="sub">Dimecres 18 de novembre de 2026 · vista compres ↔ producció</span><div class="sp"></div></div>
+ <div class="banner"><b style="font-size:15px">ⓘ</b><div>Demo funcional amb <b>dades d'exemple</b> (clients, comandes i preus ficticis). Cap acció no s'envia ni s'aplica sola: cada proposta passa per la cua d'aprovacions. Models de màquina, Display CTB i arquitectura PLC→ERP són els reals de galan.es.</div></div>
+ <div class="grid k5">${D.kpis.map(k=>`<div class="card kpi ${k.cls}"><b>${k.v}</b><span>${k.l}</span><div class="d mut">${k.d}</div></div>`).join('')}</div>
+ <div class="grid two">
+  <div class="card"><h3>Ordres de fabricació · cicle i risc</h3><div class="gantt">
+   ${D.ofs.filter(o=>o.risc!=='ok').map(o=>`<div class="grow" style="cursor:pointer" onclick="openOF('${o.id}')"><div class="b">${o.id} <span class="mut">· ${o.maq}</span></div><div class="gtrack"><div class="gfill ${o.risc==='alt'?'risk':o.risc==='mitja'?'warn':'ok'}" style="left:0;width:${o.prog}%"></div></div><div class="small mut">${o.lliur}</div></div>`).join('')}
+  </div><div class="small mut" style="margin-top:10px">Barra = % del cicle completat (enginyeria → proves → embalatge). Vermell = material o hores en risc.</div></div>
+  <div class="card"><h3>Què demana decisió avui</h3>
+   ${D.approvals.filter(a=>a.sev!=='gry').slice(0,5).map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':'amb'}"></div><div class="b"><div class="b" style="font-size:12.5px">${a.t}</div><div class="small mut">${a.who} · ${a.id}</div></div><span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':'t-pur'}">${a.tip==='compres'?'Compres':a.tip==='produccio'?'Producció':a.tip==='mixta'?'Mixta':a.tip==='qualitat'?'Qualitat':'Logística'}</span></div>`).join('')}
+   <button class="btn soft" style="width:100%;justify-content:center" onclick="go('aprovacions')">Veure la cua completa (9)</button>
   </div>
-  <div class="grid two">
-    <div class="card"><h3>Decisions pendents</h3>${pend.length?pend.map(qitemHTML).join(''):'<div class="note">Sense decisions pendents.</div>'}</div>
-    <div class="card"><h3>Què passa si una compra es mou</h3>
-      ${S.ofs.filter(o=>o.risc!=='baix').map(o=>`<div class="matrow"><span class="dot ${o.risc==='alt'?'d-red':'d-amb'}"></span><div style="flex:1"><b>${o.id}</b> · ${esc(o.maquina)}<div class="mut small">muntatge ${o.muntatge} · prova ${o.prova}</div></div><span class="tag ${o.risc==='alt'?'t-red':'t-amb'}">${o.risc==='alt'?'risc alt':'risc mitjà'}</span></div>`).join('')}
-      <div class="note" style="margin-top:12px">El sistema detecta l'impacte i proposa la decisió a qui correspon (compres o producció). Mai replanifica sol.</div></div>
-  </div>`;
-  c.querySelectorAll('.qitem').forEach((q,i)=>q.addEventListener('click',()=>openApproval(pend[i].id)));
-};
-
-function qitemHTML(a){
-  const dot = a.pri==='alta'?'d-red':a.pri==='mitjana'?'d-amb':'d-gry';
-  return `<div class="qitem" data-id="${a.id}"><span class="dot ${dot}"></span><div class="b"><div class="t">${esc(a.titulo)}</div><div class="m">${esc(a.detalle)}</div></div><span class="tag t-gry">${esc(a.qui)}</span></div>`;
+ </div>
+ <div class="grid two-r">
+  <div class="card"><h3>Capacitat per centre · properes 6 setmanes (% càrrega)</h3><div class="cap">
+   <div class="caprow small mut"><div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);text-align:center">${D.weeks.map(w=>`<span>${w}</span>`).join('')}</div><div></div></div>
+   ${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}</div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px">${c.w.map(v=>`<div class="bar ${v>100?'risk':v>85?'warn':'ok'}" style="height:12px"><i style="width:${Math.min(100,v)}%"></i></div>`).join('')}</div><div class="small mut">${Math.round(c.w.reduce((a,b)=>a+b)/6)}%</div></div>`).join('')}
+  </div><div class="small mut" style="margin-top:10px">CNC1 supera el 100% la setmana 48: l'aprovació AP-95 recalcula dates abans que es noti al taller.</div></div>
+  <div class="card"><h3>Recepcions i comandes a seguir</h3><div class="tw" style="border:0">
+   <table><tr><th>Comanda</th><th>Proveïdor</th><th>Previst</th><th>Estat</th></tr>
+   ${nextRec.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="small">${p.rev}</td><td>${pcTag(p.est)}</td></tr>`).join('')}
+  </table></div>
+  <h3 style="margin-top:16px">Activitat recent</h3>
+  <ul class="tl">${D.activity.slice(0,4).map(a=>`<li><b>${a.t}</b><span class="w">${a.d} · ${a.by}</span></li>`).join('')}</ul>
+  </div>
+ </div>`;
 }
 
-// ---------- Inbox ----------
-CFG.views.inbox = c => {
-  const pend = S.approvals.filter(a=>a.estado==='pendiente');
-  const done = S.approvals.filter(a=>a.estado!=='pendiente');
-  c.innerHTML = `<div class="row-head"><div><h1>Aprovacions</h1><div class="sub">Algunes decisions són de compres, d'altres de producció, i algunes de totes dues. El sistema proposa; la persona decideix.</div></div></div>
-  <h2 style="margin:6px 0 12px">Pendents (${pend.length})</h2>
-  ${pend.length?pend.map(qitemHTML).join(''):'<div class="note">Sense decisions pendents.</div>'}
-  ${done.length?`<h2 style="margin:22px 0 12px">Resoltes (${done.length})</h2>`+done.map(a=>`<div class="qitem" data-id="${a.id}"><span class="dot d-grn"></span><div class="b"><div class="t">${esc(a.titulo)}</div><div class="m">${esc(a.estado)} · ${esc(a.resolucion||'')}</div></div></div>`).join(''):''}`;
-  c.querySelectorAll('.qitem').forEach(q=>q.addEventListener('click',()=>openApproval(q.dataset.id)));
-};
-
-function openApproval(id){
-  const a = S.approvals.find(x=>x.id===id); if(!a) return;
-  const body = a.estado==='pendiente' ? `
-    <div class="why"><b>Per què importa:</b> ${esc(a.why)}</div>
-    ${a.accion.kind==='mail'?`<h3>Correu proposat (editable)</h3><textarea id="ap-mail">${a.accion.body}</textarea>`:''}
-    ${a.accion.kind==='replan'?`<div class="note">Acció proposada: ${esc(a.accion.delta)}. Producció rep la nova data i comercial avisa el client. Tot queda registrat a l'OF.</div>`:''}
-    ${a.accion.kind==='substitucio'?`<div class="note">Acció proposada: validar ${esc(a.accion.material)} per a ${esc(a.accion.of)}. Comprés confirma preu i data; producció confirma muntatge i rendiment.</div>`:''}
-    <div class="act">
-      ${a.accion.kind==='mail'?`<button class="btn" onclick="resolveApproval('${id}','mail')">Aprovar i enviar (simulat)</button>`:''}
-      ${a.accion.kind==='replan'?`<button class="btn" onclick="resolveApproval('${id}','replan')">Aprovar replanificació (simulat)</button>`:''}
-      ${a.accion.kind==='substitucio'?`<button class="btn" onclick="resolveApproval('${id}','substitucio')">Validar substitució (simulat)</button>`:''}
-      <button class="btn ghost" onclick="toast('Esborrany desat (simulat)')">Desar esborrany</button>
-      <button class="btn danger" onclick="resolveApproval('${id}','rebutjada')">Rebutjar</button>
-    </div>`
-  : `<div class="note">Resolta: ${esc(a.estado)} · ${esc(a.resolucion||'')}</div>`;
-  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${esc(a.titulo)}</h2><div class="sub">${a.id} · ${esc(a.tipo)} · decideix: ${esc(a.qui)}</div></div><div class="pb"><p>${esc(a.detalle)}</p>${body}</div>`);
-}
-function resolveApproval(id, how){
-  const a = S.approvals.find(x=>x.id===id); if(!a) return;
-  if(how==='mail'){ a.estado='aprovada'; a.resolucion='correu registrat com a enviat (simulat)'; logAct(`Aprovat: ${a.titulo}`); }
-  else if(how==='replan'){
-    a.estado='aprovada'; a.resolucion='replanificació aplicada (simulat)';
-    const o=S.ofs.find(x=>x.id===a.accion.proyecto); if(o){ o.muntatge='09/12'; o.prova='22/12'; o.risc='mitja'; }
-    logAct(`Replanificació aprovada: ${a.accion.proyecto} (simulat).`);
-  }
-  else if(how==='substitucio'){
-    a.estado='aprovada'; a.resolucion='equivalent validat (simulat)';
-    const o=S.ofs.find(x=>x.id===a.accion.of); if(o){ const m=o.materials.find(m=>m.desc.includes('6312')); if(m){m.desc='Rodaments 6312-2RS (8 uds)'; m.estat='en-curs';} o.risc='baix'; }
-    const pc=S.orders.find(x=>x.id==='PC-3116'); if(pc){ pc.lineas[0].desc='Rodament 6312-2RS'; pc.lineas[0].estado='confirmat'; pc.estado='confirmat'; pc.entrega='previst 02/12'; }
-    logAct(`Substitució validada: ${a.accion.material} (simulat).`);
-  }
-  else { a.estado='rebutjada'; a.resolucion='rebutjada per l\'usuari'; logAct(`Rebutjada: ${a.titulo}`); }
-  save(); closeDrawer(); renderView(); toast(how==='rebutjada'?'Decisió rebutjada':'Aprovat i registrat (simulat)');
+function vAprovacions(){
+ const tipName={compres:'Compres',produccio:'Producció',mixta:'Mixta',qualitat:'Qualitat',logistica:'Logística'};
+ return `<div class="row-head"><h1>Aprovacions</h1><span class="sub">La cua de decisions: Automio detecta i prepara, vosaltres aproveu. Res no s'envia ni s'aplica sol.</span></div>
+ <div class="grid k3">
+  <div class="card kpi bad"><b>${D.approvals.filter(a=>a.sev==='red').length}</b><span>Crítiques avui</span><div class="d mut">PLC retardat + replanificació OF-2641</div></div>
+  <div class="card kpi warn"><b>${D.approvals.filter(a=>a.sev==='amb').length}</b><span>Amb impacte de setmana</span><div class="d mut">si queden per sobre de divendres, mouen muntatges</div></div>
+  <div class="card kpi"><b>${D.approvals.length}</b><span>Total a la cua</span><div class="d mut">repartides entre compres, producció i qualitat</div></div>
+ </div>
+ ${D.approvals.map(a=>`<div class="qitem" onclick="openAP('${a.id}')"><div class="dot d-${a.sev==='red'?'red':a.sev==='amb'?'amb':'gry'}"></div><div class="b">
+  <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="b">${a.t}</span></div>
+  <div class="small mut" style="margin-top:2px">${a.ctx}</div>
+  <div class="small" style="margin-top:4px"><span class="mut">Decideix:</span> <b>${a.who}</b> · <span class="mut">${a.id}</span></div>
+ </div><span class="tag ${a.tip==='compres'?'t-blu':a.tip==='produccio'?'t-nvy':a.tip==='mixta'?'t-pur':a.tip==='qualitat'?'t-grn':'t-gry'}">${tipName[a.tip]}</span></div>`).join('')}`;
 }
 
-// ---------- Producció ----------
-CFG.views.prod = c => {
-  c.innerHTML = `<div class="row-head"><div><h1>Producció</h1><div class="sub">Ordres de fabricació amb el material que les alimenta: el que falta, quan arriba i quina compra el porta.</div></div></div>
-  <div class="ofboard">${S.ofs.map(o=>`
-    <div class="ofcard" style="cursor:pointer" data-id="${o.id}">
-      <div class="row-head"><h4>${o.id} · ${esc(o.maquina)}</h4><div class="sp"></div><span class="tag ${o.risc==='alt'?'t-red':o.risc==='mitja'?'t-amb':'t-grn'}">${o.risc==='alt'?'risc alt':o.risc==='mitja'?'risc mitjà':'en marxa'}</span></div>
-      <div class="mut small" style="margin-bottom:6px">${esc(o.client)}</div>
-      ${steps(o.fases,o.fase)}
-      <div style="display:flex;align-items:center;gap:10px;margin:8px 0"><div class="bar ${o.risc==='alt'?'risk':''}" style="flex:1"><i style="width:${o.progres}%"></i></div><b>${o.progres}%</b></div>
-      <div class="small"><b>Material:</b></div>
-      ${o.materials.map(m=>`<div class="matrow"><span class="dot ${['endarrerit','esgotat'].includes(m.estat)?'d-red':['sense-confirmar','pendent'].includes(m.estat)?'d-amb':m.estat==='en-curs'?'d-blu':'d-grn'}"></span><div style="flex:1">${esc(m.desc)}<div class="mut small">${m.compra!=='—'?'compra '+m.compra:'fabricació pròpia'}</div></div>${tag(EST_M,m.estat)}</div>`).join('')}
-      <div class="mut small" style="margin-top:8px">Muntatge: <b>${o.muntatge}</b> · Prova amb client: <b>${o.prova}</b></div>
-    </div>`).join('')}</div>`;
-  c.querySelectorAll('.ofcard').forEach(k=>k.addEventListener('click',()=>openOF(k.dataset.id)));
-};
-function openOF(id){
-  const o = S.ofs.find(x=>x.id===id);
-  const rel = S.orders.filter(p=>p.of===id);
-  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${o.id} · ${esc(o.maquina)}</h2><div class="sub">${esc(o.client)} · muntatge ${o.muntatge} · prova ${o.prova}</div></div>
-  <div class="pb">
-    ${steps(o.fases,o.fase)}
-    <h3 style="margin-top:16px">Material i compres vinculades</h3>
-    ${o.materials.map(m=>`<div class="matrow"><span class="dot ${['endarrerit','esgotat'].includes(m.estat)?'d-red':['sense-confirmar','pendent'].includes(m.estat)?'d-amb':m.estat==='en-curs'?'d-blu':'d-grn'}"></span><div style="flex:1">${esc(m.desc)}<div class="mut small">${m.compra!=='—'?'compra '+m.compra:'fabricació pròpia'}</div></div>${tag(EST_M,m.estat)}</div>`).join('')}
-    ${rel.length?`<h3 style="margin-top:16px">Comandes</h3>`+rel.map(p=>`<div class="matrow"><div style="flex:1"><b>${p.id}</b> · ${esc(p.prov)}</div>${tag(EST_O,p.estado)}<span class="b">${fmtE(p.total)}</span></div>`).join(''):''}
-    <div class="note" style="margin-top:14px">Si una compra es mou, Automio proposa replanificar l'OF i avisar comercial; la decisió és de l'equip.</div>
-  </div>`);
+function vProduccio(){
+ return `<div class="row-head"><h1>Ordres de fabricació</h1><span class="sub">Cada màquina és un projecte: ruta, material, hores i traçabilitat. Filtre:</span><div class="sp"></div></div>
+ <div class="tools"><button class="chip on">Totes <span class="c">${D.ofs.length}</span></button><button class="chip" onclick="filOF('risc',this)">Amb risc <span class="c">3</span></button><button class="chip" onclick="filOF('cur',this)">En taller <span class="c">7</span></button><button class="chip" onclick="filOF('proves',this)">En proves/embalatge <span class="c">3</span></button><div class="sp"></div><input type="search" placeholder="Filtra per model, client…" oninput="filOFq(this.value)"></div>
+ <div class="tw"><table id="of-t"><tr><th>OF</th><th>Màquina</th><th>Client</th><th>Aplicació</th><th>Fase</th><th>Cicle</th><th>Hores p/r</th><th>Lliurament</th><th>Risc material</th></tr>
+ ${D.ofs.map(o=>`<tr class="row" data-risc="${o.risc}" data-fase="${o.fase}" data-q="${(o.id+' '+o.maq+' '+o.cli+' '+o.aplic).toLowerCase()}" onclick="openOF('${o.id}')">
+  <td class="b">${o.id}</td><td><b>${o.maq}</b><div class="small mut">${o.desc}</div></td><td class="wrap">${o.cli}</td><td class="wrap small">${o.aplic}</td>
+  <td class="small">${o.fase<10?`${o.fase}/10 · ${faseSt('cur')}`:'Tancada'}</td><td>${bar(o.prog,100,o.risc==='alt'?'risk':o.risc==='mitja'?'warn':'ok')}<span class="small mut">${o.prog}%</span></td>
+  <td class="small">${o.horesR}/${o.horesP} h ${o.horesR>o.horesP?'<span class="tag t-red">+'+(o.horesR-o.horesP)+' h</span>':''}</td>
+  <td class="small b">${o.lliur}</td><td>${riscTag(o.risc)}<div class="small mut" style="max-width:210px;white-space:normal">${o.riscTxt}</div></td></tr>`).join('')}
+ </table><div class="tfoot">${D.ofs.length} ordres · el risc es calcula creuant material pendent, dates de compra i hores imputades</div></div>`;
+}
+function filOF(f,el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');
+ document.querySelectorAll('#of-t tr.row').forEach(r=>{const rk=r.dataset.risc,fs=+r.dataset.fase;
+ r.style.display=f==='risc'?(rk==='alt'||rk==='mitja'?'':'none'):f==='cur'?(fs>=2&&fs<=6?'':'none'):f==='proves'?(fs>=8&&fs<10?'':'none'):''})}
+function filOFq(q){q=q.toLowerCase();document.querySelectorAll('#of-t tr.row').forEach(r=>r.style.display=r.dataset.q.includes(q)?'':'none')}
+
+function vCapacitat(){
+ return `<div class="row-head"><h1>Capacitat i centres de treball</h1><span class="sub">Càrrega planificada vs capacitat setmanal · properes 6 setmanes</span></div>
+ <div class="banner"><b>⚠</b><div><b>CNC1 supera el 100% la setmana 48 (118%)</b> i CNC2 s'hi acosta (110% la S49). Proposta preparada: moure 12 h del plató CRG300 de CNC1 a CNC2 la S48 i avançar la bancada externa. <span class="mut">La decisió queda a la cua d'aprovacions (AP-95 i replanificació OF-2641).</span></div></div>
+ <div class="card"><h3>Càrrega per centre (%)</h3><div class="cap">
+  <div class="caprow small mut"><div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);text-align:center">${D.weeks.map(w=>`<span>${w}</span>`).join('')}</div><div></div></div>
+  ${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}<div class="mut" style="font-weight:400">${c.op}</div></div><div style="display:grid;grid-template-columns:repeat(6,1fr);gap:3px">${c.w.map(v=>`<div class="bar ${v>100?'risk':v>85?'warn':'ok'}" style="height:14px" title="${v}%"><i style="width:${Math.min(100,v)}%"></i></div>`).join('')}</div><div class="small mut">${Math.round(c.w.reduce((a,b)=>a+b)/6)}%</div></div>`).join('')}
+ </div></div>
+ <div class="grid k2" style="margin-top:14px">
+  <div class="card"><h3>On es concentra la càrrega (hores per fase, any en curs)</h3>${D.informes.horesFase.map(h=>`<div class="hbar"><span class="lb">${h[0]}</span><span class="tr"><span class="fl" style="width:${Math.round(h[1]/918*100)}%"></span></span><span class="vl">${h[1]} h</span></div>`).join('')}</div>
+  <div class="card"><h3>Lectura ràpida</h3><ul class="tl">
+   <li><b>Muntatge i mecanitzat acumulen el 58% de les hores</b><span class="w">són els centres que marquen el lliurament de les 9 OF actives</span></li>
+   <li><b>Proves: pista ocupada 6 setmanes seguides</b><span class="w">OF-2643 acaba aquesta setmana; OF-2641 entra al desembre</span></li>
+   <li><b>Enginyeria baixa del 70% al febrer</b><span class="w">finestra per avançar la variant de la BBCA500D (OF-2645)</span></li>
+  </ul></div>
+ </div>`;
 }
 
-// ---------- Compres ----------
-let FLT = {estado:'totes', q:''};
-CFG.views.compras = c => {
-  const counts = {totes:S.orders.length};
-  ['endarrerit','sense-confirmar','esgotat','enviat','confirmat','rebut'].forEach(k=>counts[k]=S.orders.filter(o=>o.estado===k).length);
-  let rows = S.orders.filter(o=>(FLT.estado==='totes'||o.estado===FLT.estado) && (!FLT.q || (o.id+o.prov+o.of).toLowerCase().includes(FLT.q)));
-  c.innerHTML = `<div class="row-head"><div><h1>Comandes de compra</h1><div class="sub">Cada comanda penja d'una ordre de fabricació: el retard d'una compra es veu a producció a l'instant.</div></div><div class="sp"></div><button class="btn ghost" onclick="novaComanda()">+ Nova comanda (esborrany)</button></div>
-  ${chipRow([{key:'totes',label:'Totes',count:counts.totes},{key:'endarrerit',label:'Endarrerides',count:counts.endarrerit},{key:'sense-confirmar',label:'Sense confirmar',count:counts['sense-confirmar']},{key:'esgotat',label:'Esgotades',count:counts.esgotat},{key:'rebut',label:'Rebudes',count:counts.rebut}], FLT.estado, 'setFltEstado')}
-  <div class="tools"><input type="search" placeholder="Cercar comanda, proveïdor u OF…" value="${esc(FLT.q)}" oninput="setFltQ(this.value)"></div>
-  <div id="tbl">${tableHTML([
-    {k:'id',l:'Comanda',f:o=>`<b>${o.id}</b>`},
-    {k:'prov',l:'Proveïdor',f:o=>esc(o.prov),wrap:true},
-    {k:'of',l:'OF vinculada',f:o=>o.of==='—'?'<span class="mut">—</span>':`<span class="tag t-blu">${o.of}</span>`},
-    {k:'lin',l:'Línies',f:o=>o.lineas.length,num:true},
-    {k:'total',l:'Total',f:o=>fmtE(o.total),num:true},
-    {k:'ent',l:'Lliurament',f:o=>esc(o.entrega),wrap:true},
-    {k:'est',l:'Estat',f:o=>tag(EST_O,o.estado)}
-  ], rows)}</div>`;
-  attachRowClicks(c, rows, openOrder);
-};
-function setFltEstado(k){FLT.estado=k;renderView();}
-function setFltQ(v){FLT.q=v.toLowerCase();renderView();const i=document.querySelector('input[type=search]');if(i){i.focus();i.setSelectionRange(i.value.length,i.value.length);}}
-
-function openOrder(o){ drawerState = {tab:'lin', render:()=>renderOrderDrawer(o.id)}; renderOrderDrawer(o.id); }
-function renderOrderDrawer(oid){
-  const o = S.orders.find(x=>x.id===oid);
-  const tabs = [{id:'lin',l:'Línies'},{id:'seg',l:'Seguiment'},{id:'doc',l:'Documents'}];
-  let body='';
-  if(drawerState.tab==='lin'){
-    body = tableHTML([
-      {k:'d',l:'Descripció',f:l=>esc(l.desc),wrap:true},
-      {k:'q',l:'Ud.',f:l=>l.qty,num:true},
-      {k:'p',l:'Preu ud.',f:l=>fmtE(l.precio),num:true},
-      {k:'e',l:'Estat',f:l=>tag(EST_L,l.estado)}
-    ], o.lineas, {foot:`Total: ${fmtE(o.total)}`});
-  } else if(drawerState.tab==='seg'){
-    body = `<ul class="tl">
-      <li><b>Comanda emesa</b><span class="w">fa 10 dies · compres</span></li>
-      ${o.estado!=='borrador'?'<li><b>Enviada al proveïdor</b><span class="w">fa 9 dies</span></li>':''}
-      ${['confirmat','parcial','rebut'].includes(o.estado)?'<li><b>Confirmada pel proveïdor</b><span class="w">fa 7 dies</span></li>':''}
-      ${o.estado==='endarrerit'?'<li><b>Avís de retard</b><span class="w">fa 2 dies · nova data comunicada</span></li>':''}
-      ${o.estado==='rebut'?'<li><b>Recepció registrada</b><span class="w">material a magatzem</span></li>':''}
-      ${o.estado==='esgotat'?'<li><b>Sense estoc al proveïdor</b><span class="w">proposada equivalència</span></li>':''}
-    </ul><div class="note">Historial d'exemple. En producció s'alimenta dels correus i recepcions reals.</div>`;
-  } else {
-    body = `<div class="docview">📄 Comanda ${o.id}.pdf (exemple)<br><span class="mut">Albarà — pendent</span></div>
-    <div class="act"><button class="btn ghost" onclick="toast('Document adjuntat (simulat)')">Adjuntar document (simulat)</button></div>`;
-  }
-  const acciones = [];
-  if(o.estado!=='rebut'){
-    acciones.push(`<button class="btn" onclick="mailSeguimiento('${o.id}')">Preparar seguiment</button>`);
-    if(o.lineas.some(l=>l.estado!=='rebut')) acciones.push(`<button class="btn soft" onclick="recepcioParcial('${o.id}')">Registrar recepció</button>`);
-  }
-  document.querySelector('#drawer .panel').innerHTML = `<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>${o.id} · ${esc(o.prov)}</h2><div class="sub">${o.of!=='—'?'OF '+o.of+' · ':''}lliurament: ${esc(o.entrega)} · ${tag(EST_O,o.estado)}</div>${drawerTabs(tabs, drawerState.tab)}</div><div class="pb">${body}<div class="act">${acciones.join('')}</div></div>`;
-}
-function mailSeguimiento(oid){
-  const o = S.orders.find(x=>x.id===oid);
-  openDrawer(`<div class="ph"><button class="x" onclick="closeDrawer()">×</button><h2>Seguiment de ${o.id}</h2><div class="sub">El correu el revises abans que surti (simulat)</div></div>
-  <div class="pb"><textarea id="sg-mail">Bon dia,\n\nescrivim sobre la comanda ${o.id} (${o.lineas.map(l=>l.desc).join('; ')}). Estat actual: ${EST_O[o.estado][1].toLowerCase()}. Necessitem confirmació de data i qualsevol incidència que pugui afectar ${o.of!=='—'?'l\''+o.of:'la planificació'}.\n\nGràcies.</textarea>
-  <div class="act"><button class="btn" onclick="enviarSeguiment('${o.id}')">Aprovar i enviar (simulat)</button><button class="btn ghost" onclick="openOrder(S.orders.find(x=>x.id==='${o.id}'))">Tornar</button></div></div>`);
-}
-function enviarSeguiment(oid){ logAct(`Seguiment de ${oid} aprovat i registrat com a enviat (simulat).`); save(); closeDrawer(); renderView(); toast('Correu registrat com a enviat (simulat)'); }
-function recepcioParcial(oid){
-  const o = S.orders.find(x=>x.id===oid);
-  const pend = o.lineas.filter(l=>l.estado!=='rebut');
-  if(!pend.length) return;
-  const l = pend[0]; l.estado='rebut';
-  o.estado = o.lineas.every(x=>x.estado==='rebut') ? 'rebut' : 'parcial';
-  const of = S.ofs.find(x=>x.id===o.of); if(of){ const m=of.materials.find(m=>m.compra===oid); if(m) m.estat='rebut'; }
-  logAct(`Recepció registrada a ${oid}: ${l.desc} (simulat).`);
-  save(); renderOrderDrawer(oid); renderShell(); toast('Recepció registrada (simulat)');
-}
-function novaComanda(){
-  const n = 'PC-' + (3119 + S.orders.filter(o=>o.id.startsWith('PC-')).length);
-  S.orders.unshift({id:n, prov:'(sense assignar)', of:'—', estado:'borrador', total:0, entrega:'—', lineas:[{desc:'Línia nova (editar)', qty:1, precio:0, estado:'pendent'}]});
-  logAct(`Esborrany ${n} creat (simulat).`); save(); renderView(); toast('Esborrany creat'); openOrder(S.orders[0]);
+function vTaller(){
+ const enCurs=D.ofs.filter(o=>o.fase>=2&&o.fase<10&&o.risc!=='ok');
+ return `<div class="row-head"><h1>Seguiment de taller</h1><span class="sub">Fases en curs, operaris i imputació d'hores en temps real</span></div>
+ <div class="tw"><table><tr><th>OF · màquina</th><th>Fase en curs</th><th>Centre</th><th>Operari</th><th>Hores p/r</th><th>Desviació</th><th>Nota de taller</th></tr>
+ ${enCurs.map(o=>{const f=o.ruta.find(r=>r.st==='cur')||o.ruta[o.ruta.length-1];const dv=o.horesR-o.horesP;return `<tr class="row" onclick="openOF('${o.id}')"><td class="b">${o.id} · ${o.maq}</td><td class="wrap">${f.n}</td><td>${f.c}</td><td class="small">${f.op}</td><td class="small">${o.horesR}/${o.horesP} h</td><td>${dv>0?`<span class="tag t-red">+${dv} h</span>`:'<span class="tag t-grn">dins pla</span>'}</td><td class="wrap small mut">${f.nota||'—'}</td></tr>`}).join('')}
+ </table><div class="tfoot">Les desviacions superiors a 8 h generen proposta de replanificació a la cua d'aprovacions</div></div>
+ <div class="grid k2" style="margin-top:14px">
+  <div class="card"><h3>Imputació d'avui per centre</h3><div class="cap">${D.capacity.map(c=>`<div class="caprow"><div class="small b">${c.c}</div><div class="bar ${c.w[0]>100?'risk':c.w[0]>85?'warn':'ok'}"><i style="width:${Math.min(100,c.w[0])}%"></i></div><div class="small mut">${c.w[0]}%</div></div>`).join('')}</div></div>
+  <div class="card"><h3>Últims moviments de taller</h3><ul class="tl">${D.activity.filter(a=>/OF-|husos|muntatge|CNC|marxa/.test(a.t)).slice(0,5).map(a=>`<li><b>${a.t}</b><span class="w">${a.d} · ${a.by}</span></li>`).join('')}</ul></div>
+ </div>`;
 }
 
-// ---------- Proveïdors ----------
-CFG.views.prov = c => {
-  c.innerHTML = `<div class="row-head"><div><h1>Proveïdors</h1><div class="sub">Fiabilitat i comportament històric (dades d'exemple).</div></div></div>
-  ${tableHTML([
-    {k:'n',l:'Proveïdor',f:p=>`<b>${esc(p.nombre)}</b><div class="mut small">${esc(p.cat)}</div>`,wrap:true},
-    {k:'o',l:'Lliuraments a temps',f:p=>`<div style="display:flex;align-items:center;gap:8px"><div class="bar ${p.otif<80?'risk':p.otif<90?'warn':'ok'}" style="width:90px"><i style="width:${p.otif}%"></i></div>${p.otif}%</div>`},
-    {k:'q',l:'Qualitat',f:p=>`<div style="display:flex;align-items:center;gap:8px"><div class="bar ok" style="width:90px"><i style="width:${p.calidad}%"></i></div>${p.calidad}%</div>`},
-    {k:'pd',l:'Comandes',f:p=>p.pedidos,num:true},
-    {k:'u',l:'Darrera',f:p=>p.ultimo},
-    {k:'nt',l:'Nota',f:p=>`<span class="mut small">${esc(p.nota)}</span>`,wrap:true}
-  ], S.suppliers)}
-  <div class="note" style="margin-top:12px">Noms de proveïdors ficticis marcats com a exemple. Els índexs es calcularien de les recepcions reals.</div>`;
-};
-
-// ---------- Activitat ----------
-CFG.views.act = c => {
-  c.innerHTML = `<div class="row-head"><div><h1>Activitat</h1><div class="sub">Tot el fet en aquesta demo, amb hora.</div></div><div class="sp"></div><button class="btn ghost" onclick="resetDemo()">Reiniciar demo</button></div>
-  <ul class="tl">${S.activity.map(a=>`<li><b>${esc(a.text)}</b><span class="w">${new Date(a.ts).toLocaleString('ca-ES')}</span></li>`).join('')}</ul>`;
-};
-
-// Automio OS · demo framework (datos de ejemplo, todo simulado en local)
-const LSKEY = 'automio-demo-' + CFG.slug;
-let S = loadState();
-function loadState(){
-  try{ const raw = localStorage.getItem(LSKEY); if(raw){ const p = JSON.parse(raw); if(p && p.v === CFG.v) return p.s; } }catch(e){}
-  return JSON.parse(JSON.stringify(CFG.initial));
-}
-function save(){ try{ localStorage.setItem(LSKEY, JSON.stringify({v:CFG.v, s:S})); }catch(e){} }
-function resetDemo(){ localStorage.removeItem(LSKEY); location.reload(); }
-
-const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const fmtN = (n,d=0) => Number(n).toLocaleString(CFG.locale,{minimumFractionDigits:d,maximumFractionDigits:d});
-const fmtE = n => fmtN(n,2) + ' €';
-const $ = sel => document.querySelector(sel);
-const el = html => { const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; };
-
-let VIEW = location.hash ? location.hash.slice(1) : CFG.home;
-let drawerState = null;
-
-const ICONS = {
-  panel:'M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z',
-  inbox:'M3 5h18v14H3zM3 7l9 6 9-6',
-  compras:'M4 4h2l2.5 11h10L21 7H7M9 20a1 1 0 100-2 1 1 0 000 2M18 20a1 1 0 100-2 1 1 0 000 2',
-  prov:'M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6',
-  docs:'M7 3h7l5 5v13H7zM14 3v5h5',
-  prod:'M4 20V10l5 3v-3l5 3V6h6v14z',
-  cert:'M12 3l2.5 5 5.5.8-4 4 1 5.7-5-2.7-5 2.7 1-5.7-4-4L9.5 8z',
-  act:'M12 8v5l3 2M12 21a9 9 0 110-18 9 9 0 010 18',
-  conf:'M12 8a4 4 0 100 8 4 4 0 000-8zM12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1',
-  proj:'M3 7h18M3 7v13h18V7M3 7l2-4h14l2 4M10 11h4',
-  logi:'M1 8h13v9H1zM14 11h4l3 3v3h-7zM5.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3M16.5 20a1.5 1.5 0 100-3 1.5 1.5 0 000 3',
-  spare:'M14 7a4 4 0 105.6 5.6L14 7zm0 0L8 13m-3 8l6-6',
-  search:'M11 19a8 8 0 100-16 8 8 0 000 16zM21 21l-4.35-4.35'
-};
-function icon(name){ return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="${ICONS[name]||ICONS.panel}"/></svg>`; }
-
-function renderShell(){
-  const mods = CFG.modules.map(m => {
-    if(m.sec) return `<div class="sec">${esc(m.sec)}</div>`;
-    const badge = m.badge ? `<span class="n">${typeof m.badge==='function'?m.badge(S):m.badge}</span>` : '';
-    return `<a data-v="${m.id}" class="${VIEW===m.id?'on':''}" onclick="go('${m.id}')">${icon(m.icon)}<span>${esc(m.label)}</span>${badge}</a>`;
-  }).join('');
-  document.getElementById('app').innerHTML = `
-  <aside id="side">
-    <div class="brand"><div class="logo"><div class="mark">${esc(CFG.mark)}</div><div><div class="bn">${esc(CFG.company)}</div><div class="bs">AUTOMIO OS · DEMO</div></div></div></div>
-    <nav>${mods}</nav>
-    <div class="side-foot">${CFG.t.foot}</div>
-  </aside>
-  <main>
-    <div class="topbar">
-      <div class="crumb">${esc(CFG.company)} · ${esc((CFG.modules.find(m=>m.id===VIEW)||{}).label||'')}</div>
-      <div class="sp"></div>
-      <span class="pill">${CFG.t.pill}</span>
-      <div class="avatar">${esc(CFG.userIni)}</div>
-    </div>
-    <div class="content" id="content"></div>
-  </main>
-  <div class="drawer" id="drawer" onclick="if(event.target===this)closeDrawer()"></div>
-  <div class="toast" id="toast"></div>`;
-  renderView();
-}
-function go(v){ VIEW=v; location.hash=v; renderShell(); window.scrollTo(0,0); }
-window.addEventListener('hashchange',()=>{ const v=location.hash.slice(1); if(v&&v!==VIEW){VIEW=v;renderShell();} });
-
-function renderView(){
-  const m = CFG.modules.find(x=>x.id===VIEW) || CFG.modules.find(x=>x.id===CFG.home);
-  const c = document.getElementById('content'); if(!c) return;
-  c.innerHTML = '';
-  (CFG.views[m.id]||CFG.views[CFG.home])(c);
-  document.querySelector('.topbar .crumb').innerHTML = `${esc(CFG.company)} · ${esc(m.label)}`;
-  document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('on', a.dataset.v===m.id));
+function vQualitat(){
+ const p=D.quality.proves[0];
+ return `<div class="row-head"><h1>Qualitat i proves</h1><span class="sub">Inspeccions de recepció, no-conformitats i proves finals de màquina</span></div>
+ <div class="grid two-r">
+  <div class="card"><h3>Prova final en curs · ${p.of} (${p.maq})</h3>
+   ${p.items.map(i=>`<div class="chk ${i.done?'done':''}"><div class="cbx">${i.done?'✓':''}</div><div class="ct">${i.t}</div></div>`).join('')}
+   <div class="note" style="margin-top:12px">Quan falta una prova, el lliurament queda bloquejat i el dossier no es tanca. Les proves replicen el que el client veurà al Display CTB: RPM de husos, torsió S/Z, comptador de metres i receptors.</div>
+  </div>
+  <div>
+   <div class="card" style="margin-bottom:14px"><h3>Inspeccions de recepció</h3><div class="tw" style="border:0"><table><tr><th>Inspecció</th><th>Comanda</th><th>Material</th><th>Resultat</th></tr>${D.quality.insp.map(i=>`<tr><td class="b">${i.id}</td><td>${i.pc}</td><td class="wrap small">${i.qu}<div class="mut">${i.d}</div></td><td><span class="tag t-grn">${i.res}</span></td></tr>`).join('')}</table></div></div>
+   <div class="card"><h3>No-conformitats</h3><div class="tw" style="border:0"><table><tr><th>NC</th><th>OF</th><th>Descripció</th><th>Estat</th></tr>${D.quality.ncs.map(n=>`<tr><td class="b">${n.id}</td><td>${n.of}</td><td class="wrap small">${n.t}<div class="mut">${n.d}</div></td><td>${n.st.startsWith('Tancada')?'<span class="tag t-grn">Tancada</span>':'<span class="tag t-amb">'+n.st+'</span>'}</td></tr>`).join('')}</table></div></div>
+  </div>
+ </div>`;
 }
 
-function toast(msg){ const t=$('#toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._h); t._h=setTimeout(()=>t.style.display='none',2800); }
-
-function openDrawer(html){ const d=$('#drawer'); d.innerHTML=`<div class="panel">${html}</div>`; d.classList.add('on'); }
-function closeDrawer(){ $('#drawer').classList.remove('on'); drawerState=null; }
-
-function logAct(text){ S.activity.unshift({ts:new Date().toISOString(), text}); if(S.activity.length>200)S.activity.length=200; save(); }
-
-function chipRow(groups, active, onpick){
-  // groups: [{key,label,count}]
-  return `<div class="tools">${groups.map(g=>`<button class="chip ${active===g.key?'on':''}" onclick="${onpick}('${g.key}')">${esc(g.label)}${g.count!=null?` <span class="c">${g.count}</span>`:''}</button>`).join('')}</div>`;
+function vCompres(){
+ return `<div class="row-head"><h1>Comandes de compra</h1><span class="sub">Vinculades a la llista de materials de cada OF: si una data es mou, l'OF ho veu a l'instant</span></div>
+ <div class="grid k4">
+  <div class="card kpi bad"><b>${D.pcs.filter(p=>p.est==='retard').length}</b><span>Amb retard</span><div class="d mut">PC-2315 · afecta 2 OF</div></div>
+  <div class="card kpi warn"><b>${D.pcs.filter(p=>p.est==='pendent-conf'||p.est==='pendent-ap').length}</b><span>Pendents de confirmar/aprovar</span><div class="d mut">PC-2322 · PC-2331 · PC-2334</div></div>
+  <div class="card kpi"><b>${D.pcs.filter(p=>p.est==='en-curs'||p.est==='parcial').length}</b><span>En curs o parcials</span></div>
+  <div class="card kpi ok"><b>${D.pcs.filter(p=>p.est==='rebuda').length}</b><span>Rebudes aquest mes</span></div>
+ </div>
+ <div class="tw"><table><tr><th>Comanda</th><th>Proveïdor</th><th>Contingut</th><th>Import</th><th>Confirmada</th><th>Revisada</th><th>OF que alimenta</th><th>Estat</th></tr>
+ ${D.pcs.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap">${p.prov}</td><td class="wrap small">${p.items}</td><td class="b">${p.imp}</td><td class="small">${p.conf}</td><td class="small">${p.rev}</td><td class="small wrap">${p.of}</td><td>${pcTag(p.est)}</td></tr>`).join('')}
+ </table><div class="tfoot">Clic a una comanda per veure línies, historial i el seguiment preparat</div></div>`;
 }
 
-function tableHTML(cols, rows, opts={}){
-  const rowFn = opts.rowFn || (()=> '');
-  const head = cols.map(c=>`<th style="${c.w?`width:${c.w}`:''}">${esc(c.l)}</th>`).join('');
-  const body = rows.length ? rows.map((r,i)=>`<tr class="row" data-i="${i}" ${rowFn(r,i)}>${cols.map(c=>`<td class="${c.wrap?'wrap':''}" style="${c.num?'text-align:right':''}">${c.f(r)}</td>`).join('')}</tr>`).join('') : `<tr><td colspan="${cols.length}" class="mut" style="text-align:center;padding:26px">${esc(opts.empty||CFG.t.empty)}</td></tr>`;
-  const foot = opts.foot || `${rows.length} ${CFG.t.records}`;
-  return `<div class="tw"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table><div class="tfoot">${foot}</div></div>`;
+function vSolicituds(){
+ const sc=[
+  {id:"SC-114",de:"OF-2642 · CRG300",t:"Cilindres i vàlvules Festo",imp:"4.820 €",st:"Pressupost rebut",ap:"AP-90",note:"Si s'aprova aquesta setmana, recepció setmana 50, a temps per muntatge."},
+  {id:"SC-115",de:"Estoc",t:"Detectors de fil trencat (sobreestoc controlat)",imp:"2.112 €",st:"Proposta Automio",ap:"AP-93",note:"Els dos projectes grans del T1 en consumiran el doble del previst."},
+  {id:"SC-116",de:"OF-2641",t:"PLC de reserva o segona font Siemens",imp:"~1.500 €",st:"En estudi",ap:"AP-88",note:"Reduiria el retard de +6 d a +2 d."},
+  {id:"SC-117",de:"OF-2647 · EPCA",t:"Caixa i embalatge estoc",imp:"680 €",st:"Pendent llançar",ap:"—",note:"Es llança quan pintura confirmi data."}
+ ];
+ return `<div class="row-head"><h1>Sol·licituds de compra</h1><span class="sub">Neixen de la llista de materials: el que falta per fabricar, proposat abans que sigui urgent</span></div>
+ <div class="tw"><table><tr><th>Sol·licitud</th><th>Origen</th><th>Material</th><th>Import est.</th><th>Estat</th><th>Decisió</th><th>Nota</th></tr>
+ ${sc.map(s=>`<tr class="row" ${s.ap!=='—'?`onclick="openAP('${s.ap}')"`:' style="cursor:default"'}><td class="b">${s.id}</td><td class="small">${s.de}</td><td class="wrap">${s.t}</td><td>${s.imp}</td><td><span class="tag ${s.st==='Pressupost rebut'?'t-blu':s.st==='Proposta Automio'?'t-pur':'t-gry'}">${s.st}</span></td><td class="small">${s.ap}</td><td class="wrap small mut">${s.note}</td></tr>`).join('')}
+ </table></div>`;
 }
 
-function attachRowClicks(root, rows, onclick){
-  root.querySelectorAll('tr.row').forEach(tr=>tr.addEventListener('click',ev=>{
-    if(ev.target.closest('button')||ev.target.closest('input')||ev.target.closest('select')||ev.target.closest('a')) return;
-    onclick(rows[+tr.dataset.i]);
-  }));
+function vEstoc(){
+ return `<div class="row-head"><h1>Estoc i articles</h1><span class="sub">Cobertura en dies creuada amb el pla de producció · ubicacions i lotes traçats</span></div>
+ <div class="tools"><button class="chip on">Tots <span class="c">${D.stock.length}</span></button><button class="chip" onclick="filSt(this)">Sota mínim / baixos <span class="c">${D.stock.filter(s=>s.est!=='ok').length}</span></button><div class="sp"></div><input type="search" placeholder="Filtra per referència, nom…" oninput="filStq(this.value)"></div>
+ <div class="tw"><table id="st-t"><tr><th>Referència</th><th>Article</th><th>Família</th><th>Estoc</th><th>Mínim</th><th>Cobertura</th><th>Ubicació</th><th>Estat</th><th>Darrer moviment</th></tr>
+ ${D.stock.map(s=>`<tr class="row" data-est="${s.est}" data-q="${(s.ref+' '+s.nom).toLowerCase()}"><td class="b">${s.ref}</td><td class="wrap">${s.nom}</td><td class="small">${s.fam}</td><td class="b">${s.st}</td><td class="small">${s.min}</td><td class="small">${s.cob}</td><td class="small">${s.ub}</td><td>${estTag(s.est)}</td><td class="wrap small mut">${s.mov}</td></tr>`).join('')}
+ </table><div class="tfoot">Sota mínim es proposa reposició a la cua d'aprovacions, mai automàtica</div></div>`;
+}
+function filSt(el){document.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));el.classList.add('on');
+ document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.est==='ok'?'none':'')}
+function filStq(q){q=q.toLowerCase();document.querySelectorAll('#st-t tr.row').forEach(r=>r.style.display=r.dataset.q.includes(q)?'':'none')}
+
+function vProveidors(){
+ return `<div class="row-head"><h1>Proveïdors</h1><span class="sub">Rendiment 12 mesos: puntualitat (OTIF), terminis i incidències</span></div>
+ <div class="grid k2">
+ ${D.suppliers.map(s=>`<div class="card" style="cursor:pointer" onclick="openSUP('${s.id}')"><div class="sup-h"><div class="sup-av">${s.nom.split(' ')[0].slice(0,2).toUpperCase()}</div><div style="flex:1;min-width:0"><div class="b">${s.nom}</div><div class="small mut">${s.cat}</div></div><div style="text-align:right"><div class="b" style="font-size:18px;color:${s.otif>=92?'var(--grn)':s.otif>=85?'var(--amb)':'var(--red)'}">${s.otif}%</div><div class="small mut">OTIF</div></div></div>
+ <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;font-size:12px"><div><span class="mut">Termini mitjà</span><div class="b">${s.lead}</div></div><div><span class="mut">Incidències 12 m</span><div class="b">${s.inc}</div></div><div><span class="mut">Compres 12 m</span><div class="b">${s.compres}</div></div></div>
+ <div style="margin-top:10px">${spark(s.trend)}<div class="small mut" style="margin-top:4px">Puntualitat per mes (10 = impecable)</div></div>
+ ${s.note?`<div class="note" style="margin-top:10px">${s.note}</div>`:''}
+ </div>`).join('')}
+ </div>`;
 }
 
-function steps(items, cur){
-  return `<div class="progress-steps">${items.map((s,i)=>`<div class="st ${i<cur?'done':i===cur?'now':''}">${esc(s)}</div>`).join('')}</div>`;
+function vInformes(){
+ const g=D.informes.gast,mx=Math.max(...g.map(x=>x[1]));
+ return `<div class="row-head"><h1>Informes</h1><span class="sub">Per a la revisió mensual de compres i producció</span></div>
+ <div class="grid two">
+  <div class="card"><h3>Gast per proveïdor · 12 mesos</h3>${g.map(x=>`<div class="hbar"><span class="lb">${x[0]}</span><span class="tr"><span class="fl" style="width:${Math.round(x[1]/mx*100)}%"></span></span><span class="vl">${x[1].toLocaleString('ca-ES')} €</span></div>`).join('')}
+   <div class="note" style="margin-top:10px">El 63% del gast es concentra en 3 proveïdors. Automio proposa acord marc amb el més puntual (Martorell, 97% OTIF) abans d'obrir segona font.</div></div>
+  <div class="card"><h3>Puntualitat per proveïdor (OTIF)</h3>${D.suppliers.map(s=>`<div class="hbar"><span class="lb">${s.nom.split(' ')[0]} ${s.nom.split(' ')[1]||''}</span><span class="tr"><span class="fl" style="width:${s.otif}%;background:${s.otif>=92?'var(--grn)':s.otif>=85?'#e8890c':'var(--red)'}"></span></span><span class="vl">${s.otif}%</span></div>`).join('')}
+   <div class="note" style="margin-top:10px">Objectiu 92%. Vallès (Siemens) ha caigut al 82% pel PLC: el seguiment AP-87 demana acció aquesta setmana.</div></div>
+ </div>
+ <div class="grid two-r">
+  <div class="card"><h3>Hores per fase · any en curs</h3>${D.informes.horesFase.map(h=>`<div class="hbar"><span class="lb">${h[0]}</span><span class="tr"><span class="fl" style="width:${Math.round(h[1]/918*100)}%"></span></span><span class="vl">${h[1]} h</span></div>`).join('')}
+   <div class="note" style="margin-top:10px">Muntatge i mecanitzat concentren el 58% de les hores: qualsevol retard de material s'acaba notant aquí.</div></div>
+  <div class="card"><h3>OF lliurades per mes</h3><div style="display:flex;align-items:flex-end;gap:14px;height:120px;padding:10px 4px 0">${D.informes.mes.map(m=>`<div style="flex:1;text-align:center"><div style="background:var(--navy);border-radius:6px 6px 0 0;height:${m[1]*30}px"></div><div class="small mut" style="margin-top:6px">${m[0]}</div></div>`).join('')}</div>
+   <div class="note" style="margin-top:12px">Temps mitjà enginyeria → lliurament: 5,4 mesos (dades d'exemple). Amb el seguiment de material coordinat, l'objectiu és baixar-lo a 4,8.</div></div>
+ </div>`;
 }
 
-function kv(pairs){ return `<div class="kv">${pairs.map(([k,v])=>`<div>${esc(k)}</div><div>${v}</div>`).join('')}</div>`; }
-
-function mailPreview(m){
-  return `<div class="mailprev"><div class="mh">${esc(CFG.t.mailto)}: ${esc(m.to)} · ${esc(CFG.t.mailsubj)}: ${esc(m.subj)}</div>${m.body}</div>`;
+function vActivitat(){
+ return `<div class="row-head"><h1>Activitat</h1><span class="sub">Tot el que ha passat i qui ho ha decidit · traçabilitat completa</span></div>
+ <div class="card"><ul class="tl">${D.activity.map(a=>`<li><b>${a.t}</b><span class="w">${a.d} · ${a.by}</span></li>`).join('')}</ul></div>`;
 }
 
-function drawerTabs(tabs, active){
-  return `<div class="tabs">${tabs.map(t=>`<button class="${t.id===active?'on':''}" onclick="drawerState.tab='${t.id}';renderDrawerBody()">${esc(t.l)}</button>`).join('')}</div>`;
+/* ---------- DRAWERS ---------- */
+function openDrawer(head,tabs,body,tabFns){$('#d-head').innerHTML=head;$('#d-tabs').innerHTML=tabs;$('#d-body').innerHTML=body;$('#drawer').classList.add('on');window._tabFns=tabFns||{}}
+function closeDrawer(){$('#drawer').classList.remove('on')}
+function dtab(i,fn){document.querySelectorAll('#d-tabs button').forEach((b,j)=>b.classList.toggle('on',i===j));$('#d-body').innerHTML=window._tabFns[fn]()}
+$('#drawer').addEventListener('click',e=>{if(e.target.id==='drawer')closeDrawer()});
+
+function phaseBar(ruta){return `<div class="phase">${ruta.map(r=>`<div class="pstep ${r.st==='done'?'done':r.st==='cur'?'cur':r.st==='blocked'?'blocked':''}"><div class="st-dot"></div>${r.n.split('·')[0].trim()}<div class="small" style="font-size:9.5px">${r.st==='done'?'✓':r.st==='cur'?'en curs':''}</div></div>`).join('')}</div>`}
+
+function openOF(id){const o=OF(id);
+ const head=`<h2>${o.id} · ${o.maq}</h2><div class="small mut" style="margin-top:3px">${o.desc} · ${o.cli} · Lliurament <b>${o.lliur}</b> ${riscTag(o.risc)}</div>`;
+ const tabs=`<button class="on" onclick="dtab(0,'res')">Resum</button><button onclick="dtab(1,'bom')">Llista de materials</button><button onclick="dtab(2,'ruta')">Ruta i fases</button><button onclick="dtab(3,'trac')">Traçabilitat</button>`;
+ const fns={
+ res:()=>`<div class="kv"><div>Client</div><div>${o.cli}</div><div>Màquina</div><div><b>${o.maq}</b> — ${o.desc}</div><div>Aplicació</div><div>${o.aplic}</div><div>Fase actual</div><div>${o.fase}/10 · ${o.resp}</div><div>Hores</div><div>${o.horesR} imputades de ${o.horesP} planificades ${o.horesR>o.horesP?`<span class="tag t-red">+${o.horesR-o.horesP} h</span>`:''}</div><div>Lliurament</div><div><b>${o.lliur}</b></div><div>Risc material</div><div>${riscTag(o.risc)} ${o.riscTxt}</div></div>
+  ${phaseBar(o.ruta)}
+  <div class="why"><b>Connexió compres ↔ producció:</b> ${o.bom.filter(b=>b.est!=='ok').length?`hi ha ${o.bom.filter(b=>b.est!=='ok').length} línia(es) de material amb atenció. La data de cada compra es creua amb la fase que la necessita; si es mou, l'OF ho marca i es proposa replanificar (mai automàticament).`:'tot el material crític rebut o traçat. Sense bloquejos.'}</div>`,
+ bom:()=>`<div class="tw" style="border:0"><table><tr><th>Material</th><th>Tipus</th><th>Req.</th><th>Estoc</th><th>Rebut</th><th>Comanda</th><th>Arribada</th><th>Estat</th></tr>
+  ${o.bom.map(b=>`<tr><td class="wrap b">${b.art}</td><td class="small">${b.tip}</td><td>${b.req}</td><td>${b.stock}</td><td>${b.rebut}</td><td class="small">${b.pc!=='—'?`<a style="color:var(--blu);cursor:pointer" onclick="event.stopPropagation();openPC('${b.pc}')">${b.pc}</a>`:'—'}</td><td class="small">${b.eta}</td><td>${estTag(b.est)}</td></tr>`).join('')}
+ </table><div class="tfoot">Lot i sèrie de cada component traçats fins al dossier de qualitat de la màquina</div></div>`,
+ ruta:()=>`<div class="tw" style="border:0"><table><tr><th>Fase</th><th>Centre</th><th>Hores p/r</th><th>Operari</th><th>Estat</th><th>Nota</th></tr>
+  ${o.ruta.map(r=>`<tr><td class="wrap b">${r.n}</td><td>${r.c}</td><td class="small">${r.hr}/${r.hp} h ${r.hr>r.hp?`<span class="tag t-red">+${r.hr-r.hp} h</span>`:''}</td><td class="small">${r.op}</td><td>${r.st==='done'?'<span class="tag t-grn">Feta</span>':r.st==='cur'?'<span class="tag t-blu">En curs</span>':r.st==='next'?'<span class="tag t-amb">Següent</span>':'<span class="tag t-gry">Pendent</span>'}</td><td class="wrap small mut">${r.nota||'—'}</td></tr>`).join('')}
+ </table><div class="tfoot">Les desviacions >8 h generen proposta de replanificació a la cua d'aprovacions</div></div>`,
+ trac:()=>{const lots=o.bom.filter(b=>b.lot&&b.lot!=='—');return `<div class="card" style="border:0;padding:0"><h3>Lots i sèries registrats</h3>${lots.length?lots.map(b=>`<div style="margin-bottom:8px"><span class="lot">${b.lot}</span><div class="small mut" style="margin-top:2px">${b.art}</div></div>`).join(''):'<div class="mut small">Pendent de registrar (material encara no rebut).</div>'}
+  <div class="note" style="margin-top:12px">A la entrega, el dossier inclou certificats 3.1 de colada, sèries de motors i PLC, i l'informe de proves (marxa en buit, torsió S/Z). El client rep el mateix dossier que veureu aquí.</div></div>`}
+ };
+ openDrawer(head,tabs,fns.res(),fns);
 }
-function renderDrawerBody(){ if(drawerState&&drawerState.render) drawerState.render(); }
 
-document.addEventListener('DOMContentLoaded', renderShell);
+function openPC(id){const p=PC(id);
+ const head=`<h2>${p.id} · ${p.prov}</h2><div class="small mut" style="margin-top:3px">${p.items} · ${p.imp} ${pcTag(p.est)}</div>`;
+ const apRel=D.approvals.find(a=>a.ctx.includes(p.id)||(a.mail&&a.mail.body.includes(p.id)));
+ const tabs=`<button class="on" onclick="dtab(0,'lin')">Línies</button><button onclick="dtab(1,'hist')">Historial i seguiment</button>`;
+ const fns={
+ lin:()=>`<div class="tw" style="border:0"><table><tr><th>Article</th><th>Qtt.</th><th>Preu</th><th>Arribada</th></tr>${p.lines.map(l=>`<tr><td class="wrap b">${l.a}</td><td>${l.q} ${l.u}</td><td>${l.p}</td><td class="small">${l.eta}</td></tr>`).join('')}</table><div class="tfoot">Total ${p.imp} · alimenta: ${p.of}</div></div>
+  <div class="kv"><div>Sol·licitada</div><div>${p.sol}</div><div>Confirmada</div><div>${p.conf}</div><div>Data revisada</div><div><b>${p.rev}</b></div><div>OF que alimenta</div><div>${p.of}</div></div>`,
+ hist:()=>`<ul class="tl">${p.hist.split('·').map(h=>`<li><b>${h.trim()}</b></li>`).join('')}</ul>
+  ${apRel?`<div class="why"><b>Decisió pendent:</b> ${apRel.t} — la tens a la cua d'aprovacions (${apRel.id}).<div class="act"><button class="btn soft" onclick="openAP('${apRel.id}')">Obrir ${apRel.id}</button></div></div>`:'<div class="note">Sense decisions pendents sobre aquesta comanda.</div>'}`
+ };
+ openDrawer(head,tabs,fns.lin(),fns);
+}
 
-</script></body></html>
+function openAP(id){const a=AP(id);if(!a){toast('Decisió ja gestionada');return}
+ const tipName={compres:'Compres',produccio:'Producció',mixta:'Compres + producció',qualitat:'Qualitat + producció',logistica:'Logística'};
+ const head=`<h2>${a.id} · ${a.t}</h2><div class="small mut" style="margin-top:3px">Decideix: <b>${a.who}</b> · <span class="tag ${a.sev==='red'?'t-red':a.sev==='amb'?'t-amb':'t-gry'}">${a.sev==='red'?'Crítica':a.sev==='amb'?'Aquesta setmana':'Planificable'}</span> <span class="tag t-nvy">${tipName[a.tip]}</span></div>`;
+ const body=`<div class="kv"><div>Context</div><div>${a.ctx}</div><div>Impacte</div><div>${a.impact}</div><div>Qui decideix</div><div><b>${a.who}</b> (${tipName[a.tip]})</div></div>
+ ${a.mail?`<h3 style="margin:16px 0 6px">Correu preparat (no s'envia sense el teu OK)</h3><div class="mailprev"><div class="mh">Per a: ${a.mail.to}<br>Assumpte: ${a.mail.sub}</div>${esc(a.mail.body).replace(/\n/g,'<br>')}</div>`:''}
+ <div class="act"><button class="btn" onclick="resolveAP('${a.id}',true)">Aprovar${a.mail?' i enviar':''}</button><button class="btn ghost" onclick="resolveAP('${a.id}',false)">Rebutjar</button><button class="btn soft" onclick="closeDrawer()">Decidir més tard</button></div>
+ <div class="note" style="margin-top:12px">Automio detecta i prepara; la decisió és sempre vostra. Tot queda registrat a Activitat.</div>`;
+ openDrawer(head,'',body,{});
+}
+
+function resolveAP(id,ok){const a=AP(id);const i=D.approvals.indexOf(a);if(i<0){closeDrawer();return}
+ D.approvals.splice(i,1);
+ D.activity.unshift({d:'ara mateix',t:`${ok?'Aprovada':'Rebutjada'} ${a.id}: ${a.t}`,by:a.who.split('(')[0].trim()});
+ const nav=D.nav.find(n=>n.id==='aprovacions');if(nav&&nav.n>0)nav.n--;
+ $('#bell-n').textContent=Math.max(0,parseInt($('#bell-n').textContent)-1);
+ renderNav();markNav();closeDrawer();
+ toast(ok?`${a.id} aprovada — registrada a Activitat`:`${a.id} rebutjada — registrada a Activitat`);
+ if(currentView()==='aprovacions')render();
+ if(currentView()==='tauler')render();
+}
+
+function openSUP(id){const s=SUP(id);
+ const pcs=D.pcs.filter(p=>p.prov===s.nom);
+ const head=`<h2>${s.nom}</h2><div class="small mut" style="margin-top:3px">${s.cat} · ${s.contact}</div>`;
+ const body=`<div class="grid k3" style="margin-top:12px"><div class="card kpi ${s.otif>=92?'ok':s.otif>=85?'warn':'bad'}"><b>${s.otif}%</b><span>OTIF 12 m</span></div><div class="card kpi"><b>${s.lead}</b><span>Termini mitjà</span></div><div class="card kpi"><b>${s.compres}</b><span>Compres 12 m</span></div></div>
+ <div class="card" style="border:0;padding:0"><h3>Puntualitat per mes</h3>${spark(s.trend)}</div>
+ ${s.note?`<div class="note" style="margin:12px 0">${s.note}</div>`:''}
+ <h3 style="margin:16px 0 6px">Comandes recents</h3>
+ ${pcs.length?`<div class="tw" style="border:0"><table><tr><th>Comanda</th><th>Contingut</th><th>Import</th><th>Estat</th></tr>${pcs.map(p=>`<tr class="row" onclick="openPC('${p.id}')"><td class="b">${p.id}</td><td class="wrap small">${p.items}</td><td>${p.imp}</td><td>${pcTag(p.est)}</td></tr>`).join('')}</table></div>`:'<div class="mut small">Sense comandes obertes.</div>'}`;
+ openDrawer(head,'',body,{});
+}
+
+/* ---------- SEARCH ---------- */
+const gs=$('#gs'),gsr=$('#gsr');
+gs.addEventListener('input',()=>{const q=gs.value.toLowerCase().trim();if(q.length<2){gsr.classList.remove('on');return}
+ const res=[];
+ D.ofs.forEach(o=>{if((o.id+o.maq+o.cli).toLowerCase().includes(q))res.push({t:`${o.id} · ${o.maq}`,s:o.cli,fn:`openOF('${o.id}')`})});
+ D.pcs.forEach(p=>{if((p.id+p.prov+p.items).toLowerCase().includes(q))res.push({t:`${p.id} · ${p.items}`,s:p.prov,fn:`openPC('${p.id}')`})});
+ D.suppliers.forEach(s=>{if(s.nom.toLowerCase().includes(q))res.push({t:s.nom,s:s.cat,fn:`openSUP('${s.id}')`})});
+ D.stock.forEach(s=>{if((s.ref+s.nom).toLowerCase().includes(q))res.push({t:`${s.ref} · ${s.nom}`,s:`Estoc ${s.st} · ${s.ub}`,fn:`go('estoc')`})});
+ gsr.innerHTML=res.slice(0,8).map(r=>`<div onclick="${r.fn};gsr.classList.remove('on');gs.value=''"><span class="b">${r.t}</span><span class="mut small">${r.s}</span></div>`).join('')||'<div class="mut">Sense resultats</div>';
+ gsr.classList.add('on')});
+document.addEventListener('click',e=>{if(!e.target.closest('.gsearch'))gsr.classList.remove('on')});
+
+/* ---------- ROUTER ---------- */
+const VIEWS={tauler:vTauler,aprovacions:vAprovacions,produccio:vProduccio,capacitat:vCapacitat,taller:vTaller,qualitat:vQualitat,compres:vCompres,solicituds:vSolicituds,estoc:vEstoc,proveidors:vProveidors,informes:vInformes,activitat:vActivitat};
+function markNav(){const v=currentView();document.querySelectorAll('nav a,.mnav a').forEach(a=>a.classList.toggle('on',a.dataset.v===v))}
+function render(){const v=currentView();$('#crumb').textContent=TITLES[v]||'Tauler';$('#view').innerHTML=(VIEWS[v]||vTauler)();markNav();window.scrollTo(0,0);
+ const p=location.hash.replace('#/','').split('/');
+ if(p[1]==='of'&&OF(p[2]))openOF(p[2]);
+ if(p[1]==='pc'&&PC(p[2]))openPC(p[2]);
+ if(p[1]==='ap'&&AP(p[2]))openAP(p[2]);
+ if(p[1]==='sup'&&SUP(p[2]))openSUP(p[2]);}
+window.addEventListener('hashchange',()=>{closeDrawer();render()});
+renderNav();render();
+</script>
+</body></html>
